@@ -8,7 +8,7 @@ const colors = {
   pink: '#F763A0',
   metal: '#889BBD',
   warning: '#FFC64E',
-  primary: '#4A50F1',
+  primary: '#008D74',
   black: 'rgb(0,0,0)',
 
   /* ---------- OnBoard Color -----------*/
@@ -29,11 +29,11 @@ const colors = {
   helpText_60: 'rgba(31,38,49,0.6)',
   helpText_docs: '#797D84',
   denim: '#4A50F1',
-  denim_medium: '#3C40C0',
+  denim_medium: '#2AD8B9',
   // denim_medium: '#125DD5',
   bottomBarColor: '#1F2631',
   mainBgColor: 'rgba(243, 245, 249, 1)',
-  primary_overlay: '#5358FE',
+  primary_overlay: '#2AD8B9',
   normalText: '#4D5A68',
   interactionText: 'rgba(113, 142, 177, 0.8)',
   commentText: '#617182',

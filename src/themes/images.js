@@ -1,6 +1,6 @@
 const images = {
   logo: require('~/assets/images/logo.png'),
-  logoSimple: require('~/assets/images/logo-simple.png'),
+  logoSimple: require('~/assets/images/logo-simple-pocket.png'),
   logoIconGif: require('~/assets/images/loadingIcon.gif'),
   onBoard: {
     onBoard_1: require('~/assets/images/onBoard/onBoard_1.png'),

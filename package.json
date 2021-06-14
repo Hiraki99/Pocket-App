@@ -17,8 +17,8 @@
     "build-release-test": "yarn android-fix && cd android && ./gradlew clean && cd .. && npx react-native run-android --variant=release",
     "release:android:apk": "yarn android-fix && cd android && ./gradlew clean && ./gradlew assembleRelease && cd .. && open .",
     "build-android-store": "yarn android-fix && cd android && ./gradlew clean && ./gradlew bundleRelease && cd ..",
-    "set-icon-ios": "react-native set-icon --platform ios --path src/assets/images/logo1024.png",
-    "set-icon-android": "react-native set-icon --platform android --path src/assets/images/logo1024.png"
+    "set-icon-ios": "react-native set-icon --platform ios --path src/assets/images/logo1024_pocket.png",
+    "set-icon-android": "react-native set-icon --platform android --path src/assets/images/logo1024_pocket.png"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^2",

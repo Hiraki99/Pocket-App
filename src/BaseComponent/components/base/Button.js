@@ -2,13 +2,13 @@ import React from 'react';
 import {
   StyleSheet,
   ActivityIndicator,
-  View,
+  // View,
   Text as NativeText,
 } from 'react-native';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import EvilIcons from 'react-native-vector-icons/EvilIcons';
+// import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+// import EvilIcons from 'react-native-vector-icons/EvilIcons';
 
 import {colors} from '~/themes';
 
@@ -38,59 +38,9 @@ export default class Button extends React.PureComponent {
           {this.props.children}
         </ButtonText>
         {this.props.loading ? (
-          <Loading
-            size="small"
-            color={'white'}
-            style={{
-              position: 'absolute',
-              justifyContent: 'center',
-              alignItems: 'center',
-              right: 12,
-              width: 30,
-              height: 30,
-            }}
-          />
+          <Loading size="small" color={'white'} style={styles.loading} />
         ) : (
-          <>
-            {this.props.icon && (
-              <View
-                style={{
-                  position: 'absolute',
-                  justifyContent: 'center',
-                  alignItems: 'center',
-                  right: 12,
-                  width: 30,
-                  height: 30,
-                  borderRadius: 15,
-                  backgroundColor: props.reloadIcon
-                    ? props.danger
-                      ? colors.red_brick
-                      : colors.denim_medium
-                    : props.white
-                    ? colors.primary
-                    : colors.denim_medium,
-                  paddingTop: 0,
-                  paddingLeft: 0,
-                }}>
-                {!props.reloadIcon && (
-                  <MaterialCommunityIcons
-                    name="arrow-right"
-                    style={{color: '#fff', fontSize: 20, paddingTop: 2}}
-                  />
-                )}
-                {props.reloadIcon && (
-                  <EvilIcons
-                    name="redo"
-                    style={{
-                      color: 'white',
-                      fontSize: 30,
-                      marginTop: 3,
-                    }}
-                  />
-                )}
-              </View>
-            )}
-          </>
+          <></>
         )}
       </ButtonContainer>
     );
@@ -165,6 +115,14 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.12,
     shadowRadius: 4,
     // elevation: 4,
+  },
+  loading: {
+    position: 'absolute',
+    justifyContent: 'center',
+    alignItems: 'center',
+    right: 12,
+    width: 30,
+    height: 30,
   },
 });
 
@@ -247,7 +205,7 @@ const ButtonContainer = styled.TouchableOpacity`
   borderRadius: ${(props) => {
     if (props.large) {
       if (props.rounded) {
-        return '15px';
+        return '50px';
       }
 
       if (props.pill) {
@@ -293,13 +251,13 @@ const ButtonContainer = styled.TouchableOpacity`
     }
     return '20px';
   }}
-  flex-direction: row
-  align-items: center
-  justify-content: center
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 `;
 
 const ButtonText = styled(NativeText)`
-  letter-spacing: 1
+  letter-spacing: 1;
   fontSize: ${(props) => {
     if (props.large) {
       return '17px';
@@ -346,6 +304,7 @@ const ButtonText = styled(NativeText)`
       }
       if (props.primary) {
         return props.theme.colors.primary;
+        // return '#05A185';
       }
       if (props.warning) {
         return props.theme.colors.warning;

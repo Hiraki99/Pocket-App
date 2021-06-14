@@ -901,13 +901,13 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PocketApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.9.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.aic.group.englishforschool;
+				PRODUCT_BUNDLE_IDENTIFIER = org.aic.english4school;
 				PRODUCT_NAME = PocketApp;
 				PROVISIONING_PROFILE_SPECIFIER = "english forschool in house";
 				SWIFT_OBJC_BRIDGING_HEADER = "PocketApp-Bridging-Header.h";
@@ -931,13 +931,13 @@
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PocketApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.0.0;
+				MARKETING_VERSION = 1.9.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.aic.group.englishforschool;
+				PRODUCT_BUNDLE_IDENTIFIER = org.aic.english4school;
 				PRODUCT_NAME = PocketApp;
 				PROVISIONING_PROFILE_SPECIFIER = "english forschool in house";
 				SWIFT_OBJC_BRIDGING_HEADER = "PocketApp-Bridging-Header.h";

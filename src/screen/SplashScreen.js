@@ -12,7 +12,7 @@ import {changeCurrentCourse} from '~/features/course/CourseAction';
 import navigator from '~/navigation/customNavigator';
 import {FIRST_PAGE, PAGE_SIZE} from '~/constants/query';
 
-class SplashScreen extends React.Component {
+class SplashScreen extends React.PureComponent {
   constructor(props) {
     super(props);
   }
@@ -43,15 +43,13 @@ class SplashScreen extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (!prevProps.isProfileLoaded && this.props.isProfileLoaded) {
-      setTimeout(() => {
-        const {current_course_obj} = this.props.user;
-        if (current_course_obj) {
-          this.props.changeCurrentCourse(current_course_obj);
-          navigator.reset('MainStack');
-        } else {
-          navigator.navigate('Course');
-        }
-      }, 2000);
+      const {current_course_obj} = this.props.user;
+      if (current_course_obj) {
+        this.props.changeCurrentCourse(current_course_obj);
+        navigator.reset('MainStack');
+      } else {
+        navigator.navigate('Course');
+      }
     }
   }
 
@@ -60,7 +58,7 @@ class SplashScreen extends React.Component {
       <View style={styles.wrap}>
         <View style={styles.mainContent}>
           <Image
-            source={images.logoIconGif}
+            source={images.logoSimple}
             style={styles.img}
             resizeMode="cover"
           />
@@ -72,7 +70,7 @@ class SplashScreen extends React.Component {
 
 const styles = {
   wrap: {
-    backgroundColor: colors.denim,
+    backgroundColor: colors.white,
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',

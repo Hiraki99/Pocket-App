@@ -7,16 +7,36 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import {RowContainer} from '~/BaseComponent/components/base/CommonContainer';
+import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {RowContainer} from '~/BaseComponent/components/base/CommonContainer';
 import {colors} from '~/themes';
-import {OS} from '~/constants/os';
 
 const Input = (props) => {
   const [blur, setOnBlur] = React.useState(false);
+  const [showPassword, setShowPassword] = React.useState(
+    !props.secureTextEntry,
+  );
 
   return (
-    <RowContainer>
+    <RowContainer style={props.containerStyle}>
+      {props.accountIcon && (
+        <MaterialCommunityIcons
+          color={colors.black}
+          name={'account'}
+          size={24}
+        />
+      )}
+      {props.emailIcon && (
+        <MaterialCommunityIcons
+          color={colors.normalText}
+          name={'email'}
+          size={24}
+        />
+      )}
+      {props.passwordIcon && (
+        <Ionicons color={colors.black} name={'key-sharp'} size={20} />
+      )}
       <TextInput
         placeholder={props.placeholder}
         autoCapitalize="none"
@@ -29,13 +49,28 @@ const Input = (props) => {
         placeholderTextColor={colors.placeHolder}
         allowFontScaling={false}
         onBlur={() => setOnBlur(true)}
-        secureTextEntry={props.secureTextEntry}
-        style={[styles.input, OS.IsAndroid ? {} : props.style]}
+        secureTextEntry={showPassword}
+        style={[styles.input, props.inputStyle || {}]}
       />
-      {!!props.value && !blur && (
+      {!!props.value && !blur && !props.secureTextEntry && (
         <TouchableWithoutFeedback onPress={() => props.onChangeText('')}>
           <Ionicons
             name={'close'}
+            size={24}
+            color={colors.placeHolder}
+            style={styles.icon}
+          />
+        </TouchableWithoutFeedback>
+      )}
+      {props.secureTextEntry && (
+        <TouchableWithoutFeedback
+          onPress={() => {
+            setShowPassword((old) => {
+              return !old;
+            });
+          }}>
+          <Ionicons
+            name={!showPassword ? 'ios-eye' : 'ios-eye-off'}
             size={24}
             color={colors.placeHolder}
             style={styles.icon}
@@ -49,15 +84,23 @@ Input.propTypes = {
   placeholder: PropTypes.string,
   value: PropTypes.string,
   onChangeText: PropTypes.func,
-  style: ViewPropTypes.style,
+  inputStyle: ViewPropTypes.style,
+  containerStyle: ViewPropTypes.style,
   secureTextEntry: PropTypes.bool,
+  accountIcon: PropTypes.bool,
+  passwordIcon: PropTypes.bool,
+  emailIcon: PropTypes.bool,
 };
 Input.defaultProps = {
   placeholder: '',
   value: '',
   onChangeText: () => {},
   secureTextEntry: false,
-  style: {
+  accountIcon: false,
+  passwordIcon: false,
+  emailIcon: false,
+  containerStyle: {},
+  inputStyle: {
     shadowColor: 'rgb(60,128,209)',
     shadowOffset: {width: 0, height: 8},
     shadowOpacity: 0.05,
@@ -73,7 +116,7 @@ const styles = StyleSheet.create({
     fontSize: 17,
     lineHeight: 22,
     paddingVertical: 17,
-    paddingHorizontal: 24,
+    paddingHorizontal: 16,
     flex: 1,
     fontFamily: 'CircularStd-Book',
   },

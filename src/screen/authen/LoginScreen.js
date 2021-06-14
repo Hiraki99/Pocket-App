@@ -10,7 +10,6 @@ import {
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
-import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import Config from 'react-native-config';
 import {
   GoogleSignin,
@@ -25,10 +24,8 @@ import {
   NoFlexContainer,
   Input,
   FlexContainer,
-  RowContainer,
 } from '~/BaseComponent';
 import {REGEX} from '~/constants/regex';
-import {OS} from '~/constants/os';
 import {
   login,
   refreshUser,
@@ -176,7 +173,7 @@ class LoginScreen extends React.Component {
     const {email, password} = this.state;
     return (
       <FlexContainer>
-        <GeneralStatusBar backgroundColor={colors.mainBgColor} />
+        <GeneralStatusBar backgroundColor={colors.white} />
         <View style={styles.backgroundContainer}>
           <KeyboardAvoidingView behavior="position" keyboardVerticalOffset="50">
             <View
@@ -197,38 +194,27 @@ class LoginScreen extends React.Component {
                 <Text h4 bold style={{marginTop: 8}}>
                   Đăng nhập
                 </Text>
-                <Text
-                  center
-                  style={{
-                    marginTop: 0,
-                    color: colors.helpText,
-                    opacity: 0.38,
-                  }}>
-                  {translate('Nhập thông tin để đăng nhập')}
-                </Text>
+
                 {this.props.errorMessage && this.renderErrorMessage()}
               </NoFlexContainer>
               <View
                 backgroundColor={colors.white}
                 style={{
-                  borderRadius: 12,
-                  backgroundColor: colors.white,
-                  overflow: 'hidden',
                   width: '100%',
                 }}>
                 <Input
                   placeholder={translate('Địa chỉ email')}
                   value={email}
+                  accountIcon
                   onChangeText={(text) => {
                     if (this.props.errorMessage) {
                       this.props.clearForm();
                     }
                     this.setState({email: text});
                   }}
+                  containerStyle={styles.inputContainerStyle}
                 />
-                <View
-                  style={{height: 1, backgroundColor: colors.mainBgColor}}
-                />
+
                 <Input
                   placeholder={translate('Mật khẩu')}
                   value={password}
@@ -238,7 +224,9 @@ class LoginScreen extends React.Component {
                     }
                     this.setState({password: text});
                   }}
+                  passwordIcon
                   secureTextEntry
+                  containerStyle={styles.inputContainerStyle}
                 />
               </View>
               <View style={{height: 24}} />
@@ -254,88 +242,6 @@ class LoginScreen extends React.Component {
                 onPress={() => this.login()}>
                 {translate('Đăng nhập')}
               </Button>
-              <TouchableOpacity
-                activeOpacity={0.7}
-                onPress={this.signInGG}
-                style={{marginVertical: 8}}
-                justifyContent={'space-between'}>
-                <RowContainer
-                  justifyContent={'space-between'}
-                  style={styles.socialBtn}
-                  backgroundColor={colors.white}
-                  borderRadius={15}
-                  paddingHorizontal={16}
-                  paddingVertical={12}>
-                  <MaterialCommunityIcons
-                    name={'gmail'}
-                    color={colors.milanoRed}
-                    size={24}
-                  />
-                  <FlexContainer>
-                    <Text
-                      fontSize={18}
-                      color={colors.helpText}
-                      center
-                      medium
-                      uppercase>
-                      {translate('Đăng nhập qua Google')}
-                    </Text>
-                  </FlexContainer>
-                </RowContainer>
-              </TouchableOpacity>
-              {!OS.IsAndroid && (
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  justifyContent={'space-between'}
-                  onPress={this.signInApple}>
-                  <RowContainer
-                    backgroundColor={colors.black}
-                    style={styles.socialBtn}
-                    borderRadius={15}
-                    paddingVertical={12}
-                    paddingHorizontal={16}>
-                    <MaterialCommunityIcons
-                      name={'apple'}
-                      color={colors.white}
-                      size={22}
-                    />
-                    <FlexContainer>
-                      <Text
-                        h5
-                        color={colors.white}
-                        fontSize={18}
-                        center
-                        medium
-                        uppercase>
-                        {translate('Đăng nhập qua Apple')}
-                      </Text>
-                    </FlexContainer>
-                  </RowContainer>
-                </TouchableOpacity>
-              )}
-              <Text h5 style={{color: colors.helpText, marginTop: 36}} center>
-                Bạn chưa có tài khoản?
-              </Text>
-
-              <TouchableOpacity
-                activeOpacity={0.8}
-                onPress={() => {
-                  navigator.navigate('Register');
-                  // this.props.refreshUser();
-                }}>
-                <Text
-                  center
-                  uppercase
-                  h5
-                  bold
-                  style={{
-                    marginBottom: 25,
-                    color: colors.denim,
-                    marginTop: 5,
-                  }}>
-                  Đăng ký
-                </Text>
-              </TouchableOpacity>
             </View>
           </KeyboardAvoidingView>
 
@@ -351,7 +257,7 @@ class LoginScreen extends React.Component {
                   paddingBottom: 48,
                 }}
                 info>
-                {translate('Bằng việc đăng nhập bạn đã đồng ý với &nbsp;')}
+                {translate('Bằng việc đăng nhập bạn đã đồng ý với')}&nbsp;
                 <Text color={colors.normalText}>
                   {translate('Quy định bảo mật ứng dụng')}
                 </Text>
@@ -365,13 +271,13 @@ class LoginScreen extends React.Component {
 }
 
 const styles = StyleSheet.create({
-  logo: {width: 98, height: 63},
+  logo: {width: 70, height: 70},
   bodyWrapper: {borderRadius: 8},
   backgroundContainer: {
     paddingTop: 80,
     flex: 1,
     height: '100%',
-    backgroundColor: colors.mainBgColor,
+    backgroundColor: colors.white,
     justifyContent: 'space-between',
   },
   shadowInput: {
@@ -384,6 +290,13 @@ const styles = StyleSheet.create({
   },
   socialBtn: {
     width: width - 48,
+  },
+  inputContainerStyle: {
+    backgroundColor: '#F5F6F9',
+    borderRadius: 50,
+    paddingLeft: 18,
+    paddingRight: 16,
+    marginBottom: 12,
   },
 });
 const mapStateToProps = (state) => {
