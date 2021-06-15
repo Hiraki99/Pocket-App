@@ -1,16 +1,10 @@
-import React, {useState, useEffect, useCallback} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {connect, useDispatch} from 'react-redux';
-import {View, StyleSheet} from 'react-native';
+import {StyleSheet, FlatList} from 'react-native';
 import PropTypes from 'prop-types';
-import Carousel from 'react-native-snap-carousel';
 
-import {Loading, TextBase} from '~/BaseComponent';
-import {TextBaseStyle} from '~/BaseComponent/components/base/text-base/TextBase';
+import {FlexContainer, SeparatorVertical} from '~/BaseComponent';
 import LessonSliderItem from '~/BaseComponent/components/elements/lesson/LessonSliderItem';
-import {
-  sliderWidth,
-  itemWidth,
-} from '~/BaseComponent/components/elements/lesson/lessonStyles';
 import {
   fetchLesson,
   changeCurrentLesson,
@@ -18,32 +12,12 @@ import {
   fetchLessonPracticeSpeak,
 } from '~/features/lessons/LessonAction';
 import navigator from '~/navigation/customNavigator';
-import {OS} from '~/constants/os';
-import {translate} from '~/utils/multilanguage';
+import {colors} from '~/themes';
 
 const LessonContainer = (props) => {
-  const carouselRef = React.useRef(null);
   const dispatch = useDispatch();
-  const [index, setIndex] = useState(0);
-  const [loadDone, setLoadDone] = useState(false);
-  const {user, currentCourse, lessons, isExam} = props;
-  const numberLesson = lessons.length;
 
-  useEffect(() => {
-    if (
-      user?.current_lesson_obj?.order > -1 &&
-      user?.current_lesson_obj?.is_exam === isExam &&
-      loadDone
-    ) {
-      setTimeout(() => {
-        setIndex(
-          !lessons.length > user?.current_lesson_obj?.order
-            ? 0
-            : user?.current_lesson_obj?.order,
-        );
-      }, 300);
-    }
-  }, [user, isExam, lessons, loadDone]);
+  const {user, currentCourse, lessons, isExam} = props;
 
   useEffect(() => {
     if (!currentCourse) {
@@ -84,54 +58,18 @@ const LessonContainer = (props) => {
   );
 
   return (
-    <View>
-      <View style={styles.lessonInfoTeacher}>
-        <TextBase
-          style={[
-            TextBaseStyle.h2,
-            TextBaseStyle.uppercase,
-            TextBaseStyle.bold,
-          ]}>
-          {currentCourse ? currentCourse.display_name : ''}
-        </TextBase>
-        {lessons.length > 0 && (
-          <TextBase style={{color: 'rgba(31, 38, 49, 0.54)'}}>
-            {/*{`Lesson ${index + 1 >= 10 ? index + 1 : `0${index + 1}`}/${*/}
-            {/*  numberLesson >= 10 ? numberLesson : `0${numberLesson}`*/}
-            {/*}`}*/}
-            {`${translate('Lesson %s/%s', {
-              s1: `${index + 1 >= 10 ? index + 1 : `0${index + 1}`}`,
-              s2: numberLesson >= 10 ? numberLesson : `0${numberLesson}`,
-            })}`}
-          </TextBase>
-        )}
-      </View>
-      {lessons.length === 0 && (
-        <View paddingTop={24}>
-          <Loading style={styles.loading} />
-        </View>
-      )}
-      <Carousel
-        ref={carouselRef}
+    <FlexContainer>
+      <FlatList
         data={lessons}
-        onLayout={() => setLoadDone(true)}
         renderItem={renderItemLesson}
-        sliderWidth={sliderWidth}
-        itemWidth={itemWidth}
-        firstItem={index}
-        inactiveSlideScale={0.9}
-        inactiveSlideOpacity={0.6}
-        containerCustomStyle={styles.slider}
-        contentContainerCustomStyle={styles.sliderContentContainer}
-        removeClippedSubviews
-        // maxToRenderPerBatch={3}
-        onSnapToItem={(i) => setIndex(i)}
-        lockScrollTimeoutDuration={0}
-        swipeThreshold={5}
-        // enableMomentum
-        // decelerationRate={'fast'}
+        keyExtractor={(item) => item._id}
+        numColumns={2}
+        style={styles.flatlist}
+        ItemSeparatorComponent={() => <SeparatorVertical md />}
+        ListFooterComponent={() => <SeparatorVertical height={48} />}
+        showsVerticalScrollIndicator={false}
       />
-    </View>
+    </FlexContainer>
   );
 };
 
@@ -155,36 +93,16 @@ LessonContainer.defaultProps = {
   isExam: false,
 };
 
+const styles = StyleSheet.create({
+  flatlist: {
+    paddingHorizontal: 24,
+    paddingVertical: 24,
+    backgroundColor: colors.white,
+  },
+});
 export default connect(mapStateToProps, {
   fetchLesson,
   changeCurrentLesson,
   changeCurrentLessonPractice,
   fetchLessonPracticeSpeak,
 })(LessonContainer);
-
-const styles = StyleSheet.create({
-  loading: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingBottom: 90,
-  },
-  slider: {
-    marginTop: 15 * OS.scaleYByDesign,
-    overflow: 'visible',
-  },
-  sliderContentContainer: {
-    paddingVertical: 0,
-  },
-  paginationContainer: {
-    paddingVertical: 8,
-  },
-  lessonInfoTeacher: {
-    flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginHorizontal: 24,
-    marginBottom: 16,
-    marginTop: 32,
-  },
-});

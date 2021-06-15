@@ -17,7 +17,7 @@ const ImageOptimize = (props) => {
         source,
         imageStyle.width * 2,
         imageStyle.height * 2,
-        !OS.IsAndroid ? 'JPEG' : 'WEBP',
+        !OS.IsAndroid ? 'PNG' : 'WEBP',
         quality,
         0,
         undefined,

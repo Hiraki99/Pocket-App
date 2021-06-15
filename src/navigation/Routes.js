@@ -7,8 +7,11 @@ import {createNativeStackNavigator} from 'react-native-screens/native-stack';
 
 import navigator from './customNavigator';
 
+import LessonDetailPrimaryScreen from '~/screen/lesson/LessonDetailPrimaryScreen';
+import LessonDetailScreen from '~/screen/lesson/LessonDetailScreen';
 import {OS} from '~/constants/os';
 import LoginScreen from '~/screen/authen/LoginScreen';
+import LoginMethodScreen from '~/screen/authen/LoginMethodScreen';
 import RegisterScreen from '~/screen/authen/RegisterScreen';
 import PrivacyScreen from '~/screen/authen/PrivacyScreen';
 import OnBoardingScreen from '~/screen/OnBoardingScreen';
@@ -119,6 +122,7 @@ import UserExamDidScreen from '~/screen/exam/UserExamDidScreen';
 import NotificationsScreen from '~/screen/NotificationsScreen';
 import PrimaryPointAndSayBubbleScreen from '~/screen/activity/primary/PrimaryPointAndSayBubbleScreen';
 import ChangeLanguageScreen from '~/screen/ChangeLanguageScreen';
+import HomeScreen from '~/screen/bottomTab/HomeScreen';
 
 let Stack;
 if (!OS.IsAndroid) {
@@ -136,6 +140,7 @@ const AuthStack = () => {
         headerShown: false,
       }}>
       {/*<Stack.Screen name="SyncExample" component={SyncExample} />*/}
+      <Stack.Screen name="LoginMethod" component={LoginMethodScreen} />
       <Stack.Screen name="Login" component={LoginScreen} />
       <Stack.Screen name="Register" component={RegisterScreen} />
       <Stack.Screen name="Privacy" component={PrivacyScreen} />
@@ -152,7 +157,6 @@ const AppStack = () => {
         headerShown: false,
         gestureEnabled: false,
       }}>
-      {/*<Stack.Screen name="ZoomTestScreen" component={ZoomTestScreen} />*/}
       <Stack.Screen name="Splash" component={SplashScreen} />
       <Stack.Screen name="OnBoarding" component={OnBoardingScreen} />
       <Stack.Screen name="ChangeLanguage" component={ChangeLanguageScreen} />
@@ -161,8 +165,13 @@ const AppStack = () => {
       <Stack.Screen name="EditorEssayExam" component={EditorEssayExamScreen} />
       <Stack.Screen name="SearchExam" component={SearchExamScreen} />
       <Stack.Screen name="SpeakVipLesson" component={SpeakVipLessonScreen} />
-      <Stack.Screen name="MainStack" component={AppBottomTab} />
+      <Stack.Screen name="MainStack" component={HomeScreen} />
       <Stack.Screen name="SummaryReview" component={SummaryReviewScreen} />
+      <Stack.Screen name={'LessonDetail'} component={LessonDetailScreen} />
+      <Stack.Screen
+        name={'LessonDetailPrimary'}
+        component={LessonDetailPrimaryScreen}
+      />
       <Stack.Screen
         name="PrimaryListenAndTickOrCross"
         component={PrimaryListenAndTickOrCrossScreen}
@@ -450,9 +459,9 @@ export default function Routes() {
         const previousRouteName = naviRef.current.getCurrentRoute().name;
         const currentRouteName = getActiveRouteName(state);
         if (previousRouteName !== currentRouteName) {
-          console.log('currentRouteName ', currentRouteName);
           analytics().setCurrentScreen(currentRouteName, currentRouteName);
         }
+        console.log('currentRouteName ', currentRouteName);
       }}>
       <AppStack />
     </NavigationContainer>

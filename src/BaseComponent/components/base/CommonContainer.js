@@ -50,6 +50,7 @@ export const FlexContainer = styled.View`
     return 'visible';
   }}
   backgroundColor: ${(props) => props.backgroundColor || 'transparent'}
+  zIndex: 1
 `;
 export const NoFlexContainer = styled.View`
   justifyContent: ${(props) => props.justifyContent || 'flex-start'}

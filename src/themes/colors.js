@@ -8,7 +8,7 @@ const colors = {
   pink: '#F763A0',
   metal: '#889BBD',
   warning: '#FFC64E',
-  primary: '#008D74',
+  primary: '#09AB8E',
   black: 'rgb(0,0,0)',
 
   /* ---------- OnBoard Color -----------*/
@@ -76,6 +76,9 @@ const colors = {
   red_brick: '#E31919',
   // color puzzle game
   success_puzzle: 'rgba(0, 255, 84, 0.3)',
+  /* ---------- Background Color -----------*/
+  newMainBackground: '#F8F8F6',
+  backgroundActivity: '#F5F6F9',
 };
 
 export default colors;

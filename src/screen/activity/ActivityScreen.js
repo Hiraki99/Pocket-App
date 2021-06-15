@@ -11,6 +11,7 @@ import {
   CommonAlert,
   Loading,
   Text,
+  SeparatorVertical,
 } from '~/BaseComponent';
 import ActivityItem from '~/BaseComponent/components/elements/script/ActivityItem';
 import ActivityLevelModal from '~/BaseComponent/components/elements/activity/ActivityLevelModal';
@@ -153,26 +154,11 @@ class ActivityScreen extends React.Component {
   };
 
   renderHeaderFlatList = () => {
-    const {partIndex, currentPart, loading} = this.props;
-    let displayIndex =
-      partIndex + 1 < 10 ? '0' + (partIndex + 1) : partIndex + 1;
+    const {currentPart, loading} = this.props;
 
     return (
       <>
         <View style={styles.partInfo}>
-          <View style={styles.partName}>
-            <Text bold fontSize={12} color={colors.white}>
-              {translate('PART')}
-            </Text>
-            <Text
-              color={colors.white}
-              h4
-              bold
-              style={{letterSpacing: 1.41, marginTop: -8}}>
-              {displayIndex}
-            </Text>
-          </View>
-
           <Text h4 bold style={{paddingBottom: 8}}>
             {currentPart.name}
           </Text>
@@ -194,30 +180,31 @@ class ActivityScreen extends React.Component {
       lessonIndex + 1 < 10 ? '0' + (lessonIndex + 1) : lessonIndex + 1;
 
     return (
-      <>
+      <FlexContainer backgroundColor={colors.backgroundActivity}>
         <CommonHeader
           themeWhite
           title={`${translate('Unit %s', {s1: displayIndex})}`.toUpperCase()}
+          border
+          uppercase={false}
         />
-        <FlexContainer backgroundColor={colors.mainBgColor}>
-          {this.renderAlert()}
-          <FlatList
-            ListHeaderComponent={this.renderHeaderFlatList}
-            ListFooterComponent={() => <View style={{height: 48}} />}
-            data={activities}
-            renderItem={this.renderItem}
-            keyExtractor={(item) => item._id}
-            showsVerticalScrollIndicator={false}
-            extraData={this.props}
-            initialNumToRender={3}
-          />
-          <ActivityLevelModal
-            ref={(refs) => (this.acticityLevelRef = refs)}
-            data={this.state.itemSelected}
-            action={this.navigateToScript}
-          />
-        </FlexContainer>
-      </>
+        {this.renderAlert()}
+        <FlatList
+          ListHeaderComponent={this.renderHeaderFlatList}
+          ListFooterComponent={() => <View style={{height: 48}} />}
+          ItemSeparatorComponent={() => <SeparatorVertical height={12} />}
+          data={activities}
+          renderItem={this.renderItem}
+          keyExtractor={(item) => item._id}
+          showsVerticalScrollIndicator={false}
+          style={{zIndex: 10}}
+          initialNumToRender={3}
+        />
+        <ActivityLevelModal
+          ref={(refs) => (this.acticityLevelRef = refs)}
+          data={this.state.itemSelected}
+          action={this.navigateToScript}
+        />
+      </FlexContainer>
     );
   }
 }
@@ -227,7 +214,7 @@ const styles = {
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 24,
-    marginTop: 32,
+    paddingTop: 32,
   },
   partName: {
     justifyContent: 'center',

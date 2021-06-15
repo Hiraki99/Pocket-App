@@ -60,7 +60,7 @@ class SplashScreen extends React.PureComponent {
           <Image
             source={images.logoSimple}
             style={styles.img}
-            resizeMode="cover"
+            resizeMode="contain"
           />
         </View>
       </View>

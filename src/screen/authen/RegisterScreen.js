@@ -4,12 +4,12 @@ import {
   Image,
   Dimensions,
   StyleSheet,
-  KeyboardAvoidingView,
   View,
   Alert,
   TouchableOpacity,
   Keyboard,
 } from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {
   Button,
@@ -19,6 +19,7 @@ import {
   Loading,
   SeparatorVertical,
   Input,
+  FlexContainer,
 } from '~/BaseComponent';
 import {REGEX} from '~/constants/regex';
 import {updateKeyboardHeight} from '~/features/config/ConfigAction';
@@ -112,14 +113,7 @@ class RegisterScreen extends React.Component {
     const {errorMessage} = this.props;
 
     return (
-      <Text
-        center
-        style={{
-          marginTop: 0,
-          marginBottom: 10,
-          color: colors.danger,
-          opacity: 1,
-        }}>
+      <Text center style={styles.errorText}>
         {errorMessage}
       </Text>
     );
@@ -137,10 +131,10 @@ class RegisterScreen extends React.Component {
   render() {
     const {email, password} = this.state;
     return (
-      <>
-        <GeneralStatusBar backgroundColor={colors.mainBgColor} />
-        <View style={styles.backgroundContainer}>
-          <KeyboardAvoidingView behavior="position" keyboardVerticalOffset="50">
+      <FlexContainer backgroundColor={colors.white}>
+        <GeneralStatusBar backgroundColor={colors.white} />
+        <KeyboardAwareScrollView>
+          <View style={styles.backgroundContainer}>
             <View
               style={{
                 justifyContent: 'flex-start',
@@ -172,38 +166,33 @@ class RegisterScreen extends React.Component {
                 {this.props.errorMessage && this.renderErrorMessage()}
               </NoFlexContainer>
               <View
-                backgroundColor={colors.white}
                 style={{
-                  borderRadius: 12,
-                  backgroundColor: colors.white,
-                  overflow: 'hidden',
                   width: '100%',
                 }}>
                 <Input
                   placeholder={translate('Địa chỉ email')}
                   value={email}
+                  emailIcon
                   onChangeText={(text) => {
                     if (this.props.errorMessage) {
                       this.props.clearForm();
                     }
                     this.setState({email: text});
                   }}
+                  containerStyle={styles.inputContainerStyle}
                 />
-                <View
-                  style={{height: 1, backgroundColor: colors.mainBgColor}}
-                />
+
                 <Input
                   placeholder={translate('Họ và tên')}
                   value={this.state.fullname}
+                  accountIcon
                   onChangeText={(text) => {
                     if (this.props.errorMessage) {
                       this.props.clearForm();
                     }
                     this.setState({fullname: text});
                   }}
-                />
-                <View
-                  style={{height: 1, backgroundColor: colors.mainBgColor}}
+                  containerStyle={styles.inputContainerStyle}
                 />
                 <Input
                   placeholder={translate('Mật khẩu')}
@@ -214,7 +203,9 @@ class RegisterScreen extends React.Component {
                     }
                     this.setState({password: text});
                   }}
+                  passwordIcon
                   secureTextEntry
+                  containerStyle={styles.inputContainerStyle}
                 />
               </View>
               <SeparatorVertical lg />
@@ -237,7 +228,7 @@ class RegisterScreen extends React.Component {
 
               <TouchableOpacity
                 activeOpacity={0.8}
-                onPress={() => navigator.navigate('Login')}>
+                onPress={() => navigator.navigate('LoginMethod')}>
                 <Text
                   center
                   uppercase
@@ -252,30 +243,29 @@ class RegisterScreen extends React.Component {
                 </Text>
               </TouchableOpacity>
             </View>
-          </KeyboardAvoidingView>
-
-          <View style={{paddingHorizontal: 24, marginBottom: 12}}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => navigator.navigate('Privacy')}>
-              <Text
-                center
-                style={{
-                  marginTop: 10,
-                  color: colors.interactionText,
-                  paddingBottom: 48,
-                }}
-                info>
-                {translate('Bằng việc đăng nhập bạn đã đồng ý với &nbsp;')}
-                <Text color={colors.normalText}>
-                  {translate('Quy định bảo mật ứng dụng')}
-                </Text>
-              </Text>
-            </TouchableOpacity>
           </View>
+        </KeyboardAwareScrollView>
+        <View style={{paddingHorizontal: 24, marginBottom: 12}}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => navigator.navigate('Privacy')}>
+            <Text
+              center
+              style={{
+                marginTop: 10,
+                color: colors.interactionText,
+                paddingBottom: 48,
+              }}
+              info>
+              {translate('Bằng việc đăng nhập bạn đã đồng ý với')}{' '}
+              <Text color={colors.normalText}>
+                {translate('Quy định bảo mật ứng dụng')}
+              </Text>
+            </Text>
+          </TouchableOpacity>
         </View>
         {this.props.loading && this.renderLoading()}
-      </>
+      </FlexContainer>
     );
   }
 }
@@ -287,7 +277,7 @@ const styles = StyleSheet.create({
     paddingTop: 80,
     flex: 1,
     height: '100%',
-    backgroundColor: colors.mainBgColor,
+    backgroundColor: colors.white,
     position: 'relative',
     zIndex: 1,
     justifyContent: 'space-between',
@@ -316,12 +306,25 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     position: 'absolute',
     left: 0,
-    top: -20,
+    top: 0,
     width: '100%',
     height: '100%',
     opacity: 0.8,
     zIndex: 100,
     backgroundColor: 'black',
+  },
+  inputContainerStyle: {
+    backgroundColor: '#F5F6F9',
+    borderRadius: 50,
+    paddingLeft: 18,
+    paddingRight: 16,
+    marginBottom: 12,
+  },
+  errorText: {
+    marginTop: 0,
+    marginBottom: 10,
+    color: colors.danger,
+    opacity: 1,
   },
 });
 

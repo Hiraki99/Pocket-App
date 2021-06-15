@@ -1,17 +1,14 @@
 import React from 'react';
-import {View, TouchableOpacity} from 'react-native';
+import {View, TouchableNativeFeedback, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
+import FastImage from 'react-native-fast-image';
 
-import Button from '../../base/Button';
-
-import styles from './lessonStyles';
-
-import {truncateStr} from '~/utils/common';
+import {colors} from '~/themes';
+import {RowContainer} from '~/BaseComponent';
+import {OS} from '~/constants/os';
 import TextBase, {
   TextBaseStyle,
 } from '~/BaseComponent/components/base/text-base/TextBase';
-import ImageOptimize from '~/BaseComponent/components/base/ImageOptimize';
-import {translate} from '~/utils/multilanguage';
 
 export default class LessonSliderItem extends React.PureComponent {
   static propTypes = {
@@ -24,51 +21,70 @@ export default class LessonSliderItem extends React.PureComponent {
       data: {featured_image},
     } = this.props;
     return (
-      <ImageOptimize
+      <FastImage
         resizeMode={'contain'}
         imageStyle={styles.image}
-        source={featured_image}
+        style={styles.image}
+        source={{uri: featured_image}}
       />
     );
   };
 
   render() {
     const {
-      data: {name, display_name, description},
+      data: {name, display_name},
       onChange,
     } = this.props;
 
     return (
-      <TouchableOpacity
-        activeOpacity={1}
-        style={styles.slideInnerContainer}
-        onPress={onChange}>
-        <View style={styles.imageContainer}>{this.image()}</View>
-        <View style={styles.textContainer}>
-          <TextBase style={[TextBaseStyle.primary, TextBaseStyle.bold]}>
-            {name.replace('Bài', 'unit').toUpperCase()}
-          </TextBase>
-          <TextBase style={[TextBaseStyle.h4, TextBaseStyle.bold]}>
-            {display_name}
-          </TextBase>
-
-          <TextBase style={{color: 'rgba(31,38,49,0.38)', paddingBottom: 24}}>
-            {truncateStr(description, description.length > 30 ? 50 : 80)}
-          </TextBase>
-
-          <Button
-            large
-            primary
-            rounded
-            block
-            uppercase
-            bold
-            icon
-            onPress={onChange}>
-            {translate('Tiếp tục')}
-          </Button>
+      <TouchableNativeFeedback activeOpacity={1} onPress={onChange}>
+        <View style={styles.slideInnerContainer}>
+          <RowContainer paddingHorizontal={14}>
+            <TextBase style={[TextBaseStyle.primary, TextBaseStyle.bold]}>
+              {name.replace('Bài', 'unit').toUpperCase()}
+            </TextBase>
+          </RowContainer>
+          <View
+            style={{
+              justifyContent: 'center',
+              alignItems: 'center',
+              paddingHorizontal: 4,
+            }}>
+            {this.image()}
+            <View style={styles.textContainer}>
+              <TextBase
+                style={[
+                  TextBaseStyle.h5,
+                  TextBaseStyle.bold,
+                  TextBaseStyle.center,
+                ]}>
+                {display_name}
+              </TextBase>
+            </View>
+          </View>
         </View>
-      </TouchableOpacity>
+      </TouchableNativeFeedback>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  slideInnerContainer: {
+    width: (OS.WIDTH - 64) / 2,
+    marginHorizontal: 8,
+    shadowColor: colors.black,
+    shadowOffset: {
+      width: 2,
+      height: 8,
+    },
+    shadowOpacity: 0.09,
+    shadowRadius: 10,
+
+    elevation: 3,
+    borderWidth: 0.01,
+    borderRadius: 16,
+    paddingVertical: 12,
+    backgroundColor: colors.white,
+  },
+  image: {width: 140, height: 100, marginTop: 8, marginBottom: 16},
+});

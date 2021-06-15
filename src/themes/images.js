@@ -178,6 +178,10 @@ const images = {
     slide: require('~/assets/images/live/type_docs/slide.png'),
   },
   pdf_icon: require('~/assets/images/pdf_icon.png'),
+  social: {
+    facebook: require('~/assets/images/social-icon/facebook.png'),
+    google: require('~/assets/images/social-icon/google.png'),
+  },
 };
 
 export default images;

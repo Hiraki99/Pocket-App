@@ -16,6 +16,7 @@ import {
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {appleAuth} from '@invertase/react-native-apple-authentication';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {
   Button,
@@ -172,98 +173,109 @@ class LoginScreen extends React.Component {
   render() {
     const {email, password} = this.state;
     return (
-      <FlexContainer>
+      <FlexContainer backgroundColor={colors.white}>
         <GeneralStatusBar backgroundColor={colors.white} />
-        <View style={styles.backgroundContainer}>
-          <KeyboardAvoidingView behavior="position" keyboardVerticalOffset="50">
-            <View
-              style={{
-                justifyContent: 'flex-start',
-                alignItems: 'center',
-                paddingHorizontal: 24,
-              }}>
-              <NoFlexContainer
-                justifyContent="center"
-                alignItems="center"
-                marginBottom={15}>
-                <Image
-                  source={images.logoSimple}
-                  style={styles.logo}
-                  resizeMode="contain"
-                />
-                <Text h4 bold style={{marginTop: 8}}>
-                  Đăng nhập
-                </Text>
-
-                {this.props.errorMessage && this.renderErrorMessage()}
-              </NoFlexContainer>
+        <KeyboardAwareScrollView>
+          <View style={styles.backgroundContainer}>
+            <KeyboardAvoidingView
+              behavior="position"
+              keyboardVerticalOffset="50">
               <View
-                backgroundColor={colors.white}
                 style={{
-                  width: '100%',
+                  justifyContent: 'flex-start',
+                  alignItems: 'center',
+                  paddingHorizontal: 24,
                 }}>
-                <Input
-                  placeholder={translate('Địa chỉ email')}
-                  value={email}
-                  accountIcon
-                  onChangeText={(text) => {
-                    if (this.props.errorMessage) {
-                      this.props.clearForm();
-                    }
-                    this.setState({email: text});
-                  }}
-                  containerStyle={styles.inputContainerStyle}
-                />
+                <NoFlexContainer
+                  justifyContent="center"
+                  alignItems="center"
+                  marginBottom={15}>
+                  <Image
+                    source={images.logoSimple}
+                    style={styles.logo}
+                    resizeMode="contain"
+                  />
+                  <Text h4 bold style={{marginTop: 8}}>
+                    Đăng nhập
+                  </Text>
 
-                <Input
-                  placeholder={translate('Mật khẩu')}
-                  value={password}
-                  onChangeText={(text) => {
-                    if (this.props.errorMessage) {
-                      this.props.clearForm();
-                    }
-                    this.setState({password: text});
-                  }}
-                  passwordIcon
-                  secureTextEntry
-                  containerStyle={styles.inputContainerStyle}
-                />
+                  {this.props.errorMessage && this.renderErrorMessage()}
+                </NoFlexContainer>
+                <View
+                  backgroundColor={colors.white}
+                  style={{
+                    width: '100%',
+                  }}>
+                  <Input
+                    placeholder={translate('Địa chỉ email')}
+                    value={email}
+                    accountIcon
+                    onChangeText={(text) => {
+                      if (this.props.errorMessage) {
+                        this.props.clearForm();
+                      }
+                      this.setState({email: text});
+                    }}
+                    containerStyle={styles.inputContainerStyle}
+                  />
+
+                  <Input
+                    placeholder={translate('Mật khẩu')}
+                    value={password}
+                    onChangeText={(text) => {
+                      if (this.props.errorMessage) {
+                        this.props.clearForm();
+                      }
+                      this.setState({password: text});
+                    }}
+                    passwordIcon
+                    secureTextEntry
+                    containerStyle={styles.inputContainerStyle}
+                  />
+                </View>
+                <View style={{height: 24}} />
+                <Button
+                  large
+                  primary
+                  rounded
+                  block
+                  uppercase
+                  bold
+                  icon
+                  loading={this.props.loading}
+                  onPress={() => this.login()}>
+                  {translate('Đăng nhập')}
+                </Button>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigator.goBack();
+                  }}>
+                  <Text h6 paddingVertical={16} main>
+                    {translate('Đăng nhập cách khác')}
+                  </Text>
+                </TouchableOpacity>
               </View>
-              <View style={{height: 24}} />
-              <Button
-                large
-                primary
-                rounded
-                block
-                uppercase
-                bold
-                icon
-                loading={this.props.loading}
-                onPress={() => this.login()}>
-                {translate('Đăng nhập')}
-              </Button>
-            </View>
-          </KeyboardAvoidingView>
-
-          <View style={{paddingHorizontal: 24, marginBottom: 12}}>
-            <TouchableOpacity
-              activeOpacity={0.8}
-              onPress={() => navigator.navigate('Privacy')}>
-              <Text
-                center
-                style={{
-                  marginTop: 10,
-                  color: colors.interactionText,
-                  paddingBottom: 48,
-                }}
-                info>
-                {translate('Bằng việc đăng nhập bạn đã đồng ý với')}&nbsp;
-                <Text color={colors.normalText}>
-                  {translate('Quy định bảo mật ứng dụng')}
-                </Text>
-              </Text>
-            </TouchableOpacity>
+            </KeyboardAvoidingView>
           </View>
+        </KeyboardAwareScrollView>
+        <View style={{paddingHorizontal: 24, marginBottom: 12}}>
+          <TouchableOpacity
+            activeOpacity={0.8}
+            onPress={() => navigator.navigate('Privacy')}>
+            <Text
+              center
+              style={{
+                marginTop: 10,
+                color: colors.interactionText,
+                paddingBottom: 48,
+              }}
+              info>
+              {translate('Bằng việc đăng nhập bạn đã đồng ý với')}&nbsp;
+              <Text color={colors.normalText}>
+                {translate('Quy định bảo mật ứng dụng')}
+              </Text>
+            </Text>
+          </TouchableOpacity>
         </View>
       </FlexContainer>
     );

@@ -1,6 +1,12 @@
 import React from 'react';
-import {Body, Header, Left, Right} from 'native-base';
-import {TouchableOpacity, ViewPropTypes} from 'react-native';
+import {Body, Left, Right} from 'native-base';
+import {
+  StatusBar,
+  StyleSheet,
+  TouchableOpacity,
+  ViewPropTypes,
+  View,
+} from 'react-native';
 import styled from 'styled-components';
 import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -8,7 +14,8 @@ import PropTypes from 'prop-types';
 
 import Text from '../base/Text';
 
-import {RowContainer} from '~/BaseComponent';
+import {colors} from '~/themes';
+import {NoFlexContainer, RowContainer} from '~/BaseComponent';
 import {truncateStr} from '~/utils/common';
 import navigator from '~/navigation/customNavigator';
 import {OS} from '~/constants/os';
@@ -16,44 +23,56 @@ import {OS} from '~/constants/os';
 const CommonHeader = (props) => {
   const {back, close, themeWhite, androidStatusBarColor, onClose} = props;
   const {children, ...updateProps} = props;
+
   return (
-    <SHeader
-      style={[styles.header]}
-      iosBarStyle={themeWhite ? 'dark-content' : 'light-content'}
-      androidStatusBarColor={androidStatusBarColor}
-      {...props}>
-      <Left height={40}>
-        <TouchableOpacity
-          onPress={() => {
-            if (close) {
-              return onClose();
-            }
-            props.onBack();
-          }}
-          style={styles.corner}>
-          {back && (
-            <SIonicons name="md-arrow-back" size={24} {...updateProps} />
-          )}
-          {close && <SAntDesign size={24} name="close" {...updateProps} />}
-        </TouchableOpacity>
-      </Left>
-      <Body height={40} style={{minWidth: 200, alignItems: 'center'}}>
-        <Text h5 bold center uppercase color={props.headerContentColor}>
-          {truncateStr(props.title, 28)}
-        </Text>
-      </Body>
-      <Right
-        height={40}
+    <NoFlexContainer>
+      <StatusBar
+        backgroundColor={androidStatusBarColor}
+        barStyle={themeWhite ? 'dark-content' : 'light-content'}
+      />
+      <SView
         style={{
-          justifyContent: 'flex-end',
-          alignItems: 'center',
-        }}>
-        <RowContainer
-          style={props.styleChildren ? props.styleChildren : styles.corner}>
-          {children}
-        </RowContainer>
-      </Right>
-    </SHeader>
+          height: OS.statusBarHeight,
+          width: OS.WIDTH,
+          zIndex: 1000001,
+        }}
+        {...updateProps}
+      />
+      <RowContainer
+        style={[styles.header, props.border ? styles.border : null]}>
+        <Left>
+          <TouchableOpacity
+            onPress={() => {
+              if (close) {
+                return onClose();
+              }
+              props.onBack();
+            }}
+            style={styles.corner}>
+            {back && (
+              <SIonicons name="md-arrow-back" size={24} {...updateProps} />
+            )}
+            {close && <SAntDesign size={24} name="close" {...updateProps} />}
+          </TouchableOpacity>
+        </Left>
+        <Body style={styles.body}>
+          <Text
+            h5
+            bold
+            center
+            uppercase={props.uppercase}
+            color={props.headerContentColor}>
+            {truncateStr(props.title, 28)}
+          </Text>
+        </Body>
+        <Right style={styles.right}>
+          <RowContainer
+            style={props.styleChildren ? props.styleChildren : styles.corner}>
+            {children}
+          </RowContainer>
+        </Right>
+      </RowContainer>
+    </NoFlexContainer>
   );
 };
 
@@ -69,6 +88,9 @@ CommonHeader.propTypes = {
   androidStatusBarColor: PropTypes.string,
   headerContentColor: PropTypes.string,
   styleChildren: ViewPropTypes.style,
+  border: PropTypes.bool,
+  shadow: PropTypes.bool,
+  uppercase: PropTypes.bool,
 };
 
 CommonHeader.defaultProps = {
@@ -85,24 +107,26 @@ CommonHeader.defaultProps = {
   themeBlack: false,
   androidStatusBarColor: 'white',
   headerContentColor: 'black',
+  border: false,
+  shadow: false,
+  uppercase: true,
 };
 
-const styles = {
+const styles = StyleSheet.create({
   header: {
-    // alignItems: 'center',
-    shadowColor: 'rgba(60, 128, 209, 1)',
+    shadowColor: colors.black,
     shadowOffset: {
-      width: 0,
+      width: 4,
       height: 4,
     },
-    shadowOpacity: 0.0851449,
-    shadowRadius: 2,
+    shadowOpacity: 0.1,
+    shadowRadius: 16,
     elevation: 2,
-    borderBottomWidth: 0,
-    height: 40,
-    overflow: 'hidden',
-    // backgroundColor: 'red',
-    // paddingBottom: 20,
+    height: 48,
+    paddingVertical: 8,
+    zIndex: 100000,
+    backgroundColor: 'white',
+    overflow: 'visible',
   },
   corner: {
     width: 40,
@@ -111,9 +135,15 @@ const styles = {
     alignItems: 'center',
     // paddingTop: 5,
   },
-};
+  right: {justifyContent: 'flex-end', alignItems: 'center'},
+  body: {minWidth: 200, alignItems: 'center'},
+  border: {
+    borderBottomRightRadius: 16,
+    borderBottomLeftRadius: 16,
+  },
+});
 
-const SHeader = styled(Header)`
+const SView = styled(View)`
   background-color: ${(props) => {
     if (props.themeWhite) {
       return props.theme.colors.white;
@@ -131,7 +161,7 @@ const SHeader = styled(Header)`
 const SIonicons = styled(Ionicons)`
   color: ${(props) => {
     if (props.themeWhite) {
-      return props.theme.colors.primary;
+      return props.theme.colors.normalText;
     }
     if (props.themePrimary) {
       return props.theme.colors.white;

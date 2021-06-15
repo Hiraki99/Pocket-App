@@ -14,28 +14,26 @@ import {colors} from '~/themes';
 
 const Input = (props) => {
   const [blur, setOnBlur] = React.useState(false);
-  const [showPassword, setShowPassword] = React.useState(
-    !props.secureTextEntry,
-  );
+  const [showPassword, setShowPassword] = React.useState(props.secureTextEntry);
 
   return (
     <RowContainer style={props.containerStyle}>
       {props.accountIcon && (
         <MaterialCommunityIcons
-          color={colors.black}
+          color={props.colorIcon}
           name={'account'}
           size={24}
         />
       )}
       {props.emailIcon && (
         <MaterialCommunityIcons
-          color={colors.normalText}
+          color={props.colorIcon}
           name={'email'}
           size={24}
         />
       )}
       {props.passwordIcon && (
-        <Ionicons color={colors.black} name={'key-sharp'} size={20} />
+        <Ionicons color={props.colorIcon} name={'key-sharp'} size={20} />
       )}
       <TextInput
         placeholder={props.placeholder}
@@ -62,7 +60,7 @@ const Input = (props) => {
           />
         </TouchableWithoutFeedback>
       )}
-      {props.secureTextEntry && (
+      {props.secureTextEntry && !!props.value && (
         <TouchableWithoutFeedback
           onPress={() => {
             setShowPassword((old) => {
@@ -87,6 +85,7 @@ Input.propTypes = {
   inputStyle: ViewPropTypes.style,
   containerStyle: ViewPropTypes.style,
   secureTextEntry: PropTypes.bool,
+  colorIcon: PropTypes.string,
   accountIcon: PropTypes.bool,
   passwordIcon: PropTypes.bool,
   emailIcon: PropTypes.bool,
@@ -99,6 +98,7 @@ Input.defaultProps = {
   accountIcon: false,
   passwordIcon: false,
   emailIcon: false,
+  colorIcon: colors.black,
   containerStyle: {},
   inputStyle: {
     shadowColor: 'rgb(60,128,209)',

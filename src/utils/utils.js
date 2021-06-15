@@ -16,6 +16,18 @@ import {OS} from '~/constants/os';
 import {colors} from '~/themes';
 import {translate} from '~/utils/multilanguage';
 let listAudio = {};
+const keys = Object.keys(audios);
+keys.forEach((key) => {
+  const audio = audios[key];
+  const whoosh = new Sound(audio, (error) => {
+    if (error) {
+      return;
+    }
+    whoosh.setVolume(0.3);
+    whoosh.play(() => {});
+  });
+  listAudio[audios[key]] = whoosh;
+});
 
 export const toastNativeMessage = (message) => {
   if (OS.IsAndroid) {
@@ -310,22 +322,21 @@ export const onOffPlayAudioZoom = (expectStateZoom = false) => {
 
 export const playAudio = (name) => {
   if (audios[name]) {
-    const audio = audios[name];
-    const whoosh = new Sound(audio, (error) => {
-      if (error) {
-        return;
-      }
-      whoosh.setVolume(0.3);
-      whoosh.play(() => {});
-    });
-    listAudio[audios[name]] = whoosh;
+    // const audio = audios[name];
+    // const whoosh = new Sound(audio, (error) => {
+    //   if (error) {
+    //     return;
+    //   }
+    //   whoosh.setVolume(0.3);
+    //   whoosh.play(() => {});
+    // });
+    listAudio[audios[name]].play();
   }
 };
 //
 export const removeAudio = (name) => {
   if (audios[name] && listAudio[audios[name]]) {
-    listAudio[audios[name]].release();
-    delete listAudio[audios[name]];
+    listAudio[audios[name]].stop();
   }
 };
 

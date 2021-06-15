@@ -43,19 +43,10 @@ class ActivityItem extends React.PureComponent {
             <View>
               <FastImage
                 source={{uri: item.featured_image}}
-                style={{width: 52, height: 52, marginRight: 16}}
+                style={styles.featureImage}
               />
               {item.word_group_level === HARD_LEVEL.BAD && (
-                <Image
-                  source={images.clam}
-                  style={{
-                    width: 20,
-                    height: 20,
-                    position: 'absolute',
-                    top: -4,
-                    right: 18,
-                  }}
-                />
+                <Image source={images.clam} style={styles.clamImage} />
               )}
             </View>
             <View style={styles.courseInfo}>
@@ -191,6 +182,18 @@ const styles = {
   },
   hard: {width: 22, height: 14, marginBottom: 2, marginLeft: 8},
   error: {width: 20, height: 20, position: 'absolute', top: -4, right: 18},
+  clamImage: {
+    width: 20,
+    height: 20,
+    position: 'absolute',
+    top: -4,
+    right: 18,
+  },
+  featureImage: {
+    width: 48,
+    height: 48,
+    marginRight: 16,
+  },
 };
 
 export default connect(mapStateToProps, {resetActivityDone})(ActivityItem);
