@@ -10,6 +10,7 @@ const colors = {
   warning: '#FFC64E',
   primary: '#09AB8E',
   black: 'rgb(0,0,0)',
+  black_007: 'rgba(0,0,0, 0.07)',
 
   /* ---------- OnBoard Color -----------*/
   purple: '#3B2FC5',

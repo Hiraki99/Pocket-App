@@ -182,6 +182,14 @@ const images = {
     facebook: require('~/assets/images/social-icon/facebook.png'),
     google: require('~/assets/images/social-icon/google.png'),
   },
+  icon_account: {
+    account: require('~/assets/images/setting/account.png'),
+    logout: require('~/assets/images/setting/logout.png'),
+    setting: require('~/assets/images/setting/setting.png'),
+    update: require('~/assets/images/setting/update.png'),
+    video: require('~/assets/images/setting/video.png'),
+    upgrade: require('~/assets/images/setting/upgrade.png'),
+  },
 };
 
 export default images;

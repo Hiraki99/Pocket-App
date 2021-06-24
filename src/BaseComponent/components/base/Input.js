@@ -36,6 +36,7 @@ const Input = (props) => {
         <Ionicons color={props.colorIcon} name={'key-sharp'} size={20} />
       )}
       <TextInput
+        editable={props.enableEdit}
         placeholder={props.placeholder}
         autoCapitalize="none"
         value={props.value}
@@ -50,7 +51,7 @@ const Input = (props) => {
         secureTextEntry={showPassword}
         style={[styles.input, props.inputStyle || {}]}
       />
-      {!!props.value && !blur && !props.secureTextEntry && (
+      {!!props.value && !blur && !props.secureTextEntry && props.enableEdit && (
         <TouchableWithoutFeedback onPress={() => props.onChangeText('')}>
           <Ionicons
             name={'close'}
@@ -85,6 +86,7 @@ Input.propTypes = {
   inputStyle: ViewPropTypes.style,
   containerStyle: ViewPropTypes.style,
   secureTextEntry: PropTypes.bool,
+  enableEdit: PropTypes.bool,
   colorIcon: PropTypes.string,
   accountIcon: PropTypes.bool,
   passwordIcon: PropTypes.bool,
@@ -94,6 +96,7 @@ Input.defaultProps = {
   placeholder: '',
   value: '',
   onChangeText: () => {},
+  enableEdit: true,
   secureTextEntry: false,
   accountIcon: false,
   passwordIcon: false,

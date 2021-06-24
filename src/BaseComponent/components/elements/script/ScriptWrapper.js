@@ -1,5 +1,5 @@
 import React from 'react';
-import {BackHandler, View, Image} from 'react-native';
+import {BackHandler, View, Image, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Body, Button, Header, Left, Right} from 'native-base';
@@ -182,14 +182,7 @@ class ScriptWrapper extends React.Component {
         )}
 
         {showProgress && !game && (
-          <Body
-            style={{
-              height: 40,
-              minWidth: 150,
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginBottom: 6,
-            }}>
+          <Body style={styles.body}>
             <Progress.Bar
               progress={progress}
               borderRadius={3}
@@ -264,6 +257,7 @@ class ScriptWrapper extends React.Component {
   };
   render() {
     const {mainBgColor, white, primary, game} = this.props;
+    console.log('');
     return (
       <View style={[styles.wrapper, {backgroundColor: mainBgColor}]}>
         <SHeader
@@ -281,19 +275,12 @@ class ScriptWrapper extends React.Component {
                 white={white}
                 primary={primary}
                 game={game}
+                style={{paddingLeft: 8}}
               />
             </Button>
           </Left>
           {this.renderCenter()}
-          <Right
-            style={{
-              height: 40,
-              alignItems: 'center',
-              justifyContent: 'flex-end',
-              marginBottom: 10,
-            }}>
-            {this.renderRight()}
-          </Right>
+          <Right style={styles.right}>{this.renderRight()}</Right>
         </SHeader>
         {this.props.children}
       </View>
@@ -365,7 +352,7 @@ const SText = styled(Text)`
   }};
 `;
 
-const styles = {
+const styles = StyleSheet.create({
   wrapper: {
     backgroundColor: colors.white,
     flex: 1,
@@ -373,10 +360,10 @@ const styles = {
   },
   header: {
     alignItems: 'center',
-    shadowColor: 'rgba(60, 128, 209, 1)',
+    // shadowColor: 'rgba(60, 128, 209, 1)',
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 8,
     },
     shadowOpacity: 0.0851449,
     shadowRadius: 2,
@@ -392,7 +379,20 @@ const styles = {
   progress: {
     width: 100,
   },
-};
+  body: {
+    minWidth: 100,
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: 6,
+  },
+  right: {
+    height: 40,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    marginBottom: 10,
+  },
+});
 
 ScriptWrapper.propTypes = {
   mainBgColor: PropTypes.string,

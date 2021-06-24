@@ -2,17 +2,24 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {check, PERMISSIONS, RESULTS, request} from 'react-native-permissions';
 import ImagePicker from 'react-native-image-picker';
-import {View, StyleSheet, Platform, Alert} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {
+  View,
+  StyleSheet,
+  Platform,
+  Alert,
+  TouchableNativeFeedback,
+} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 import {
   Button,
-  Card,
   RowContainer,
-  STextInput,
   Text,
   Avatar,
-  CommonHeader,
-  SeparatorVertical,
+  BlankHeader,
+  FlexContainer,
+  Input,
 } from '~/BaseComponent';
 import {customNavigationOptions} from '~/navigation/navigationHelper';
 import {colors} from '~/themes';
@@ -76,7 +83,6 @@ class ProfileInfoScreen extends React.Component {
         if (response.didCancel || response.error || response.customButton) {
           return;
         }
-        console.log('Profile ', response);
         this.setState({
           avatar: isAndroid
             ? response.uri
@@ -116,65 +122,79 @@ class ProfileInfoScreen extends React.Component {
   };
 
   render() {
-    const {user, loadingUpdateProfile} = this.props;
-    const {full_name, avatar} = this.state;
+    const {avatar} = this.state;
 
     return (
-      <>
-        <CommonHeader title={translate('Thông tin')} themeWhite />
-        <View style={styles.container}>
-          <Avatar uri={avatar} update onPress={this.chooseImage} />
-          <View style={styles.containerFirst}>
-            <Card style={styles.cardContainer}>
-              <RowContainer
-                paddingVertical={8}
-                paddingHorizontal={16}
-                justifyContent="space-between"
-                alignItem="center">
-                <Text h5 color={colors.helpText2} style={styles.title}>
-                  {translate('Họ tên')}
+      <FlexContainer backgroundColor={colors.white}>
+        <BlankHeader />
+        <RowContainer style={{width: '100%'}}>
+          <TouchableNativeFeedback
+            onPress={() => {
+              navigator.goBack();
+            }}>
+            <RowContainer
+              paddingLeft={16}
+              paddingRight={24}
+              paddingVertical={4}>
+              <Ionicons name="md-arrow-back" size={24} />
+            </RowContainer>
+          </TouchableNativeFeedback>
+        </RowContainer>
+        <KeyboardAwareScrollView>
+          <View style={styles.container}>
+            <RowContainer justifyContent={'center'}>
+              <Avatar
+                size={122}
+                uri={avatar}
+                update
+                onPressAvatar={this.chooseImage}
+              />
+            </RowContainer>
+            <FlexContainer paddingHorizontal={24} paddingVertical={36}>
+              <Input
+                placeholder={translate('Họ và tên')}
+                value={this.state.full_name}
+                accountIcon
+                onChangeText={(text) => {
+                  if (this.props.errorMessage) {
+                    this.props.clearForm();
+                  }
+                  this.setState({full_name: text});
+                }}
+                containerStyle={styles.inputContainerStyle}
+              />
+              <Input
+                enableEdit={false}
+                placeholder={translate('Địa chỉ email')}
+                value={this.props.user.email}
+                emailIcon
+                containerStyle={[
+                  styles.inputContainerStyle,
+                  {marginBottom: 36},
+                ]}
+              />
+              <Button
+                large
+                primary
+                rounded
+                block
+                icon
+                loading={this.props.loading}
+                onPress={this.onUpdateProfile}>
+                {translate('Lưu lại')}
+              </Button>
+              <TouchableNativeFeedback
+                onPress={() => {
+                  navigator.goBack();
+                }}>
+                <Text h5 color={colors.hoverText} center paddingVertical={16}>
+                  {translate('Hủy')}
                 </Text>
-                <STextInput
-                  placeholder={translate('Họ tên')}
-                  value={full_name}
-                  onChangeText={(text) => this.setState({full_name: text})}
-                  placeholderTextColor={colors.normalText}
-                  textAlign={'right'}
-                  allowFontScaling={false}
-                  style={styles.textInput}
-                />
-              </RowContainer>
-              <SeparatorVertical backgroundColor={colors.mainBgColor} />
-              <RowContainer
-                justifyContent="space-between"
-                alignItem="center"
-                paddingVertical={8}
-                paddingHorizontal={16}>
-                <Text h5 color={colors.helpText2} style={styles.title}>
-                  {translate('Email')}
-                </Text>
-                <RowContainer style={{flex: 1}} justifyContent="flex-end">
-                  <Text h5 bold paddingVertical={13} numberOfLines={1}>
-                    {user.email}
-                  </Text>
-                </RowContainer>
-              </RowContainer>
-            </Card>
-            <Button
-              large
-              primary
-              rounded
-              block
-              uppercase
-              bold
-              icon
-              loading={loadingUpdateProfile}
-              onPress={() => this.onUpdateProfile()}>
-              {translate('Đồng ý')}
-            </Button>
+              </TouchableNativeFeedback>
+            </FlexContainer>
           </View>
-        </View>
-      </>
+        </KeyboardAwareScrollView>
+      </FlexContainer>
     );
   }
 }
@@ -190,6 +210,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginVertical: 16,
+    backgroundColor: colors.white,
   },
   cardContainer: {
     backgroundColor: '#fff',
@@ -208,6 +229,13 @@ const styles = StyleSheet.create({
     borderColor: null,
     borderWidth: 0,
     paddingHorizontal: 0,
+  },
+  inputContainerStyle: {
+    backgroundColor: '#F5F6F9',
+    borderRadius: 50,
+    paddingLeft: 18,
+    paddingRight: 16,
+    marginBottom: 12,
   },
 });
 export default connect(mapStateToProps, {updateProfile})(ProfileInfoScreen);

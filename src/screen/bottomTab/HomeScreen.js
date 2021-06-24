@@ -1,32 +1,53 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {useSelector} from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import {BlankHeader, FlexContainer} from '~/BaseComponent';
 import HomeTabBar from '~/BaseComponent/components/elements/tabbar/HomeTabBar';
 import TopUserHeader from '~/BaseComponent/components/layouts/header/TopUserHeader';
 import LessonContainer from '~/features/lessons/container/LessonContainer';
+import navigator from '~/navigation/customNavigator';
+import {listCourseSelector} from '~/selector/lesson';
 import {colors} from '~/themes';
 import {translate} from '~/utils/multilanguage';
 
 const HomeScreen = () => {
+  const courses = useSelector(listCourseSelector);
+  const renderHomeTab = React.useCallback(() => {
+    return (
+      <HomeTabBar
+        style={[styles.tabBar, {opacity: courses.length === 0 ? 0 : 1}]}
+      />
+    );
+  }, [courses]);
   return (
     <FlexContainer backgroundColor={colors.white}>
       <BlankHeader color={colors.white} dark />
       <View paddingHorizontal={24}>
-        <TopUserHeader />
+        <TopUserHeader
+          onPressAvatar={() => {
+            navigator.navigate('Account');
+          }}
+        />
       </View>
       <ScrollableTabView
-        renderTabBar={() => <HomeTabBar style={styles.tabBar} />}
+        renderTabBar={renderHomeTab}
         tabBarBackgroundColor={colors.white}
         tabBarActiveTextColor={colors.primary}
         tabBarInactiveTextColor={colors.helpText}
         prerenderingSiblingsNumber={0}
         tabBarUnderlineStyle={{backgroundColor: colors.primary}}
         tabBarTextStyle={styles.tabBarTextStyle}>
-        <LessonContainer tabLabel={translate('Dễ')} />
-        <LessonContainer tabLabel={translate('Trung bình')} />
-        <LessonContainer tabLabel={translate('Khó')} />
+        {courses.map((item) => {
+          return (
+            <LessonContainer
+              tabLabel={translate(item.display_name)}
+              data={item}
+              key={item._id}
+            />
+          );
+        })}
       </ScrollableTabView>
     </FlexContainer>
   );

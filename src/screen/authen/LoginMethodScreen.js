@@ -284,7 +284,7 @@ const styles = StyleSheet.create({
   bottomContainer: {
     flex: 1,
     justifyContent: 'space-between',
-    paddingTop: 24,
+    paddingTop: OS.hasNotch ? 24 : 12,
     paddingBottom: OS.hasNotch ? 24 : 36,
     borderTopLeftRadius: 24,
     borderTopRightRadius: 24,

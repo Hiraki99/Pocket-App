@@ -63,13 +63,7 @@ class LoginScreen extends React.Component {
 
   componentDidUpdate(prevProps) {
     if (!prevProps.isProfileLoaded && this.props.isProfileLoaded) {
-      const {current_course_obj} = this.props.user;
-      if (current_course_obj) {
-        this.props.changeCurrentCourse(current_course_obj);
-        navigator.reset('MainStack');
-      } else {
-        navigator.navigate('Course');
-      }
+      navigator.reset('MainStack');
     }
   }
 

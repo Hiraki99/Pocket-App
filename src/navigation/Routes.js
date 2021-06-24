@@ -123,6 +123,7 @@ import NotificationsScreen from '~/screen/NotificationsScreen';
 import PrimaryPointAndSayBubbleScreen from '~/screen/activity/primary/PrimaryPointAndSayBubbleScreen';
 import ChangeLanguageScreen from '~/screen/ChangeLanguageScreen';
 import HomeScreen from '~/screen/bottomTab/HomeScreen';
+import InfoAccountScreen from '~/screen/InfoAccountScreen';
 
 let Stack;
 if (!OS.IsAndroid) {
@@ -212,6 +213,7 @@ const AppStack = () => {
       <Stack.Screen name="GameAchievement" component={GameAchievementScreen} />
       <Stack.Screen name="ActivityBoard" component={ActivityBoardScreen} />
       <Stack.Screen name="Account" component={AccountScreen} />
+      <Stack.Screen name="InfoAccount" component={InfoAccountScreen} />
       <Stack.Screen
         name="TeachingSectionDetail"
         component={TeachingSectionDetailScreen}

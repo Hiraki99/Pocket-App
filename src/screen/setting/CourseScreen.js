@@ -92,7 +92,8 @@ class CourseScreen extends React.PureComponent {
         <View style={styles.courseInfoWrap}>
           <FastImage
             source={{uri: item.featured_image}}
-            style={{width: 100, height: 100, marginBottom: -15}}
+            resizeMode={'cover'}
+            style={{width: 72, height: 72, marginHorizontal: 16}}
           />
           <View style={styles.courseInfo}>
             <Text h5 bold>
@@ -239,6 +240,7 @@ const styles = {
   courseInfoWrap: {
     flexDirection: 'row',
     alignItems: 'center',
+    paddingVertical: 12,
   },
   courseInfo: {
     flexDirection: 'column',

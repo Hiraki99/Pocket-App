@@ -74,7 +74,7 @@ const SummaryReviewScreen = () => {
   };
 
   return (
-    <>
+    <FlexContainer backgroundColor={colors.mainBgColor}>
       <CommonHeader
         title={`${translate('Lesson Review')}`}
         themeWhite
@@ -141,7 +141,6 @@ const SummaryReviewScreen = () => {
               </html>
               `,
             }}
-            showsVerticalScrollIndicator={false}
             showsHorizontalScrollIndicator={false}
             scrollEnabled={false}
             style={{
@@ -164,7 +163,7 @@ const SummaryReviewScreen = () => {
           <SeparatorVertical slg={OS.hasNotch} lg={!OS.hasNotch} />
         </FlexContainer>
       </ScrollView>
-    </>
+    </FlexContainer>
   );
 };
 SummaryReviewScreen.propTypes = {};

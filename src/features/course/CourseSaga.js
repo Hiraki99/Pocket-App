@@ -1,4 +1,5 @@
-import {put, call, takeLatest} from 'redux-saga/effects';
+import {put, call, takeLatest, select} from 'redux-saga/effects';
+
 import {
   CHANGE_CURRENT_COURSE,
   FETCH_COURSE,
@@ -10,6 +11,7 @@ import {
   fetchCourseSuccess,
   fetchCommonCommentSpeakSuccess,
   fetchCommonCommentSpeakFail,
+  changeCurrentCourse,
 } from './CourseAction';
 
 export default function* courseSagas() {
@@ -18,10 +20,16 @@ export default function* courseSagas() {
   yield takeLatest(FETCH_COMMON_COMMENT_SPEAK, fetchCommonCommentSpeak);
 }
 
+const getCurrentCourse = (state) => state.course.currentCourse;
+
 function* fetchCourse({payload: {form}}) {
   const response = yield call(courseApi.fetchCourse, form);
   if (response.ok && response.data) {
+    const currentCourse = yield select(getCurrentCourse);
     yield put(fetchCourseSuccess(response.data));
+    if (!currentCourse) {
+      yield put(changeCurrentCourse(response.data.data[0]));
+    }
     return;
   }
   yield put(fetchCourseFail());
@@ -33,7 +41,8 @@ function* updateCurrentCourse({payload: {currentCourse}}) {
 
 function* fetchCommonCommentSpeak() {
   const response = yield call(courseApi.fetchCommonCommentSpeak);
-  if (response.ok && response.data) {
+  console.log('response ', response);
+  if (response.ok && response.data && response.data.brief_comments) {
     yield put(fetchCommonCommentSpeakSuccess(response.data.brief_comments));
     return;
   }

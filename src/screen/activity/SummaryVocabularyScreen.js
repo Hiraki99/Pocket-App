@@ -144,12 +144,12 @@ const SummaryVocabularyScreen = () => {
 
   return (
     <>
-      <CommonHeader
-        title={`${translate('Vocabulary')}`}
-        themeWhite
-        onBack={onBack}
-      />
       <FlexContainer backgroundColor={colors.mainBgColor} marginTop={8}>
+        <CommonHeader
+          title={`${translate('Vocabulary')}`}
+          themeWhite
+          onBack={onBack}
+        />
         <FlatList
           ListHeaderComponent={renderHeader}
           ListFooterComponent={renderFooter}

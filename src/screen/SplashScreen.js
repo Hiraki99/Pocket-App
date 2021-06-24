@@ -3,6 +3,7 @@ import {connect} from 'react-redux';
 import {View, Image, StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
+import {BlankHeader} from '~/BaseComponent';
 import {OS} from '~/constants/os';
 import {colors, images} from '~/themes';
 import {configApi} from '~/utils/apisaure';
@@ -32,30 +33,20 @@ class SplashScreen extends React.PureComponent {
       });
     } else {
       configApi(null);
-      const firstUseApp = await AsyncStorage.getItem('firstUseApp');
-      if (firstUseApp) {
-        navigator.reset('AuthStack');
-      } else {
-        navigator.reset('OnBoarding');
-      }
+      navigator.reset('AuthStack');
     }
   }
 
   componentDidUpdate(prevProps) {
     if (!prevProps.isProfileLoaded && this.props.isProfileLoaded) {
-      const {current_course_obj} = this.props.user;
-      if (current_course_obj) {
-        this.props.changeCurrentCourse(current_course_obj);
-        navigator.reset('MainStack');
-      } else {
-        navigator.navigate('Course');
-      }
+      navigator.reset('MainStack');
     }
   }
 
   render() {
     return (
       <View style={styles.wrap}>
+        <BlankHeader />
         <View style={styles.mainContent}>
           <Image
             source={images.logoSimple}

@@ -24,7 +24,7 @@ keys.forEach((key) => {
       return;
     }
     whoosh.setVolume(0.3);
-    whoosh.play(() => {});
+    // whoosh.play(() => {});
   });
   listAudio[audios[key]] = whoosh;
 });

@@ -42,7 +42,10 @@ import {
 import api from '~/utils/apisaure';
 // import Analytics, {logUserEvent} from '~/utils/firebase';
 import {SUCCESS, ACCESS_DENIED, UNAUTHORIZED} from '~/constants/responseCodes';
-import {fetchCommonCommentSpeak} from '~/features/course/CourseAction';
+import {
+  fetchCommonCommentSpeak,
+  fetchCourse,
+} from '~/features/course/CourseAction';
 import navigator from '~/navigation/customNavigator';
 import {fetchDetailClass} from '~/features/class/ClassAction';
 import {fetchTutorialActivity} from '~/features/activity/ActivityAction';
@@ -134,6 +137,7 @@ function* gFetchMe() {
       yield put(fetchDetailClass({id: response.data?.user?.class}));
     }
     yield put(fetchCommonCommentSpeak());
+    yield put(fetchCourse());
     yield put(fetchTutorialActivity());
     const {stt} = response.data;
     const bytes = yield CryptoJS.AES.decrypt(stt.stt_token, stt.stt_key);
@@ -173,13 +177,11 @@ function* updateProfile({payload: {body}}) {
   let avatarPath;
   if (body.avatar) {
     const bodyFormData = new FormData();
-    bodyFormData.append('image', [
-      {
-        uri: body.avatar,
-        name: '123.jpg',
-        type: 'image/jpg',
-      },
-    ]);
+    bodyFormData.append('image', {
+      uri: body.avatar,
+      name: '123.jpg',
+      type: 'image/jpg',
+    });
     bodyFormData.append('type', 'image/jpeg');
     const resUpload = yield call(authApi.uploadAvatar, bodyFormData);
     if (resUpload.ok) {
@@ -262,7 +264,7 @@ function* changePassword({payload: {body}}) {
     Alert.alert('Thông báo', 'Cập nhập mật khẩu thành công!', [
       {text: 'Đồng ý'},
     ]);
-    //navigator.goBack();
+    navigator.goBack();
   } else {
     yield put(changePasswordFail());
     Alert.alert(

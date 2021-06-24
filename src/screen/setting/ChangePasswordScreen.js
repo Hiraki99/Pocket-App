@@ -1,20 +1,21 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {View, Alert, StyleSheet} from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import {View, StyleSheet, Alert, TouchableNativeFeedback} from 'react-native';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
+import {changePassword} from '~/features/authentication/AuthenAction';
 import {
   Button,
-  Card,
   RowContainer,
-  STextInput,
   Text,
-  Avatar,
-  CommonHeader,
-  SeparatorVertical,
+  BlankHeader,
+  FlexContainer,
+  Input,
 } from '~/BaseComponent';
 import {customNavigationOptions} from '~/navigation/navigationHelper';
 import {colors} from '~/themes';
-import {changePassword} from '~/features/authentication/AuthenAction';
+import navigator from '~/navigation/customNavigator';
 import {translate} from '~/utils/multilanguage';
 
 class ChangePasswordScreen extends React.Component {
@@ -44,81 +45,83 @@ class ChangePasswordScreen extends React.Component {
   };
 
   render() {
-    const {old_password, new_password} = this.state;
-    const {user} = this.props;
     return (
-      <>
-        <CommonHeader title={translate('Đổi mật khẩu')} themeWhite />
-        <View style={styles.container}>
-          <Avatar uri={user.avatar} />
-          <View style={styles.containerFirst}>
-            <Card style={styles.cardContainer}>
-              <RowContainer
-                paddingVertical={8}
-                paddingHorizontal={24}
-                justifyContent="space-between"
-                alignItem="center">
-                <Text h5 color={colors.helpText2} style={styles.title}>
-                  {translate('Mật khẩu cũ')}
+      <FlexContainer backgroundColor={colors.white}>
+        <BlankHeader />
+        <RowContainer style={{width: '100%'}}>
+          <TouchableNativeFeedback
+            onPress={() => {
+              navigator.goBack();
+            }}>
+            <RowContainer
+              paddingLeft={16}
+              paddingRight={24}
+              paddingVertical={4}>
+              <Ionicons name="md-arrow-back" size={24} />
+            </RowContainer>
+          </TouchableNativeFeedback>
+        </RowContainer>
+        <KeyboardAwareScrollView>
+          <View style={styles.container}>
+            <RowContainer justifyContent={'center'}>
+              <Text h5 bold>
+                {translate('Đổi mật khẩu')}
+              </Text>
+            </RowContainer>
+            <FlexContainer paddingHorizontal={24} paddingVertical={36}>
+              <Input
+                placeholder={translate('Mật khẩu cũ')}
+                value={this.state.old_password}
+                secureTextEntry
+                onChangeText={(text) => {
+                  this.setState({old_password: text});
+                }}
+                passwordIcon
+                containerStyle={styles.inputContainerStyle}
+              />
+              <Input
+                placeholder={translate('Mật khẩu mới')}
+                value={this.state.new_password}
+                secureTextEntry
+                onChangeText={(text) => {
+                  this.setState({new_password: text});
+                }}
+                passwordIcon
+                containerStyle={[
+                  styles.inputContainerStyle,
+                  {marginBottom: 36},
+                ]}
+              />
+              <Button
+                large
+                primary
+                rounded
+                block
+                icon
+                loading={this.props.loading}
+                onPress={this.changePassword}>
+                {translate('Lưu lại')}
+              </Button>
+              <TouchableNativeFeedback
+                onPress={() => {
+                  navigator.goBack();
+                }}>
+                <Text h5 color={colors.hoverText} center paddingVertical={16}>
+                  {translate('Hủy')}
                 </Text>
-
-                <STextInput
-                  secureTextEntry
-                  placeholder="_______"
-                  textAlign={'right'}
-                  value={old_password}
-                  onChangeText={(pass) => this.setState({old_password: pass})}
-                  placeholderTextColor={colors.helpText2}
-                  allowFontScaling={false}
-                  style={[styles.textInput]}
-                />
-              </RowContainer>
-              <SeparatorVertical backgroundColor={colors.mainBgColor} />
-              <RowContainer
-                justifyContent="space-between"
-                alignItem="center"
-                paddingVertical={8}
-                paddingHorizontal={24}>
-                <Text h5 color={colors.helpText2} style={styles.title}>
-                  {translate('Mật khẩu mới')}
-                </Text>
-                <STextInput
-                  placeholder="_______"
-                  secureTextEntry
-                  value={new_password}
-                  onChangeText={(newpass) =>
-                    this.setState({new_password: newpass})
-                  }
-                  placeholderTextColor={colors.helpText2}
-                  allowFontScaling={false}
-                  textAlign={'right'}
-                  style={[styles.textInput]}
-                />
-              </RowContainer>
-            </Card>
-            <Button
-              large
-              primary
-              rounded
-              block
-              uppercase
-              bold
-              icon
-              loading={this.props.loading}
-              onPress={this.changePassword}>
-              {translate('Đồng ý')}
-            </Button>
+              </TouchableNativeFeedback>
+            </FlexContainer>
           </View>
-        </View>
-      </>
+        </KeyboardAwareScrollView>
+      </FlexContainer>
     );
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    loading: state.auth.loading,
     user: state.auth.user || {},
+    loadingUpdateProfile: state.auth.loadingUpdateProfile,
   };
 };
 
@@ -126,6 +129,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginVertical: 16,
+    backgroundColor: colors.white,
   },
   cardContainer: {
     backgroundColor: '#fff',
@@ -137,13 +141,20 @@ const styles = StyleSheet.create({
     paddingTop: 16,
     paddingBottom: 36,
   },
-  title: {width: 120},
+  title: {width: 53},
   textInput: {
     flex: 1,
-    // textAlignVertical: 'top',
+    textAlignVertical: 'top',
+    borderColor: null,
     borderWidth: 0,
-    paddingVertical: 12,
     paddingHorizontal: 0,
+  },
+  inputContainerStyle: {
+    backgroundColor: '#F5F6F9',
+    borderRadius: 50,
+    paddingLeft: 18,
+    paddingRight: 16,
+    marginBottom: 12,
   },
 });
 export default connect(mapStateToProps, {changePassword})(ChangePasswordScreen);

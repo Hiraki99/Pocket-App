@@ -415,7 +415,7 @@ EmbedAudio.defaultProps = {
   text: '',
   transcript: null,
   enablePressControl: true,
-  onLoadDone: (status) => {},
+  onLoadDone: () => {},
   isPresentation: false,
 };
 
@@ -490,7 +490,7 @@ const styles = {
     zIndex: -1,
   },
   userBgProgress: {
-    backgroundColor: '#595FFF',
+    backgroundColor: colors.primary_overlay,
   },
   loading: {
     paddingVertical: 12,

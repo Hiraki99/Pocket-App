@@ -1,42 +1,28 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import {
-  TouchableOpacity,
-  View,
   ScrollView,
   StyleSheet,
   Alert,
+  TouchableNativeFeedback,
+  Image,
 } from 'react-native';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+import Ionicons from 'react-native-vector-icons/Ionicons';
 
 import {
-  Button,
-  Card,
-  NoFlexContainer,
   RowContainer,
   Text,
   Avatar,
   SeparatorVertical,
-  BottomTabContainer,
-  CommonHeader,
+  BlankHeader,
+  FlexContainer,
 } from '~/BaseComponent';
-import {customNavigationOptions} from '~/navigation/navigationHelper';
 import {logout} from '~/features/authentication/AuthenAction';
-import {colors} from '~/themes';
+import {colors, images} from '~/themes';
 import navigator from '~/navigation/customNavigator';
 import {translate} from '~/utils/multilanguage';
 
-const filterButton = [`${translate('Hồ sơ')}`, `${translate('Thành tích')}`];
-
 class AccountScreen extends React.PureComponent {
-  static navigationOptions = customNavigationOptions;
-  constructor(props) {
-    super(props);
-    this.state = {
-      selected: filterButton[0],
-    };
-  }
-
   componentDidMount(): void {}
 
   logout = () => {
@@ -56,145 +42,107 @@ class AccountScreen extends React.PureComponent {
     );
   };
 
-  formAccount = () => {
-    return (
-      <Card style={styles.cardContainer}>
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => navigator.navigate('Profile')}>
-          <RowContainer
-            paddingVertical={16}
-            paddingHorizontal={24}
-            justifyContent="space-between"
-            alignItem="center">
-            <Text h5>{`${translate('Thông tin cá nhân')}`}</Text>
-            <AntDesign size={20} name="right" color="rgba(52,67,86,0.3)" />
-          </RowContainer>
-        </TouchableOpacity>
-        <SeparatorVertical backgroundColor={colors.mainBgColor} />
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => navigator.navigate('ChangePassword')}>
-          <RowContainer
-            justifyContent="space-between"
-            alignItem="center"
-            paddingVertical={16}
-            paddingHorizontal={24}>
-            <Text h5>{`${translate('Đổi mật khẩu')}`}</Text>
-            <AntDesign size={20} name="right" color="rgba(52,67,86,0.3)" />
-          </RowContainer>
-        </TouchableOpacity>
-        <SeparatorVertical backgroundColor={colors.mainBgColor} />
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => navigator.navigate('SelectSchool')}>
-          <RowContainer
-            justifyContent="space-between"
-            alignItem="center"
-            paddingVertical={16}
-            paddingHorizontal={24}>
-            <Text h5>{`${translate('Thay đổi trường học')}`}</Text>
-            <AntDesign size={20} name="right" color="rgba(52,67,86,0.3)" />
-          </RowContainer>
-        </TouchableOpacity>
-        <SeparatorVertical backgroundColor={colors.mainBgColor} />
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => navigator.navigate('Course')}>
-          <RowContainer
-            justifyContent="space-between"
-            alignItem="center"
-            paddingVertical={16}
-            paddingHorizontal={24}>
-            <Text h5>{`${translate('Thay đổi lớp học')}`}</Text>
-            <AntDesign size={20} name="right" color="rgba(52,67,86,0.3)" />
-          </RowContainer>
-        </TouchableOpacity>
-        <SeparatorVertical backgroundColor={colors.mainBgColor} />
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => navigator.navigate('SelectClass')}>
-          <RowContainer
-            justifyContent="space-between"
-            alignItem="center"
-            paddingVertical={16}
-            paddingHorizontal={24}>
-            <Text h5>{`${translate('Truy cập lớp học')}`}</Text>
-            <AntDesign size={20} name="right" color="rgba(52,67,86,0.3)" />
-          </RowContainer>
-        </TouchableOpacity>
-        <SeparatorVertical backgroundColor={colors.mainBgColor} />
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => navigator.navigate('ChangeLanguage')}>
-          <RowContainer
-            justifyContent="space-between"
-            alignItem="center"
-            paddingVertical={16}
-            paddingHorizontal={24}>
-            <Text h5>{`${translate('Ngôn ngữ')}`}</Text>
-            <AntDesign size={20} name="right" color="rgba(52,67,86,0.3)" />
-          </RowContainer>
-        </TouchableOpacity>
-        <SeparatorVertical backgroundColor={colors.mainBgColor} />
-        <TouchableOpacity
-          activeOpacity={0.75}
-          onPress={() => navigator.navigate('Introduce')}>
-          <RowContainer
-            justifyContent="space-between"
-            alignItem="center"
-            paddingVertical={16}
-            paddingHorizontal={24}>
-            <Text h5>{`${translate('Thông tin ứng dụng')}`}</Text>
-            <AntDesign size={20} name="right" color="rgba(52,67,86,0.3)" />
-          </RowContainer>
-        </TouchableOpacity>
-      </Card>
-    );
-  };
-
   render() {
     const {user} = this.props;
     return (
-      <>
-        <CommonHeader title={`${translate('Quản lý tài khoản')}`} themeWhite />
-        <BottomTabContainer
-          style={styles.container}
-          backgroundColor={colors.mainBgColor}>
-          <ScrollView
-            showsVerticalScrollIndicator={false}
-            ref={(ref) => {
-              this.scrollView = ref;
-            }}
-            backgroundColor={colors.mainBgColor}>
-            <SeparatorVertical md />
-            <NoFlexContainer alignItems={'center'}>
-              <Avatar uri={user.avatar} />
+      <FlexContainer backgroundColor={colors.white}>
+        <BlankHeader />
+        <RowContainer style={{width: '100%'}}>
+          <TouchableNativeFeedback
+            onPress={() => {
+              navigator.goBack();
+            }}>
+            <RowContainer
+              paddingLeft={16}
+              paddingRight={24}
+              paddingVertical={4}>
+              <Ionicons name="md-arrow-back" size={24} />
+            </RowContainer>
+          </TouchableNativeFeedback>
+          <RowContainer>
+            <Avatar uri={user.avatar} />
+            <FlexContainer paddingHorizontal={12} paddingTop={8}>
               {user.full_name && (
-                <Text h4 bold color={colors.helpText} style={styles.name}>
+                <Text h5 bold color={colors.helpText}>
                   {user.full_name}
                 </Text>
               )}
-              <Text h6 color={colors.helpText2} paddingVertical={4}>
+              <Text h6 color={colors.helpText2} paddingVertical={6}>
                 {user.email}
               </Text>
-            </NoFlexContainer>
-            <View style={styles.tabContainer}>{this.formAccount()}</View>
-          </ScrollView>
-          <View backgroundColor={colors.mainBgColor}>
-            <Button
-              large
-              primary
-              uppercase
-              bold
-              shadow={false}
-              transparent
-              onPress={() => this.logout()}>
-              {`${translate('Đăng xuất')}`}
-            </Button>
-          </View>
-        </BottomTabContainer>
-      </>
+            </FlexContainer>
+          </RowContainer>
+        </RowContainer>
+        <ScrollView
+          showsVerticalScrollIndicator={false}
+          backgroundColor={colors.white}
+          style={{paddingHorizontal: 32}}>
+          <SeparatorVertical sm />
+          <TouchableNativeFeedback
+            onPress={() => {
+              navigator.navigate('InfoAccount');
+            }}>
+            <RowContainer style={styles.itemSetting}>
+              <Image
+                resizeMode={'contain'}
+                source={images.icon_account.account}
+                style={styles.imageIconSetting}
+              />
+              <Text h5>{translate('Tài khoản')}</Text>
+            </RowContainer>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback>
+            <RowContainer style={styles.itemSetting}>
+              <Image
+                resizeMode={'contain'}
+                source={images.icon_account.video}
+                style={styles.imageIconSetting}
+              />
+              <Text h5>{translate('Bài học')}</Text>
+            </RowContainer>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback>
+            <RowContainer style={styles.itemSetting}>
+              <Image
+                resizeMode={'contain'}
+                source={images.icon_account.upgrade}
+                style={styles.imageIconSetting}
+              />
+              <Text h5>{translate('Nâng cấp VIP')}</Text>
+            </RowContainer>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback>
+            <RowContainer style={styles.itemSetting}>
+              <Image
+                resizeMode={'contain'}
+                source={images.icon_account.update}
+                style={styles.imageIconSetting}
+              />
+              <Text h5>{translate('Cập nhật')}</Text>
+            </RowContainer>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback>
+            <RowContainer style={styles.itemSetting}>
+              <Image
+                resizeMode={'contain'}
+                source={images.icon_account.setting}
+                style={styles.imageIconSetting}
+              />
+              <Text h5>{translate('Cài đặt')}</Text>
+            </RowContainer>
+          </TouchableNativeFeedback>
+          <TouchableNativeFeedback onPress={this.logout}>
+            <RowContainer style={styles.itemSetting}>
+              <Image
+                resizeMode={'contain'}
+                source={images.icon_account.logout}
+                style={styles.imageIconSetting}
+              />
+              <Text h5>{translate('Đăng xuất')}</Text>
+            </RowContainer>
+          </TouchableNativeFeedback>
+        </ScrollView>
+      </FlexContainer>
     );
   }
 }
@@ -209,8 +157,6 @@ const mapStateToProps = (state) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // marginVertical: 16,
-    // backgroundColor: 'red',
   },
   cardContainer: {
     backgroundColor: '#fff',
@@ -258,6 +204,16 @@ const styles = StyleSheet.create({
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  itemSetting: {
+    borderBottomWidth: 1,
+    borderBottomColor: colors.black_007,
+    paddingVertical: 16,
+  },
+  imageIconSetting: {
+    width: 24,
+    height: 24,
+    marginRight: 16,
   },
 });
 

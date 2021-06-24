@@ -7,6 +7,7 @@ import {
   CHANGE_CURRENT_COURSE,
   FETCH_COMMON_COMMENT_SPEAK_SUCCESS,
 } from './CourseType';
+
 import {LOGOUT} from '~/features/authentication/AuthenType';
 
 const initState = {

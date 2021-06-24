@@ -6,7 +6,7 @@ import {Avatar, RowContainer, Text, FlexContainer} from '~/BaseComponent';
 import {infoUserSelector} from '~/selector/user';
 import {translate} from '~/utils/multilanguage';
 
-const TopUserHeader = () => {
+const TopUserHeader = (props) => {
   const user = useSelector(infoUserSelector);
   return (
     <RowContainer justifyContent={'space-between'} paddingVertical={16}>
@@ -18,7 +18,7 @@ const TopUserHeader = () => {
           {user.full_name}
         </Text>
       </FlexContainer>
-      <Avatar />
+      <Avatar onPressAvatar={props.onPressAvatar} />
     </RowContainer>
   );
 };
