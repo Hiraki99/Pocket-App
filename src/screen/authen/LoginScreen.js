@@ -169,7 +169,7 @@ class LoginScreen extends React.Component {
     return (
       <FlexContainer backgroundColor={colors.white}>
         <GeneralStatusBar backgroundColor={colors.white} />
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <View style={styles.backgroundContainer}>
             <KeyboardAvoidingView
               behavior="position"

@@ -3,34 +3,32 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>612420222868-5obh40i9h0hc7fkm4397csdpose02im9.apps.googleusercontent.com</string>
+	<string>589397194208-r934tgfv19qhge8ha5d61s54nnhird3b.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.612420222868-5obh40i9h0hc7fkm4397csdpose02im9</string>
+	<string>com.googleusercontent.apps.589397194208-r934tgfv19qhge8ha5d61s54nnhird3b</string>
 	<key>API_KEY</key>
-	<string>AIzaSyBYiZYIV4kQepEPZc0NzJXoGooARDNU9n0</string>
+	<string>AIzaSyCozk1h8zH8gw6g35Cs-pBWBddG6C3wsxY</string>
 	<key>GCM_SENDER_ID</key>
-	<string>401701609820</string>
+	<string>589397194208</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>org.aic.english4school</string>
+	<string>com.dolphin.pocket</string>
 	<key>PROJECT_ID</key>
-	<string>englishforschool</string>
+	<string>pocket-app-2fcf2</string>
 	<key>STORAGE_BUCKET</key>
-	<string>englishforschool.appspot.com</string>
+	<string>pocket-app-2fcf2.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
-	<true/>
+	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:401701609820:ios:e1c24a9aca086a1111e199</string>
-	<key>DATABASE_URL</key>
-	<string>https://englishforschool.firebaseio.com</string>
+	<string>1:589397194208:ios:e32cc2feaf5700fd69e785</string>
 </dict>
 </plist>

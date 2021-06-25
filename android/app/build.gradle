@@ -87,8 +87,6 @@ project.ext.react = [
 project.ext.envConfigFiles = [
         debugClient: ".env",
         releaseClient: ".env",
-        debugVideo : ".env.videosdk",
-        releaseVideo : ".env.videosdk",
         anothercustombuild: ".env",
 ]
 

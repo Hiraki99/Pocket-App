@@ -1,77 +1,40 @@
 {
   "project_info": {
-    "project_number": "401701609820",
-    "firebase_url": "https://englishforschool.firebaseio.com",
-    "project_id": "englishforschool",
-    "storage_bucket": "englishforschool.appspot.com"
+    "project_number": "589397194208",
+    "project_id": "pocket-app-2fcf2",
+    "storage_bucket": "pocket-app-2fcf2.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:401701609820:android:bf8bcb8416157b4411e199",
+        "mobilesdk_app_id": "1:589397194208:android:dae3e01d578dcead69e785",
         "android_client_info": {
-          "package_name": "com.aic.englishforschool"
+          "package_name": "com.dolphin.pocket"
         }
       },
       "oauth_client": [
         {
-          "client_id": "401701609820-h075o0n46fce7dk6rghrqvfero37bmvi.apps.googleusercontent.com",
+          "client_id": "589397194208-9epel862sfulphngiqici8l8a4p9qgu4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBQrgbnLUQF_LAyJRZ17MZfttgnJWpCqZI"
+          "current_key": "AIzaSyA0G8I4vRHQOyT4QdmsDOspCBIDwc9dFTw"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "401701609820-h075o0n46fce7dk6rghrqvfero37bmvi.apps.googleusercontent.com",
+              "client_id": "589397194208-9epel862sfulphngiqici8l8a4p9qgu4.apps.googleusercontent.com",
               "client_type": 3
             },
             {
-              "client_id": "401701609820-2ujk2o6alcc51fjt4hhvi0hehtg6ftc7.apps.googleusercontent.com",
+              "client_id": "589397194208-r934tgfv19qhge8ha5d61s54nnhird3b.apps.googleusercontent.com",
               "client_type": 2,
               "ios_info": {
-                "bundle_id": "org.hdlegend.english-for-school"
-              }
-            }
-          ]
-        }
-      }
-    },
-    {
-      "client_info": {
-        "mobilesdk_app_id": "1:401701609820:android:986f95fab1fb4f6411e199",
-        "android_client_info": {
-          "package_name": "com.aic.englishforschool.video"
-        }
-      },
-      "oauth_client": [
-        {
-          "client_id": "401701609820-h075o0n46fce7dk6rghrqvfero37bmvi.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
-      "api_key": [
-        {
-          "current_key": "AIzaSyBQrgbnLUQF_LAyJRZ17MZfttgnJWpCqZI"
-        }
-      ],
-      "services": {
-        "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "401701609820-h075o0n46fce7dk6rghrqvfero37bmvi.apps.googleusercontent.com",
-              "client_type": 3
-            },
-            {
-              "client_id": "401701609820-2ujk2o6alcc51fjt4hhvi0hehtg6ftc7.apps.googleusercontent.com",
-              "client_type": 2,
-              "ios_info": {
-                "bundle_id": "org.hdlegend.english-for-school"
+                "bundle_id": "com.dolphin.pocket"
               }
             }
           ]

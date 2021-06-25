@@ -30,7 +30,7 @@ import {generateNextActivity} from '~/utils/script';
 import {HARD_LEVEL} from '~/constants/threshold';
 import {translate} from '~/utils/multilanguage';
 
-class ActivityScreen extends React.Component {
+class ActivityScreen extends React.PureComponent {
   constructor(props) {
     super(props);
 
@@ -249,7 +249,7 @@ const mapStateToProps = (state) => {
           ? state.part.currentPart._id
           : ''),
     ),
-    lessonIndex: state.lesson.lessons.findIndex(
+    lessonIndex: (state.course.currentCourse?.lesson || []).findIndex(
       (item) =>
         item._id ===
         (state.lesson && state.lesson.currentLesson

@@ -61,7 +61,7 @@ class ChangePasswordScreen extends React.Component {
             </RowContainer>
           </TouchableNativeFeedback>
         </RowContainer>
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <View style={styles.container}>
             <RowContainer justifyContent={'center'}>
               <Text h5 bold>

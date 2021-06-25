@@ -47,7 +47,7 @@ const Bootstrap = (props) => {
         appState.current.match(/inactive|background/) &&
         nextAppState === 'active'
       ) {
-        console.log('App has come to the foreground!');
+        // console.log('App has come to the foreground!');
       }
       const currentTime = moment();
       if (nextAppState === 'active') {
@@ -72,6 +72,9 @@ const Bootstrap = (props) => {
 
   const navigagteNotification = React.useCallback(
     (remoteMessage) => {
+      if (!remoteMessage) {
+        return;
+      }
       const {
         data: {type, data, topic},
       } = remoteMessage;
@@ -124,8 +127,8 @@ const Bootstrap = (props) => {
   useEffect(() => {
     const initChannel = async () => {
       const res = await notifee.createChannel({
-        id: 'english_for_school',
-        name: 'English For School',
+        id: 'pocket_app',
+        name: 'Pocket English',
         lights: false,
         vibration: true,
         importance: 4,

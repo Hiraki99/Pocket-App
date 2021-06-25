@@ -14,10 +14,8 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		151E866AFBDB4A0796E8DD95 /* CircularStd-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A217850B3E8140649EBB2757 /* CircularStd-BookItalic.otf */; };
-		253C70A9257E1EEE0091BEC9 /* GoogleService-Info-In-House.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253C70A7257E1EEE0091BEC9 /* GoogleService-Info-In-House.plist */; };
-		253C70AA257E1EEE0091BEC9 /* GoogleService-Info-AppStore.plist in Resources */ = {isa = PBXBuildFile; fileRef = 253C70A8257E1EEE0091BEC9 /* GoogleService-Info-AppStore.plist */; };
+		254CE0F72685BD6B00DF5FC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 254CE0F62685BD6B00DF5FC5 /* GoogleService-Info.plist */; };
 		257FF91524B72531009D7B1B /* bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257FF91424B72531009D7B1B /* bridge.swift */; };
-		257FF91724B76464009D7B1B /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 257FF91624B76463009D7B1B /* GoogleService-Info.plist */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
@@ -69,12 +67,10 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PocketApp/main.m; sourceTree = "<group>"; };
 		234F0B5CA0DB41BE85687566 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		240CA49856A44771BD5340FB /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
-		253C70A7257E1EEE0091BEC9 /* GoogleService-Info-In-House.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-In-House.plist"; path = "PocketApp/GoogleService-Info-In-House.plist"; sourceTree = "<group>"; };
-		253C70A8257E1EEE0091BEC9 /* GoogleService-Info-AppStore.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info-AppStore.plist"; path = "PocketApp/GoogleService-Info-AppStore.plist"; sourceTree = "<group>"; };
 		253C7193257E34BD0091BEC9 /* PocketApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PocketApp.entitlements; path = PocketApp/PocketApp.entitlements; sourceTree = "<group>"; };
+		254CE0F62685BD6B00DF5FC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "PocketApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		257FF91324B72531009D7B1B /* PocketApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PocketApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		257FF91424B72531009D7B1B /* bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bridge.swift; sourceTree = "<group>"; };
-		257FF91624B76463009D7B1B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "PocketApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		25A238CA24C1517B00B9158C /* PocketApp-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PocketApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		2D02E47B1E0B4A5D006451C7 /* PocketApp-tvOS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "PocketApp-tvOS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2D02E4901E0B4A5D006451C7 /* PocketApp-tvOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PocketApp-tvOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -171,11 +167,9 @@
 		13B07FAE1A68108700A75B9A /* PocketApp */ = {
 			isa = PBXGroup;
 			children = (
+				254CE0F62685BD6B00DF5FC5 /* GoogleService-Info.plist */,
 				253C7193257E34BD0091BEC9 /* PocketApp.entitlements */,
-				253C70A8257E1EEE0091BEC9 /* GoogleService-Info-AppStore.plist */,
-				253C70A7257E1EEE0091BEC9 /* GoogleService-Info-In-House.plist */,
 				25A238CA24C1517B00B9158C /* PocketApp-Bridging-Header.h */,
-				257FF91624B76463009D7B1B /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -386,7 +380,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 8F38276T53;
+						DevelopmentTeam = 8CYW96YL22;
 						LastSwiftMigration = 1150;
 						ProvisioningStyle = Automatic;
 					};
@@ -436,15 +430,13 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
-				257FF91724B76464009D7B1B /* GoogleService-Info.plist in Resources */,
 				006D938027E848709011D8BC /* CircularStd-Black.otf in Resources */,
 				D4784015F5C84D4B88AB0C65 /* CircularStd-BlackItalic.otf in Resources */,
-				253C70AA257E1EEE0091BEC9 /* GoogleService-Info-AppStore.plist in Resources */,
-				253C70A9257E1EEE0091BEC9 /* GoogleService-Info-In-House.plist in Resources */,
 				9382F663418D471FBDF0FCA5 /* CircularStd-Bold.otf in Resources */,
 				02324002BCCF418F8C5B9400 /* CircularStd-BoldItalic.otf in Resources */,
 				4EAFB90E6011462493AD69E2 /* CircularStd-Book.otf in Resources */,
 				151E866AFBDB4A0796E8DD95 /* CircularStd-BookItalic.otf in Resources */,
+				254CE0F72685BD6B00DF5FC5 /* GoogleService-Info.plist in Resources */,
 				A75092DACEBE4BFD97009B85 /* CircularStd-Medium.otf in Resources */,
 				932177B5F8894CA0BF6AD212 /* CircularStd-MediumItalic.otf in Resources */,
 			);
@@ -897,17 +889,17 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8F38276T53;
+				DEVELOPMENT_TEAM = 8CYW96YL22;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PocketApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.9.0;
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.aic.english4school;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dolphin.pocket;
 				PRODUCT_NAME = PocketApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PocketApp-Bridging-Header.h";
@@ -927,17 +919,17 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8F38276T53;
+				DEVELOPMENT_TEAM = 8CYW96YL22;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PocketApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MARKETING_VERSION = 1.9.0;
+				MARKETING_VERSION = 1.0.0;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = org.aic.english4school;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dolphin.pocket;
 				PRODUCT_NAME = PocketApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PocketApp-Bridging-Header.h";

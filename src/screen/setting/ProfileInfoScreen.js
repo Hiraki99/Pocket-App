@@ -140,7 +140,7 @@ class ProfileInfoScreen extends React.Component {
             </RowContainer>
           </TouchableNativeFeedback>
         </RowContainer>
-        <KeyboardAwareScrollView>
+        <KeyboardAwareScrollView keyboardShouldPersistTaps="always">
           <View style={styles.container}>
             <RowContainer justifyContent={'center'}>
               <Avatar

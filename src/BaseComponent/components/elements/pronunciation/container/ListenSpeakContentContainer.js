@@ -69,6 +69,12 @@ class ListenSpeakContentContainer extends React.Component {
     if (!checkExistedFolder) {
       RNFS.mkdir(RNFS.DocumentDirectoryPath + '/rolePlayRecorder');
     }
+    const data = await requestPermission(
+      OS.IsAndroid
+        ? PERMISSIONS.ANDROID.RECORD_AUDIO
+        : PERMISSIONS.IOS.MICROPHONE,
+    );
+    await this.setState({hasPermission: data.accept});
     this.init(this.props.audio);
     this.interval = setInterval(() => {
       if (
@@ -80,10 +86,10 @@ class ListenSpeakContentContainer extends React.Component {
           this.setState({playSeconds: seconds});
         });
       }
-    }, 10);
+    }, 60);
   };
 
-  shouldComponentUpdate(nextProps): boolean {
+  shouldComponentUpdate(nextProps) {
     if (this.props.id !== nextProps.id) {
       this.setState(
         {
@@ -104,7 +110,7 @@ class ListenSpeakContentContainer extends React.Component {
     return true;
   }
 
-  componentWillUnmount(): void {
+  componentWillUnmount() {
     if (this.sound) {
       this.sound.release();
       this.sound = null;
@@ -127,13 +133,7 @@ class ListenSpeakContentContainer extends React.Component {
   };
 
   initRecord = async () => {
-    const data = await requestPermission(
-      OS.IsAndroid
-        ? PERMISSIONS.ANDROID.RECORD_AUDIO
-        : PERMISSIONS.IOS.MICROPHONE,
-    );
-    this.setState({hasPermission: data.accept});
-    if (data.accept) {
+    if (this.state.hasPermission) {
       const init = requestInit();
       AudioRecord.init(init);
       this.setState({startTimeRecord: Date.now()});
@@ -385,16 +385,7 @@ class ListenSpeakContentContainer extends React.Component {
                         style={styles.pauseIcon}
                       />
                     )}
-                    <View
-                      style={{
-                        // opacity: 0.24,
-                        position: 'absolute',
-                        top: 0,
-                        right: 0,
-                        left: 0,
-                        bottom: 0,
-                        zIndex: -1,
-                      }}>
+                    <View style={styles.progressContainer}>
                       <ProgressCircle
                         percent={processWidth > 95 ? 100 : processWidth}
                         radius={50}
@@ -567,6 +558,14 @@ const styles = StyleSheet.create({
   },
   loading: {width: 24, height: 24},
   sentence: {paddingTop: 24, paddingBottom: 8},
+  progressContainer: {
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+    zIndex: -1,
+  },
 });
 
 export default connect(mapStateToProps, {
