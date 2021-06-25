@@ -5,7 +5,6 @@ import {initReactI18next} from 'react-i18next';
 
 import translateVI from '~/translations/vi.json';
 import translateEN from '~/translations/en.json';
-import translateFR from '~/translations/ms.json';
 
 const resources = {
   // lazy requires (metro bundler does not support symlinks)
@@ -15,11 +14,9 @@ const resources = {
   en: {
     translation: translateEN,
   },
-  fr: {
-    translation: translateFR,
-  },
 };
 
+export const LANGUAGE_SUPPORT = ['vi', 'en'];
 export const translate = memoize(
   (key, config) => {
     if (i18next.exists(key)) {

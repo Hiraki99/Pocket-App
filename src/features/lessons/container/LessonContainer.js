@@ -54,6 +54,7 @@ const LessonContainer = (props) => {
     }
     return <Text h5>{translate('Chưa có dữ liệu cho phần này')}</Text>;
   }, [loading]);
+
   const renderItemLesson = useCallback(
     ({item}) => {
       return (
@@ -71,7 +72,7 @@ const LessonContainer = (props) => {
         keyExtractor={(item) => item._id}
         numColumns={2}
         style={styles.flatlist}
-        ItemSeparatorComponent={() => <SeparatorVertical md />}
+        ItemSeparatorComponent={() => <SeparatorVertical lg />}
         ListEmptyComponent={renderEmptyComponent}
         ListFooterComponent={() => <SeparatorVertical height={48} />}
         showsVerticalScrollIndicator={false}
@@ -102,7 +103,7 @@ LessonContainer.defaultProps = {
 
 const styles = StyleSheet.create({
   flatlist: {
-    paddingHorizontal: 24,
+    paddingHorizontal: 16,
     paddingVertical: 24,
     backgroundColor: colors.white,
   },

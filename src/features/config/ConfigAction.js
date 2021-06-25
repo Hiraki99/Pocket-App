@@ -1,5 +1,6 @@
 import {
   CHECK_VERSION_APP,
+  SET_FIRST_LANGUAGE_APP,
   SET_LANGUAGE_APP,
   SET_STATUS_USER_UPDATE_APP,
   UPDATE_INFO_APP,
@@ -37,6 +38,13 @@ export const updateKeyboardHeight = (data) => {
 export const setLanguageApp = (data = 'vi') => {
   return {
     type: SET_LANGUAGE_APP,
+    payload: {data},
+  };
+};
+
+export const setFirstLanguageApp = (data) => {
+  return {
+    type: SET_FIRST_LANGUAGE_APP,
     payload: {data},
   };
 };

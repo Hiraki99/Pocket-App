@@ -9,6 +9,7 @@ import AsyncStorage from '@react-native-community/async-storage';
 import messaging from '@react-native-firebase/messaging';
 import {requestTrackingPermission} from 'react-native-tracking-transparency';
 import moment from 'moment';
+import * as RNLocalize from 'react-native-localize';
 
 import {OS} from '~/constants/os';
 import {
@@ -16,7 +17,7 @@ import {
   updateTimeUsingApp,
   saveFcmToken,
 } from '~/features/authentication/AuthenAction';
-import {checkVersionApp} from '~/features/config/ConfigAction';
+import {checkVersionApp, setLanguageApp} from '~/features/config/ConfigAction';
 import {
   decreaseNumberNotification,
   increaseNumberNotification,
@@ -27,12 +28,13 @@ import {unreadCountNotificationSelector} from '~/selector/notification';
 import {configApi} from '~/utils/apisaure';
 import SocketClient from '~/utils/socket-client';
 import {CREATE_ONLINE_CLASS} from '~/constants/exam';
-import {setI18nConfig} from '~/utils/multilanguage';
+import {LANGUAGE_SUPPORT, setI18nConfig} from '~/utils/multilanguage';
 
 const Bootstrap = (props) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.auth.token || {}, shallowEqual);
   const language = useSelector((state) => state.config.language || 'vi');
+  const isFirstUseApp = useSelector((state) => state.config.isFirstSetLanguage);
   const unreadCountNotification = useSelector(unreadCountNotificationSelector);
   const fcmToken = useSelector((state) => state.auth.fcmToken, shallowEqual);
   const appState = useRef(AppState.currentState);
@@ -97,7 +99,19 @@ const Bootstrap = (props) => {
     setI18nConfig(language);
   }, [language]);
 
-  console.log('re-render');
+  useEffect(() => {
+    if (isFirstUseApp) {
+      const defaultLanguage = LANGUAGE_SUPPORT.includes(
+        RNLocalize.getLocales()[0].languageCode,
+      )
+        ? RNLocalize.getLocales()[0].languageCode
+        : 'en';
+      dispatch(setLanguageApp(defaultLanguage));
+      setI18nConfig(defaultLanguage);
+      return;
+    }
+    setI18nConfig(language);
+  }, [isFirstUseApp, language, dispatch]);
 
   useEffect(() => {
     AppState.addEventListener('change', _handleAppStateChange);
@@ -184,7 +198,7 @@ const Bootstrap = (props) => {
         }
       }
     });
-  }, [channelId]);
+  }, [channelId, dispatch]);
 
   useEffect(() => {
     return notifee.onForegroundEvent(({type, detail}) => {
@@ -209,7 +223,7 @@ const Bootstrap = (props) => {
       } catch (e) {}
       dispatch(decreaseNumberNotification());
     });
-  }, [navigagteNotification]);
+  }, [navigagteNotification, dispatch]);
 
   useEffect(() => {
     messaging()

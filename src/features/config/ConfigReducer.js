@@ -1,5 +1,6 @@
 import {OS} from '~/constants/os';
 import {
+  SET_FIRST_LANGUAGE_APP,
   SET_LANGUAGE_APP,
   SET_STATUS_USER_UPDATE_APP,
   UPDATE_INFO_APP,
@@ -12,6 +13,7 @@ const initReducer = {
   keyboardHeight: OS.WIDTH,
   galleryUsers: [],
   language: 'vi',
+  isFirstSetLanguage: true,
 };
 export default (state = initReducer, action) => {
   const {type, payload} = action;
@@ -35,6 +37,11 @@ export default (state = initReducer, action) => {
       return {
         ...state,
         language: payload.data,
+      };
+    case SET_FIRST_LANGUAGE_APP:
+      return {
+        ...state,
+        isFirstSetLanguage: payload.data,
       };
     default:
       return state;
