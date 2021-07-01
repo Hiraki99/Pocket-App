@@ -101,7 +101,6 @@ function* loginGgSaga({payload: {data}}) {
 
 function* loginAppleSaga({payload: {data}}) {
   const response = yield call(authApi.loginApple, data);
-  console.log('response ', response);
   const fcmToken = yield select(getFcmToken);
   if (response.ok && response.data) {
     yield put(loginSuccess(response.data));

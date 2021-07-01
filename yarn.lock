@@ -7541,6 +7541,13 @@ react-native-check-box@^2.1.7:
   dependencies:
     prop-types "^15.5.7"
 
+react-native-circular-progress@^1.3.7:
+  version "1.3.7"
+  resolved "https://registry.yarnpkg.com/react-native-circular-progress/-/react-native-circular-progress-1.3.7.tgz#cc430fbc612bd01134a8fc9667be107591ae6959"
+  integrity sha512-Lpe4Sb0Sdfdxopl6sEc3ooKnwlK5j1nKGq5lgi9UKDFKO6iBAszeH+PiUt6acGSRbKMH1av+9G9ni9r/6T0+nQ==
+  dependencies:
+    prop-types "^15.7.2"
+
 react-native-cn-richtext-editor@^1.0.42:
   version "1.0.42"
   resolved "https://registry.yarnpkg.com/react-native-cn-richtext-editor/-/react-native-cn-richtext-editor-1.0.42.tgz#93632b8de3e9050015d99008015b349eee0eeefe"

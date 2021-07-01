@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, TouchableOpacity, View} from 'react-native';
-// import PropTypes from 'prop-types';
 
 import {Text} from '~/BaseComponent';
 import {colors} from '~/themes';
@@ -24,7 +23,6 @@ export default class HomeTabBar extends React.Component {
               <Text
                 fontSize={14}
                 bold
-                uppercase
                 color={
                   this.props.activeTab === i ? colors.white : colors.normalText
                 }>
@@ -64,9 +62,8 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
   tabs: {
-    height: 45,
+    height: 36,
     flexDirection: 'row',
-    paddingTop: 5,
     borderWidth: 1,
     borderTopWidth: 0,
     borderLeftWidth: 0,

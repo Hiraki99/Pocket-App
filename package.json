@@ -66,6 +66,7 @@
     "react-native-bundle-splitter": "^2.0.0",
     "react-native-calendar-picker": "^7.0.0",
     "react-native-check-box": "^2.1.7",
+    "react-native-circular-progress": "^1.3.7",
     "react-native-cn-richtext-editor": "^1.0.42",
     "react-native-config": "^1.2.1",
     "react-native-date-picker": "^3.2.1",

@@ -37,8 +37,7 @@ const HomeScreen = () => {
         tabBarActiveTextColor={colors.primary}
         tabBarInactiveTextColor={colors.helpText}
         prerenderingSiblingsNumber={0}
-        tabBarUnderlineStyle={{backgroundColor: colors.primary}}
-        tabBarTextStyle={styles.tabBarTextStyle}>
+        tabBarUnderlineStyle={{backgroundColor: colors.primary}}>
         {courses.map((item) => {
           return (
             <LessonContainer

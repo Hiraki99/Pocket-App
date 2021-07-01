@@ -513,5 +513,6 @@
     "Tiếng Việt": "Tiếng Việt",
     "Lớp %s": "Lớp {{s1}}",
     "Học tiếng anh qua bài hát": "Học tiếng anh qua bài hát",
-    "Chào buổi sáng": "Chào buổi sáng"
+    "Chào buổi sáng": "Chào buổi sáng",
+    "Câu %s %s_reading": "Câu {{s1}}/{{s2}}"
 }

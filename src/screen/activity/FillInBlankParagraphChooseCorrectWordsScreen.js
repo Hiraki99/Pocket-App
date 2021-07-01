@@ -242,7 +242,6 @@ class FillInBlankParagraphChooseCorrectWordsScreen extends React.PureComponent {
                   !isDone && (
                     <Text key={`${correctAnswers[k]}_${k}`} h5>
                       {' '}
-                      {/*({correctAnswers[k].options.join(' / ')}){' '}*/}
                     </Text>
                   )}
 

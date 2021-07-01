@@ -31,7 +31,7 @@ class ActivityItem extends React.PureComponent {
 
   render() {
     const {item, onSelected, doneActivity} = this.props;
-    const checkboxColor = item.done ? '#5468FF' : '#E2E4E7';
+    const checkboxColor = item.done ? colors.primary : '#E2E4E7';
 
     return (
       <View style={[item.enabled ? styles.enable : styles.disable]}>
@@ -101,7 +101,7 @@ class ActivityItem extends React.PureComponent {
                 borderRadius: 12,
                 borderWidth: 1.6,
                 borderColor: checkboxColor,
-                backgroundColor: item.done ? '#5468FF' : null,
+                backgroundColor: item.done ? colors.primary : null,
               }}>
               <FontAwesome5
                 color={item.done ? 'white' : '#E2E4E7'}

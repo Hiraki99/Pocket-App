@@ -91,7 +91,10 @@ export default class SingleChoiceQuestion extends React.Component {
           ]}>
           {showIndex && (
             <Text bold h5 paddingVertical={8}>
-              {translate('Câu %s %s', {s1: `${index + 1}`, s2: `${length}`})}
+              {translate('Câu %s %s_reading', {
+                s1: `${index + 1}`,
+                s2: `${length}`,
+              })}
             </Text>
           )}
 

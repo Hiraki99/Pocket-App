@@ -257,7 +257,6 @@ class ScriptWrapper extends React.Component {
   };
   render() {
     const {mainBgColor, white, primary, game} = this.props;
-    console.log('');
     return (
       <View style={[styles.wrapper, {backgroundColor: mainBgColor}]}>
         <SHeader

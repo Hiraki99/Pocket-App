@@ -7,7 +7,6 @@ import {
   FlexContainer,
   MainContainer,
 } from '~/BaseComponent/components/base/CommonContainer';
-import CommonHeader from '~/BaseComponent/components/layouts/CommonHeader';
 import {Button, Text, CheckBox, TutorialHeader} from '~/BaseComponent';
 import navigator from '~/navigation/customNavigator';
 import {
@@ -96,7 +95,7 @@ class RoleplayScreen extends React.PureComponent {
 
           {selected && selected.id === item.id && (
             <View style={styles.checkbox}>
-              <CheckBox checked={true} color="#5468FF" disabled={true} />
+              <CheckBox checked={true} color={colors.primary} disabled={true} />
             </View>
           )}
         </View>

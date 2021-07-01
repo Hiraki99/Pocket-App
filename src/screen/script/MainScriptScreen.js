@@ -38,6 +38,7 @@ class MainScriptScreen extends React.Component {
       itemWritingSelected: null,
       scrollToIndex,
     };
+    this.listLoaded = new Map();
   }
 
   componentDidMount() {

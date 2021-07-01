@@ -21,7 +21,6 @@ export default class InlineSentenceActivity extends React.PureComponent {
       setTimeout(() => {
         if (typeof score === 'string' || typeof score === 'number') {
           if (parseFloat(score) > 0.5) {
-            // playAudio('correctCommonTinyActions');
             playAudio('correct');
           } else {
             playAudio('wrong');

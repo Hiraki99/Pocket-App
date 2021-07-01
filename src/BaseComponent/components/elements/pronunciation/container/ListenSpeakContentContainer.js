@@ -15,8 +15,8 @@ import LottieView from 'lottie-react-native';
 import {Icon} from 'native-base';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import AudioRecord from 'react-native-audio-record';
-import ProgressCircle from 'react-native-progress-circle';
 import {PERMISSIONS} from 'react-native-permissions';
+import {AnimatedCircularProgress} from 'react-native-circular-progress';
 
 import {
   FlexContainer,
@@ -177,7 +177,10 @@ class ListenSpeakContentContainer extends React.Component {
           Math.floor(this.state.duration) ||
         Math.ceil(this.state.playSeconds) === Math.ceil(this.state.duration)
       ) {
-        this.setState({playSeconds: 0});
+        setTimeout(() => {
+          this.setState({playSeconds: 0});
+        }, 1000);
+
         this.sound.setCurrentTime(0);
 
         if (this.state.duration !== 0 && !this.state.isDone) {
@@ -342,7 +345,7 @@ class ListenSpeakContentContainer extends React.Component {
     }
 
     return (
-      <ScriptWrapper ref={(refs) => (this.refScript = refs)}>
+      <ScriptWrapper>
         <FlexContainer backgroundColor={colors.mainBgColor}>
           <FlexContainer
             alignItems="center"
@@ -386,13 +389,21 @@ class ListenSpeakContentContainer extends React.Component {
                       />
                     )}
                     <View style={styles.progressContainer}>
-                      <ProgressCircle
-                        percent={processWidth > 95 ? 100 : processWidth}
-                        radius={50}
-                        borderWidth={6}
-                        color={colors.mainBgColor}
-                        shadowColor={colors.primary}
-                        bgColor={colors.primary}
+                      {/*<ProgressCircle*/}
+                      {/*  percent={processWidth > 95 ? 100 : processWidth}*/}
+                      {/*  radius={50}*/}
+                      {/*  borderWidth={6}*/}
+                      {/*  color={colors.mainBgColor}*/}
+                      {/*  shadowColor={colors.primary}*/}
+                      {/*  bgColor={colors.primary}*/}
+                      {/*/>*/}
+                      <AnimatedCircularProgress
+                        ref={(ref) => (this.circularProgress = ref)}
+                        size={100}
+                        width={6}
+                        fill={processWidth > 95 ? 100 : processWidth}
+                        tintColor={colors.white}
+                        backgroundColor={colors.primary}
                       />
                     </View>
                   </NoFlexContainer>

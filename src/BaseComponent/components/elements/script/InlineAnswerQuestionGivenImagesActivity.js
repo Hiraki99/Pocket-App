@@ -89,7 +89,7 @@ class InlineAnswerQuestionGivenImages extends React.PureComponent {
         <GivenImageModal
           ref={(ref) => (this.modalRef = ref)}
           options={answers}
-          onDone={(item) => {
+          onDone={() => {
             this.setState({isDone: true});
           }}
           score={parseInt(score)}

@@ -184,10 +184,10 @@ const SpeakCoachResult = (props) => {
     setDisable(true);
   };
 
-  const showModal = (speakWorstPhone = false) => {
+  const showModal = (worstPhone = false) => {
     if (modalResultRef) {
       modalResultRef.current.showModal();
-      if (speakWorstPhone) {
+      if (worstPhone) {
         setSpeakWorstPhone(true);
       }
     }

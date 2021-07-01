@@ -41,7 +41,6 @@ function* updateCurrentCourse({payload: {currentCourse}}) {
 
 function* fetchCommonCommentSpeak() {
   const response = yield call(courseApi.fetchCommonCommentSpeak);
-  console.log('response ', response);
   if (response.ok && response.data && response.data.brief_comments) {
     yield put(fetchCommonCommentSpeakSuccess(response.data.brief_comments));
     return;
