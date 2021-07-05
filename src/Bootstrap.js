@@ -83,7 +83,6 @@ const Bootstrap = (props) => {
         navigator.navigate('AccessClass');
       } else {
         if (detailData.exercise) {
-          console.log('exercise.exercise ', detailData.exercise);
           navigator.navigate('EditorEssayExam', {
             params: {id: detailData.exercise},
           });

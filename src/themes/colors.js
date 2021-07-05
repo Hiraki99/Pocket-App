@@ -35,6 +35,7 @@ const colors = {
   bottomBarColor: '#1F2631',
   mainBgColor: 'rgba(243, 245, 249, 1)',
   primary_overlay: '#2AD8B9',
+  primary_overlay_2: '#1DBEA1',
   normalText: '#4D5A68',
   interactionText: 'rgba(113, 142, 177, 0.8)',
   commentText: '#617182',

@@ -1,6 +1,7 @@
 const images = {
   logo: require('~/assets/images/logo.png'),
   logoSimple: require('~/assets/images/logo-simple-pocket.png'),
+  logoSplash: require('~/assets/images/logoSplash.png'),
   logoIconGif: require('~/assets/images/loadingIcon.gif'),
   onBoard: {
     onBoard_1: require('~/assets/images/onBoard/onBoard_1.png'),
@@ -62,6 +63,7 @@ const images = {
   shapePause: require('~/assets/images/shape_pause.png'),
   shapePlay: require('~/assets/images/shape_play.png'),
   perfectScoreStreak: require('~/assets/images/script/perfect_score_streak.png'),
+  perfectBackground: require('~/assets/images/perfect_background.png'),
   needle: require('~/assets/images/needle.png'),
   tourist: require('~/assets/images/tourist.png'),
   error404: require('~/assets/images/404error.png'),

@@ -52,7 +52,11 @@ const LessonContainer = (props) => {
     if (loading) {
       return <Loading />;
     }
-    return <Text h5>{translate('Chưa có dữ liệu cho phần này')}</Text>;
+    return (
+      <Text h5 paddingLeft={16}>
+        {translate('Chưa có dữ liệu cho phần này')}
+      </Text>
+    );
   }, [loading]);
 
   const renderItemLesson = useCallback(

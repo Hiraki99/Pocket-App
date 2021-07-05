@@ -218,6 +218,7 @@ class ActivityBoardScreen extends React.PureComponent {
     return (
       <ActivityBoardWrapper
         nextNavigation={this.nextNavigation}
+        useImageBackground={false}
         loading={doneLoading}>
         <ActivityNotice onLevelUp={this.onUpLevel} />
         {this.renderScore()}
@@ -235,7 +236,7 @@ const styles = {
   },
   card: {
     borderRadius: 8,
-    backgroundColor: colors.primary_overlay,
+    backgroundColor: colors.primary_overlay_2,
     marginBottom: 16,
     paddingVertical: 19,
     paddingHorizontal: 24,

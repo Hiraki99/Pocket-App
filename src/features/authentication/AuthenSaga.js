@@ -130,6 +130,7 @@ function* updateTimeUsingApp({payload: {data}}) {
 
 function* gFetchMe() {
   const response = yield call(authApi.fetchMe);
+
   if (response.ok && response.data) {
     yield put(fetchMeSuccess(response.data));
     if (response.data?.user && response.data?.user?.class) {

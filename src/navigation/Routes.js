@@ -22,7 +22,7 @@ import ExamCategoryScreen from '~/screen/exam/ExamCategoryScreen';
 import DetailLectureListenScreen from '~/screen/lesson/DetailLectureListenScreen';
 import DictionaryScreen from '~/screen/DictionaryScreen';
 import SplashScreen from '~/screen/SplashScreen';
-import AppBottomTab from '~/navigation/BottomTabbar';
+// import AppBottomTab from '~/navigation/BottomTabbar';
 import SearchTopicVocabularyScreen from '~/screen/lesson/SearchTopicVocabularyScreen';
 import MainScriptScreen from '~/screen/script/MainScriptScreen';
 import SentenceScreen from '~/screen/script/SentenceScreen';

@@ -3,7 +3,6 @@ import {connect} from 'react-redux';
 import {View, Image, StatusBar} from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
 
-import {BlankHeader} from '~/BaseComponent';
 import {OS} from '~/constants/os';
 import {colors, images} from '~/themes';
 import {configApi} from '~/utils/apisaure';
@@ -46,10 +45,10 @@ class SplashScreen extends React.PureComponent {
   render() {
     return (
       <View style={styles.wrap}>
-        <BlankHeader />
+        <StatusBar barStyle={'dark-content'} backgroundColor={colors.white} />
         <View style={styles.mainContent}>
           <Image
-            source={images.logoSimple}
+            source={images.logoSplash}
             style={styles.img}
             resizeMode="contain"
           />
@@ -71,8 +70,8 @@ const styles = {
     justifyContent: 'center',
   },
   img: {
-    width: 164,
-    height: 132,
+    width: 192,
+    height: 151,
   },
 };
 

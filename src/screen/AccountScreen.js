@@ -76,7 +76,7 @@ class AccountScreen extends React.PureComponent {
         <ScrollView
           showsVerticalScrollIndicator={false}
           backgroundColor={colors.white}
-          style={{paddingHorizontal: 32}}>
+          style={{paddingHorizontal: 24}}>
           <SeparatorVertical sm />
           <TouchableNativeFeedback
             onPress={() => {

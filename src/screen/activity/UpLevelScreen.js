@@ -41,7 +41,7 @@ class UpLevelScreen extends React.Component {
                 ? currentLevel
                   ? currentLevel.name
                   : `${translate('Cấp 0')}`
-                : nextLevel.name}
+                : nextLevel?.name}
             </Text>
           </View>
         </View>
@@ -53,7 +53,7 @@ class UpLevelScreen extends React.Component {
           style={{marginBottom: 5}}>
           {levelProgress === 0.5
             ? `${translate('Tốt lắm, 1/2 chặng rồi')}`
-            : `${translate('Tuyệt vời! Đã lên %s', {s1: nextLevel.name})}`}
+            : `${translate('Tuyệt vời! Đã lên %s', {s1: nextLevel?.name})}`}
         </Text>
 
         <Text
@@ -64,11 +64,11 @@ class UpLevelScreen extends React.Component {
           {levelProgress === 0.5
             ? `${translate(
                 'Bạn đã hoàn thành được 50% %s, hãy cố gắng giữ nhịp học đều để có thể sớm lên %s bạn nhé!\n Try your best!',
-                {s1: nextLevel.name, s2: nextLevel.name},
+                {s1: nextLevel?.name, s2: nextLevel?.name},
               )}`
             : `${translate(
                 'Tuyệt lắm, bạn đã lên %s rồi. \n Hãy cố gắng giữ nhịp độ học nhé!',
-                {s1: nextLevel.name},
+                {s1: nextLevel?.name},
               )}`}
         </Text>
       </ActivityBoardWrapper>
@@ -105,7 +105,7 @@ const mapStateToProps = (state) => {
   return {
     score: state.script.score,
     levelProgress: state.progress.levelProgress,
-    nextLevel: state.progress.nextLevel,
+    nextLevel: state.progress.nextLevel || {},
     currentLevel: state.progress.currentLevel,
   };
 };

@@ -2,6 +2,8 @@ import React from 'react';
 import {View, TouchableNativeFeedback, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
+import {AnimatedCircularProgress} from 'react-native-circular-progress';
+import {Icon} from 'native-base';
 
 import {colors} from '~/themes';
 import {RowContainer} from '~/BaseComponent';
@@ -9,7 +11,6 @@ import {OS} from '~/constants/os';
 import TextBase, {
   TextBaseStyle,
 } from '~/BaseComponent/components/base/text-base/TextBase';
-
 export default class LessonSliderItem extends React.PureComponent {
   static propTypes = {
     data: PropTypes.object.isRequired,
@@ -32,35 +33,44 @@ export default class LessonSliderItem extends React.PureComponent {
 
   render() {
     const {
-      data: {name, display_name},
+      data: {name, display_name, status},
       onChange,
     } = this.props;
-
     return (
       <TouchableNativeFeedback activeOpacity={1} onPress={onChange}>
         <View style={styles.slideInnerContainer}>
-          <RowContainer paddingHorizontal={14}>
+          <RowContainer paddingHorizontal={14} justifyContent={'space-between'}>
             <TextBase style={[TextBaseStyle.primary, TextBaseStyle.bold]}>
               {name.replace('Bài', 'unit').toUpperCase()}
             </TextBase>
-          </RowContainer>
-          <View
-            style={{
-              justifyContent: 'center',
-              alignItems: 'center',
-              paddingHorizontal: 4,
-            }}>
-            {this.image()}
-            <View style={styles.textContainer}>
-              <TextBase
-                style={[
-                  TextBaseStyle.h5,
-                  TextBaseStyle.bold,
-                  TextBaseStyle.center,
-                ]}>
-                {display_name}
-              </TextBase>
+            <View style={styles.processContainer}>
+              <AnimatedCircularProgress
+                size={24}
+                width={3}
+                fill={25}
+                tintColor={colors.primary}
+                backgroundColor={'rgb(9, 171, 142, 0.1)'}
+                rotation={0}
+              />
+              {!status && (
+                <Icon
+                  name={'check'}
+                  type="Entypo"
+                  style={styles.iconProcessDone}
+                />
+              )}
             </View>
+          </RowContainer>
+          <View style={styles.imageContainer}>{this.image()}</View>
+          <View style={styles.textContainer}>
+            <TextBase
+              style={[
+                TextBaseStyle.h5,
+                TextBaseStyle.bold,
+                TextBaseStyle.center,
+              ]}>
+              {display_name}
+            </TextBase>
           </View>
         </View>
       </TouchableNativeFeedback>
@@ -79,12 +89,31 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.09,
     shadowRadius: 10,
-
-    elevation: 3,
+    elevation: 2,
     borderWidth: 0.01,
     borderRadius: 16,
     paddingVertical: 12,
     backgroundColor: colors.white,
+    minHeight: 232,
   },
   image: {width: 140, height: 100, marginTop: 8, marginBottom: 16},
+  textContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+    flex: 1,
+  },
+  imageContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 4,
+    paddingVertical: 8,
+  },
+  processContainer: {
+    width: 24,
+    height: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  iconProcessDone: {color: colors.primary, fontSize: 16, position: 'absolute'},
 });

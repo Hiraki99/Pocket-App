@@ -129,10 +129,11 @@ const styles = StyleSheet.create({
     overflow: 'visible',
   },
   corner: {
-    width: 40,
+    // width: 40,
     height: !OS.IsAndroid ? null : 40,
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 16,
     // paddingTop: 5,
   },
   right: {justifyContent: 'flex-end', alignItems: 'center'},
