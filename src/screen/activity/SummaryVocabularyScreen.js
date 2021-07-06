@@ -104,17 +104,16 @@ const SummaryVocabularyScreen = () => {
       <NoFlexContainer
         justifyContent={'center'}
         alignItems={'center'}
-        paddingTop={48}
+        paddingTop={32}
         paddingBottom={16}>
         <Text h4 bold>
           Vocabulary
         </Text>
-        <Text paddingVertical={8} color={colors.hoverText}>{`${translate(
-          'Tất cả %s từ',
-          {
+        <Text paddingVertical={8} color={colors.hoverText}>
+          {translate('tất cả %s từ', {
             s1: data.length,
-          },
-        )}`}</Text>
+          })}
+        </Text>
       </NoFlexContainer>
     );
   }, [data]);
@@ -143,7 +142,7 @@ const SummaryVocabularyScreen = () => {
   }, [data]);
 
   return (
-    <>
+    <FlexContainer>
       <FlexContainer backgroundColor={colors.mainBgColor} marginTop={8}>
         <CommonHeader
           title={`${translate('Vocabulary')}`}
@@ -167,7 +166,7 @@ const SummaryVocabularyScreen = () => {
           onClose={() => setItemSelected(null)}
         />
       )}
-    </>
+    </FlexContainer>
   );
 };
 SummaryVocabularyScreen.propTypes = {};

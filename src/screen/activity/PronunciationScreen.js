@@ -493,46 +493,44 @@ class PronunciationScreen extends React.Component {
     const {listActions} = this.state;
     const {currentScriptItem, currentActivity} = this.props;
     return (
-      <>
-        <ScriptWrapper>
-          <SFlatList
-            ref={(ref) => {
-              this.flatListRef = ref;
-            }}
-            data={listActions}
-            renderItem={this.renderItem}
-            keyExtractor={(item) => item.key}
-            showsVerticalScrollIndicator={false}
-            ListHeaderComponent={this.renderHeader}
-            attachment={
-              this.props.attachment && this.props.attachment.type !== 'none'
-            }
-            onContentSizeChange={this.onMoveToEnd}
-            ListFooterComponent={this.renderFooter}
-            // removeClippedSubviews
-            // maxToRenderPerBatch={5}
-          />
+      <ScriptWrapper>
+        <SFlatList
+          ref={(ref) => {
+            this.flatListRef = ref;
+          }}
+          data={listActions}
+          renderItem={this.renderItem}
+          keyExtractor={(item) => item.key}
+          showsVerticalScrollIndicator={false}
+          ListHeaderComponent={this.renderHeader}
+          attachment={
+            this.props.attachment && this.props.attachment.type !== 'none'
+          }
+          onContentSizeChange={this.onMoveToEnd}
+          ListFooterComponent={this.renderFooter}
+          // removeClippedSubviews
+          // maxToRenderPerBatch={5}
+        />
 
-          <RecordModal
-            ref={(ref) => (this.modalRef = ref)}
-            data={this.state.itemChooseRecord || {}}
-            onRecorded={this.onRecorded}
-            onEffect={this.onEffect}
-            firstWarningError={this.state.firstWarningError}
-            onUpdateRoleplay={this.onUpdateRoleplay}
-            onFirstWarning={this.onFirstWarning}
-            onPlayOriginalAudio={this.onPlayOriginalAudio}
-            onPause={this.onPause}
-            version={this.version}
-            activity_id={currentActivity ? currentActivity._id : ''}
-            script_id={currentScriptItem ? currentScriptItem.id : ''}
-            googleApiKey={this.props.stt.api_key}
-            activity_type={this.props.activity_type}
-            fromWordGroup={this.props.fromWordGroup}
-          />
-          {this.state.isListAll && this.renderResult()}
-        </ScriptWrapper>
-      </>
+        <RecordModal
+          ref={(ref) => (this.modalRef = ref)}
+          data={this.state.itemChooseRecord || {}}
+          onRecorded={this.onRecorded}
+          onEffect={this.onEffect}
+          firstWarningError={this.state.firstWarningError}
+          onUpdateRoleplay={this.onUpdateRoleplay}
+          onFirstWarning={this.onFirstWarning}
+          onPlayOriginalAudio={this.onPlayOriginalAudio}
+          onPause={this.onPause}
+          version={this.version}
+          activity_id={currentActivity ? currentActivity._id : ''}
+          script_id={currentScriptItem ? currentScriptItem.id : ''}
+          googleApiKey={this.props.stt.api_key}
+          activity_type={this.props.activity_type}
+          fromWordGroup={this.props.fromWordGroup}
+        />
+        {this.state.isListAll && this.renderResult()}
+      </ScriptWrapper>
     );
   }
 }

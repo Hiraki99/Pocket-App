@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 import VideoPlayer from '~/BaseComponent/components/elements/script/VideoPlayer';
 import EmbedAudio from '~/BaseComponent/components/elements/script/EmbedAudio';
-import {RowContainer, Text} from '~/BaseComponent';
+import {RowContainer, SeparatorVertical, Text} from '~/BaseComponent';
 import {OS} from '~/constants/os';
 import {getDimensionVideo169} from '~/utils/utils';
 import {LANGUAGE} from '~/constants/lang';
@@ -86,7 +86,7 @@ const CommonAttachment = (props) => {
           </View>
         )}
 
-      {showText && (
+      {showText && !!props.text && !!props.translateText ? (
         <RowContainer
           paddingTop={32}
           paddingBottom={18}
@@ -101,6 +101,8 @@ const CommonAttachment = (props) => {
             <Image source={images.translate} style={styles.translate} />
           </TouchableOpacity>
         </RowContainer>
+      ) : (
+        <SeparatorVertical lg />
       )}
     </View>
   );

@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {Body, Button, Header, Left, Right} from 'native-base';
 import styled from 'styled-components';
-import AntDesign from 'react-native-vector-icons/AntDesign';
+// import AntDesign from 'react-native-vector-icons/AntDesign';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import LottieView from 'lottie-react-native';
 import * as Progress from 'react-native-progress';
@@ -268,9 +268,10 @@ class ScriptWrapper extends React.Component {
           androidStatusBarColor={game ? colors.helpText : colors.white}>
           <Left height={50}>
             <Button transparent onPress={this.onClose} style={{width: 40}}>
-              <SIcon
-                name="close"
-                size={20}
+              <SIonicons
+                name="ios-close-sharp"
+                type={'Ionicons'}
+                size={26}
                 white={white}
                 primary={primary}
                 game={game}
@@ -303,21 +304,21 @@ const SHeader = styled(Header)`
   }};
 `;
 
-const SIcon = styled(AntDesign)`
-  color: ${(props) => {
-    if (props.white) {
-      return colors.primary;
-    }
-    if (props.primary) {
-      return colors.white;
-    }
-    if (props.game) {
-      return colors.white;
-    }
-
-    return colors.primary;
-  }};
-`;
+// const SIcon = styled(AntDesign)`
+//   color: ${(props) => {
+//     if (props.white) {
+//       return colors.primary;
+//     }
+//     if (props.primary) {
+//       return colors.white;
+//     }
+//     if (props.game) {
+//       return colors.white;
+//     }
+//
+//     return colors.primary;
+//   }};
+// `;
 
 const SIonicons = styled(Ionicons)`
   color: ${(props) => {
@@ -359,7 +360,7 @@ const styles = StyleSheet.create({
   },
   header: {
     alignItems: 'center',
-    // shadowColor: 'rgba(60, 128, 209, 1)',
+    shadowColor: 'rgba(60, 128, 209, 1)',
     shadowOffset: {
       width: 0,
       height: 8,

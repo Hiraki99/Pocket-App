@@ -405,7 +405,7 @@ const styles = {
     left: 0,
     bottom: 0,
     width: 0,
-    backgroundColor: 'rgba(226,230,239,0.1)',
+    backgroundColor: 'rgba(226,230,239,0.5)',
     zIndex: -1,
   },
   userProgress: {
@@ -414,7 +414,7 @@ const styles = {
     left: 0,
     bottom: 0,
     width: 0,
-    backgroundColor: 'rgba(226,230,239,0.1)',
+    backgroundColor: 'rgba(226,230,239,0.5)',
     zIndex: -1,
   },
   loading: {

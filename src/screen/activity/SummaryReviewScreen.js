@@ -40,7 +40,9 @@ const SummaryReviewScreen = () => {
     shallowEqual,
   );
   const dispatch = useDispatch();
-  const [heightWV, setHeightWV] = React.useState(0);
+  const [heightWV, setHeightWV] = React.useState(
+    OS.HEIGHT - OS.statusBarHeight - (OS.hasNotch ? 164 : 152),
+  );
   const onBack = React.useCallback(() => {
     const reset = () => {
       dispatch(changeCurrentScriptItem(null));
@@ -50,11 +52,14 @@ const SummaryReviewScreen = () => {
   }, [dispatch, isActivityVip, fromWordGroup]);
   const onMessage = (event) => {
     const data = event.nativeEvent.data;
-    setHeightWV(
-      parseInt(data) < (OS.HEIGHT * 3) / 5
-        ? (OS.HEIGHT * 3) / 5
-        : parseInt(data),
-    );
+    console.log('dataa ', data);
+    if (data > 0) {
+      setHeightWV(
+        parseInt(data) < (OS.HEIGHT * 3) / 5
+          ? (OS.HEIGHT * 3) / 5
+          : parseInt(data),
+      );
+    }
   };
   const generateAssetsFontCss = (
     fontFileName: string,
@@ -146,7 +151,7 @@ const SummaryReviewScreen = () => {
             style={{
               borderRadius: 8,
               marginBottom: 24,
-              height: heightWV + 200,
+              height: heightWV,
             }}
           />
           <SeparatorVertical lg />

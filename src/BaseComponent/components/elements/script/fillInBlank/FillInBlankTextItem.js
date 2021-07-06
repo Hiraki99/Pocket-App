@@ -22,10 +22,10 @@ export default class FillInBlankTextItem extends React.Component {
 
     const parts = split(item.question, /\[.*?]/);
     const corrects = item.question.match(/\[.*?]/g);
-    console.log('item ', item, answer);
     const correctAnswers = corrects.map((o) =>
-      normalizeAnswerFillInBlankNormal(o),
+      normalizeAnswerFillInBlankNormal(o).toLowerCase(),
     );
+    console.log('correctAnswers ', correctAnswers);
 
     return (
       <View
@@ -108,27 +108,16 @@ export default class FillInBlankTextItem extends React.Component {
                         : colors.helpText,
                       borderBottomWidth: 1,
                       width: 60,
-                    }}>
-                    {/*<Text*/}
-                    {/*  h5*/}
-                    {/*  color={isCardMode ? colors.white : colors.helpText}*/}
-                    {/*  style={{*/}
-                    {/*    backgroundColor: isCardMode*/}
-                    {/*      ? 'red'*/}
-                    {/*      : 'rgba(89, 95, 255, 0.1)',*/}
-                    {/*    borderBottomColor: colors.helpText,*/}
-                    {/*    borderBottomWidth: 1,*/}
-                    {/*    width: 60,*/}
-                    {/*  }}*/}
-                    {/*  center*/}
-                    {/*/>*/}
-                  </TouchableOpacity>
+                    }}
+                  />
                 )}
 
                 {k < parts.length - 1 && showCorrectAnswer && (
                   <React.Fragment key={`result_${k}`}>
                     {answer[k] &&
-                      !correctAnswers[k].split('/').includes(answer[k]) && (
+                      !correctAnswers[k]
+                        .split('/')
+                        .includes(answer[k].toLowerCase()) && (
                         <Text
                           key={`warning_${k}`}
                           h5

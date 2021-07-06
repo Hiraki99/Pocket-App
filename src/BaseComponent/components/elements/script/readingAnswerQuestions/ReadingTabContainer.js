@@ -1,8 +1,9 @@
 import React from 'react';
+import {View} from 'react-native';
 import {TabBar, TabView} from 'react-native-tab-view';
 import PropTypes from 'prop-types';
 
-import {Text} from '~/BaseComponent';
+import {FlexContainer, Text} from '~/BaseComponent';
 import ReadingView from '~/BaseComponent/components/elements/script/readingAnswerQuestions/ReadingView';
 import ScriptWrapper from '~/BaseComponent/components/elements/script/ScriptWrapper';
 import {colors} from '~/themes';
@@ -76,12 +77,14 @@ export default class ReadingTabContainer extends React.PureComponent {
 
     return (
       <ScriptWrapper>
-        <TabView
-          navigationState={{index, routes}}
-          onIndexChange={this.setIndex}
-          renderScene={this.renderScene}
-          renderTabBar={this.renderTabBar}
-        />
+        <FlexContainer marginTop={1}>
+          <TabView
+            navigationState={{index, routes}}
+            onIndexChange={this.setIndex}
+            renderScene={this.renderScene}
+            renderTabBar={this.renderTabBar}
+          />
+        </FlexContainer>
       </ScriptWrapper>
     );
   }

@@ -8,7 +8,6 @@ import ReadingTabContainer from '~/BaseComponent/components/elements/script/read
 class ReadingAnswerQuestionScreen extends React.PureComponent {
   render() {
     const {currentScriptItem} = this.props;
-    console.log('currentScriptItem ', currentScriptItem);
     if (
       !currentScriptItem ||
       currentScriptItem.type !== 'reading_answer_questions'

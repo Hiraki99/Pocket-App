@@ -345,133 +345,124 @@ class ListenSpeakContentContainer extends React.Component {
     }
 
     return (
-      <ScriptWrapper>
-        <FlexContainer backgroundColor={colors.mainBgColor}>
-          <FlexContainer
-            alignItems="center"
-            justifyContent={'center'}
-            backgroundColor={colors.mainBgColor}>
-            <TouchableOpacity activeOpacity={0.7}>
-              <NoFlexContainer
-                alignItems="center"
-                justifyContent="center"
-                marginVertical={36}
-                backgroundColor={'rgba(84, 104, 255, 0.05)'}
-                style={styles.backgroundWrapperControl}>
-                <TouchableOpacity
-                  activeOpacity={0.7}
-                  onPress={() => {
-                    const {playState} = this.state;
-                    if (playState === 'paused') {
-                      this.play();
-                    } else {
-                      this.onPause();
-                    }
-                  }}>
-                  <NoFlexContainer
-                    alignItems="center"
-                    justifyContent="center"
-                    backgroundColor={colors.primary}
-                    style={styles.backgroundControlAudio}>
-                    {playState === 'paused' ? (
-                      <Ionicons
-                        color={colors.white}
-                        name={'ios-play'}
-                        size={45}
-                        style={styles.playIcon}
-                      />
-                    ) : (
-                      <Ionicons
-                        color={colors.white}
-                        name={'ios-pause'}
-                        size={45}
-                        style={styles.pauseIcon}
-                      />
-                    )}
-                    <View style={styles.progressContainer}>
-                      {/*<ProgressCircle*/}
-                      {/*  percent={processWidth > 95 ? 100 : processWidth}*/}
-                      {/*  radius={50}*/}
-                      {/*  borderWidth={6}*/}
-                      {/*  color={colors.mainBgColor}*/}
-                      {/*  shadowColor={colors.primary}*/}
-                      {/*  bgColor={colors.primary}*/}
-                      {/*/>*/}
-                      <AnimatedCircularProgress
-                        ref={(ref) => (this.circularProgress = ref)}
-                        size={100}
-                        width={6}
-                        fill={processWidth > 95 ? 100 : processWidth}
-                        tintColor={colors.white}
-                        backgroundColor={colors.primary}
-                      />
-                    </View>
-                  </NoFlexContainer>
-                </TouchableOpacity>
-              </NoFlexContainer>
-            </TouchableOpacity>
-          </FlexContainer>
-          <NoFlexContainer
-            paddingHorizontal={24}
-            alignItems={'center'}
-            style={{
-              borderTopLeftRadius: 24,
-              borderTopRightRadius: 24,
-              height: OS.Game,
-              paddingBottom: 24,
-            }}
-            backgroundColor={colors.white}>
-            <Text fontSize={19} bold center style={styles.title}>
-              {this.props.title}
-            </Text>
-            {typeWord && (
-              <>
-                <Text h2 bold primary center paddingVertical={8}>
-                  {this.props.word}
-                </Text>
-                <Text h5 color={colors.helpText} center>
-                  {this.props.pronunciation}
-                </Text>
-              </>
-            )}
-            {typeSentence && (
-              <Text fontSize={19} bold primary center style={styles.sentence}>
-                {this.props.sentence}
-              </Text>
-            )}
-            <TouchableOpacity
-              onPress={this.toggleRecord}
-              activeOpacity={0.65}
-              style={styles.record}>
-              {!answer.show && (
-                <>
-                  {loadingRecognize ? (
-                    <LottieView
-                      source={require('~/assets/animate/pressing')}
-                      autoPlay
-                      loop
-                      style={styles.loading}
+      <ScriptWrapper backgroundColor={colors.mainBgColor}>
+        <FlexContainer
+          marginTop={6}
+          alignItems="center"
+          justifyContent={'center'}
+          backgroundColor={colors.mainBgColor}>
+          <TouchableOpacity activeOpacity={0.7}>
+            <NoFlexContainer
+              alignItems="center"
+              justifyContent="center"
+              marginVertical={36}
+              backgroundColor={'rgba(84, 104, 255, 0.05)'}
+              style={styles.backgroundWrapperControl}>
+              <TouchableOpacity
+                activeOpacity={0.7}
+                onPress={() => {
+                  const {playState} = this.state;
+                  if (playState === 'paused') {
+                    this.play();
+                  } else {
+                    this.onPause();
+                  }
+                }}>
+                <NoFlexContainer
+                  alignItems="center"
+                  justifyContent="center"
+                  backgroundColor={colors.primary}
+                  style={styles.backgroundControlAudio}>
+                  {playState === 'paused' ? (
+                    <Ionicons
+                      color={colors.white}
+                      name={'ios-play'}
+                      size={45}
+                      style={styles.playIcon}
                     />
                   ) : (
-                    <Icon
-                      name="microphone"
-                      type="FontAwesome"
-                      style={{color: colors.white, fontSize: 40}}
+                    <Ionicons
+                      color={colors.white}
+                      name={'ios-pause'}
+                      size={45}
+                      style={styles.pauseIcon}
                     />
                   )}
-                  {recording && (
-                    <LottieView
-                      source={require('~/assets/animate/round-loading')}
-                      autoPlay
-                      loop
-                      style={styles.recordLotteria}
+                  <View style={styles.progressContainer}>
+                    <AnimatedCircularProgress
+                      ref={(ref) => (this.circularProgress = ref)}
+                      size={100}
+                      width={6}
+                      fill={processWidth > 90 ? 100 : processWidth}
+                      tintColor={colors.white}
+                      backgroundColor={colors.primary}
                     />
-                  )}
-                </>
-              )}
-            </TouchableOpacity>
-          </NoFlexContainer>
+                  </View>
+                </NoFlexContainer>
+              </TouchableOpacity>
+            </NoFlexContainer>
+          </TouchableOpacity>
         </FlexContainer>
+        <NoFlexContainer
+          paddingHorizontal={24}
+          alignItems={'center'}
+          style={{
+            borderTopLeftRadius: 24,
+            borderTopRightRadius: 24,
+            height: OS.Game,
+            paddingBottom: 24,
+          }}
+          backgroundColor={colors.white}>
+          <Text fontSize={19} bold center style={styles.title}>
+            {this.props.title}
+          </Text>
+          {typeWord && (
+            <>
+              <Text h2 bold primary center paddingVertical={8}>
+                {this.props.word}
+              </Text>
+              <Text h5 color={colors.helpText} center>
+                {this.props.pronunciation}
+              </Text>
+            </>
+          )}
+          {typeSentence && (
+            <Text fontSize={19} bold primary center style={styles.sentence}>
+              {this.props.sentence}
+            </Text>
+          )}
+          <TouchableOpacity
+            onPress={this.toggleRecord}
+            activeOpacity={0.65}
+            style={styles.record}>
+            {!answer.show && (
+              <>
+                {loadingRecognize ? (
+                  <LottieView
+                    source={require('~/assets/animate/pressing')}
+                    autoPlay
+                    loop
+                    style={styles.loading}
+                  />
+                ) : (
+                  <Icon
+                    name="microphone"
+                    type="FontAwesome"
+                    style={{color: colors.white, fontSize: 40}}
+                  />
+                )}
+                {recording && (
+                  <LottieView
+                    source={require('~/assets/animate/round-loading')}
+                    autoPlay
+                    loop
+                    style={styles.recordLotteria}
+                  />
+                )}
+              </>
+            )}
+          </TouchableOpacity>
+        </NoFlexContainer>
         {answer.show && <Answer isCorrect={answer.isCorrect} />}
         {this.renderAwardOrDead()}
       </ScriptWrapper>

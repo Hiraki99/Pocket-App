@@ -81,18 +81,10 @@ export default class WritingInputExam extends React.Component {
   render() {
     return (
       <ModalWrapper
-        containerStyle={{
-          flexDirection: 'row',
-          alignItems: 'flex-end',
-        }}
+        containerStyle={styles.containerStyle}
         onRequestClose={this.hide}
         shouldAnimateOnRequestClose={true}
-        style={{
-          width: OS.WIDTH,
-          borderTopRightRadius: 24,
-          borderTopLeftRadius: 24,
-          zIndex: 1000000,
-        }}
+        style={styles.modalContainer}
         visible={this.state.show}>
         {this.renderContent()}
       </ModalWrapper>
@@ -101,11 +93,18 @@ export default class WritingInputExam extends React.Component {
 }
 
 const styles = {
-  controlInner: {
-    borderTopLeftRadius: 24,
+  containerStyle: {
+    flexDirection: 'row',
+    alignItems: 'flex-end',
+  },
+  modalContainer: {
+    width: OS.WIDTH,
     borderTopRightRadius: 24,
+    borderTopLeftRadius: 24,
+    zIndex: 1000000,
+  },
+  controlInner: {
     paddingHorizontal: 12,
-    // paddingTop: 24,
     paddingBottom: 15,
     overflow: 'hidden',
     backgroundColor: colors.white,
