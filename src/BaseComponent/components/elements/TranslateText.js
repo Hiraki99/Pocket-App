@@ -27,7 +27,7 @@ const TranslateText = (props) => {
 TranslateText.propTypes = {
   textVI: PropTypes.string,
   textEN: PropTypes.string,
-  RenderComponent: PropTypes.node,
+  RenderComponent: PropTypes.element,
   iconStyle: Image.propTypes.style,
 };
 TranslateText.defaultProps = {

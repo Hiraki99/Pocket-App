@@ -20,3 +20,4 @@ export const HARD_LEVEL = {
 };
 
 export const MEDIUM_SCORE = 65;
+export const ARRAY_DISABLE_CLICK_CHARACTER = ['/', '_', '|', '\\'];

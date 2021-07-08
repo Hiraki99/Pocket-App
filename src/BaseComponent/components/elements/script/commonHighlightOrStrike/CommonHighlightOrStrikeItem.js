@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import {RowContainer, Text} from '~/BaseComponent';
 import {HighLightText} from '~/BaseComponent/components/elements/script/HighLightText';
+import {ARRAY_DISABLE_CLICK_CHARACTER} from '~/constants/threshold';
 import {colors} from '~/themes';
 import {playAudio} from '~/utils/utils';
 
@@ -72,7 +73,11 @@ const CommonHighlightOrStrikeItem = (props) => {
             return (
               <TouchableOpacity
                 activeOpacity={0.8}
-                disable={o.isExample || props.showAnswer}
+                disable={
+                  o.isExample ||
+                  props.showAnswer ||
+                  ARRAY_DISABLE_CLICK_CHARACTER.includes(o.word)
+                }
                 key={`${props.id}_${o.id}_${o.isAnswer}_${props.showAnswer}`}
                 onPress={() => {
                   checker(o);
@@ -94,7 +99,11 @@ const CommonHighlightOrStrikeItem = (props) => {
             return (
               <TouchableOpacity
                 activeOpacity={0.8}
-                disabled={o.isExample || props.showAnswer}
+                disabled={
+                  o.isExample ||
+                  props.showAnswer ||
+                  ARRAY_DISABLE_CLICK_CHARACTER.includes(o.word)
+                }
                 key={`${props.id}_${o.id}_${o.isAnswer}_${props.showAnswer}`}
                 onPress={() => {
                   checker(o);
@@ -128,7 +137,11 @@ const CommonHighlightOrStrikeItem = (props) => {
           return (
             <TouchableOpacity
               activeOpacity={0.8}
-              disabled={o.isExample || props.showAnswer}
+              disabled={
+                o.isExample ||
+                props.showAnswer ||
+                ARRAY_DISABLE_CLICK_CHARACTER.includes(o.word)
+              }
               key={`${props.id}_${o.id}_${o.isAnswer}_${props.showAnswer}`}
               onPress={() => {
                 checker(o);
