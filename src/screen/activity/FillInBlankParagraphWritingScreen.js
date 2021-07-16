@@ -4,10 +4,10 @@ import split from 'lodash/split';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {TouchableOpacity, View, StyleSheet, findNodeHandle} from 'react-native';
 
-import ScriptWrapper from '~/BaseComponent/components/elements/script/ScriptWrapper';
-import CommonAttachment from '~/BaseComponent/components/elements/script/attachment/CommonAttachment';
-import {Button, Text} from '~/BaseComponent';
-import WritingInput from '~/BaseComponent/components/elements/script/fillInBlank/WritingInput';
+import ScriptWrapper from 'BaseComponent/components/elements/script/ScriptWrapper';
+import CommonAttachment from 'BaseComponent/components/elements/script/attachment/CommonAttachment';
+import {Button, Text} from 'BaseComponent';
+import WritingInput from 'BaseComponent/components/elements/script/fillInBlank/WritingInput';
 import {generateNextActivity} from '~/utils/script';
 import {setMaxCorrect, increaseScore} from '~/features/script/ScriptAction';
 import {
@@ -187,11 +187,21 @@ class FillInBlankParagraphWritingScreen extends React.PureComponent {
             }
             return (
               <>
-                <Text key={makeid(8)} h5 primary bold>
+                <Text
+                  key={`${it[0].replace(regexReplace, '')}_${item}_${index}`}
+                  h5
+                  primary
+                  bold>
                   {it[0].replace(regexReplace, '')}
                 </Text>
                 {index === y.length - 1 && (
-                  <View key={makeid(8)} style={{width: '100%', height: 20}} />
+                  <View
+                    key={`${it[0].replace(
+                      regexReplace,
+                      '',
+                    )}_${item}_${index}_length_1`}
+                    style={{width: '100%', height: 20}}
+                  />
                 )}
                 {this.renderMetaWord(content)}
               </>
@@ -204,7 +214,7 @@ class FillInBlankParagraphWritingScreen extends React.PureComponent {
 
   _scrollToInput(reactNode: any) {
     if (this.scroll) {
-      this.scroll.scrollToFocusedInput(reactNode, 300);
+      this.scroll.scrollToFocusedInput(reactNode);
     }
   }
 
@@ -217,74 +227,75 @@ class FillInBlankParagraphWritingScreen extends React.PureComponent {
 
     const parts = split(question, splitRegex);
     return (
-      <>
-        <View style={{flexDirection: 'row', marginBottom: 22}}>
-          <View
-            style={{
-              flexDirection: 'row',
-              flexWrap: 'wrap',
-            }}>
-            {parts.map((item, k) => {
-              const correct = correctAnswers[k] ? correctAnswers[k].text : '';
-              const listCorrectAnswer = normalizeAnswerFillInBlank(
-                correct,
-              ).split('/');
-              const checkAnswerCorrect = listCorrectAnswer.includes(
-                normalizeAnswerFillInBlank(answers[k] || ''),
-              );
-              return (
-                <>
-                  {this.renderItem(item)}
-                  {k <= parts.length - 1 &&
-                    answers &&
-                    typeof answers[k] !== 'undefined' &&
-                    answers[k] !== null &&
-                    !isDone && (
-                      <TouchableOpacity
-                        activeOpacity={0.75}
-                        key={`${answers[k]}_${k}`}
-                        onPress={() => this.onSelected(k)}>
-                        <Text h5 bold primary>
-                          {answers[k]}
-                        </Text>
-                      </TouchableOpacity>
-                    )}
-
-                  {k <= parts.length - 1 &&
-                    (!answers || answers[k] === null) &&
-                    !isDone && (
-                      <TouchableOpacity
-                        activeOpacity={0.75}
-                        onPress={(event: Event) => {
-                          this.onSelected(k);
-                          this._scrollToInput(findNodeHandle(event.target));
-                        }}
-                        key={`${answers[k]}_${k}_${k}`}
-                        style={styles.question}
-                      />
-                    )}
-
-                  {k <= parts.length - 1 && isDone && (
-                    <View key={`${parts[k]}_${k}`}>
-                      {answers &&
-                        typeof answers[k] !== 'undefined' &&
-                        answers[k] !== null &&
-                        !checkAnswerCorrect && (
-                          <Text h5 bold wrongChoice lineThrough>
-                            {answers[k]}{' '}
-                          </Text>
-                        )}
-                      <Text h5 bold successChoice>
-                        {correct}
+      <View style={{flexDirection: 'row', marginBottom: 22}}>
+        <View
+          style={{
+            flexDirection: 'row',
+            flexWrap: 'wrap',
+          }}>
+          {parts.map((item, k) => {
+            const correct = correctAnswers[k] ? correctAnswers[k].text : '';
+            const listCorrectAnswer = normalizeAnswerFillInBlank(correct).split(
+              '/',
+            );
+            const checkAnswerCorrect = listCorrectAnswer.includes(
+              normalizeAnswerFillInBlank(answers[k] || ''),
+            );
+            return (
+              <React.Fragment key={`fragment_${item}_${k}`}>
+                {this.renderItem(item)}
+                {k <= parts.length - 1 &&
+                  answers &&
+                  typeof answers[k] !== 'undefined' &&
+                  answers[k] !== null &&
+                  !isDone && (
+                    <TouchableOpacity
+                      activeOpacity={0.75}
+                      key={`${answers[k]}_${k}`}
+                      onPress={() => this.onSelected(k)}>
+                      <Text h5 bold primary>
+                        {answers[k]}
                       </Text>
-                    </View>
+                    </TouchableOpacity>
                   )}
-                </>
-              );
-            })}
-          </View>
+
+                {k <= parts.length - 1 &&
+                  (!answers || answers[k] === null) &&
+                  !isDone && (
+                    <TouchableOpacity
+                      activeOpacity={0.75}
+                      onPress={(event: Event) => {
+                        this.onSelected(k);
+                        const target = findNodeHandle(event.target);
+                        setTimeout(() => {
+                          this._scrollToInput(target);
+                        }, 300);
+                      }}
+                      key={`${answers[k]}_${k}_${k}`}
+                      style={styles.question}
+                    />
+                  )}
+
+                {k <= parts.length - 1 && isDone && (
+                  <View key={`${parts[k]}_${k}`}>
+                    {answers &&
+                      typeof answers[k] !== 'undefined' &&
+                      answers[k] !== null &&
+                      !checkAnswerCorrect && (
+                        <Text h5 bold wrongChoice lineThrough>
+                          {answers[k]}{' '}
+                        </Text>
+                      )}
+                    <Text h5 bold successChoice>
+                      {correct}
+                    </Text>
+                  </View>
+                )}
+              </React.Fragment>
+            );
+          })}
         </View>
-      </>
+      </View>
     );
   };
 
@@ -348,6 +359,8 @@ class FillInBlankParagraphWritingScreen extends React.PureComponent {
           ref={(refs) => {
             this.scroll = refs;
           }}
+          extraHeight={300}
+          enableOnAndroid
           style={{marginTop: 2, flex: 1}}>
           <View paddingHorizontal={24}>
             <CommonAttachment
@@ -356,13 +369,10 @@ class FillInBlankParagraphWritingScreen extends React.PureComponent {
               text={LANGUAGE_MAPPING.vi.fill_in_blank}
               translateText={LANGUAGE_MAPPING.en.fill_in_blank}
             />
-
             {this.renderFillInBlank()}
           </View>
         </KeyboardAwareScrollView>
-
         {this.renderCheckBtn()}
-
         <WritingInput
           ref={(ref) => (this.writingRef = ref)}
           onSubmit={this.onAnswer}
@@ -380,7 +390,7 @@ const mapStateToProps = (state) => {
 
 const styles = StyleSheet.create({
   containerFooter: {
-    marginBottom: 48,
+    marginBottom: 28,
     marginTop: 24,
     paddingHorizontal: 24,
     zIndex: -1,

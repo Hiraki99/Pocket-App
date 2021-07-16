@@ -77,6 +77,7 @@ export default class LearnFlashcardSpeakWordItem extends React.Component {
 
     dispatchAnswerQuestion(isCorrect, this.props.item.score, false, {
       word: item.mainWord,
+      word_speak: true,
     });
 
     this.timeout = setTimeout(

@@ -4,6 +4,7 @@ import {
   changeCurrentScriptItem,
   pushAction,
   answerQuestion,
+  increaseWorkSpeak,
   // pushScriptItemSpeak,
 } from '~/features/script/ScriptAction';
 import navigator from '~/navigation/customNavigator';
@@ -909,7 +910,12 @@ export const dispatchAnswerQuestion = (
   score,
   canRetry = false,
   extraData = null,
-) => store.dispatch(answerQuestion(isCorrect, score, canRetry, extraData));
+) => {
+  store.dispatch(answerQuestion(isCorrect, score, canRetry, extraData));
+  if (extraData?.word_speak) {
+    store.dispatch(increaseWorkSpeak());
+  }
+};
 
 export const processUserDoneActivity = (
   currentStep = 'ActivityBoard',

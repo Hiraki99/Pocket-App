@@ -5,6 +5,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import PropTypes from 'prop-types';
 import {Body, Header, Left, Right} from 'native-base';
 import {ActivityIndicator, TouchableOpacity} from 'react-native';
+import Orientation from 'react-native-orientation';
 
 import {OS} from '~/constants/os';
 import {colors} from '~/themes';
@@ -28,7 +29,13 @@ export default class VideoPlayer extends React.PureComponent {
   }
 
   youTubeRef = React.createRef();
-
+  componentDidMount() {
+    if (OS.IsAndroid) {
+      Orientation.lockToLandscapeLeft();
+    } else {
+      Orientation.lockToLandscapeRight();
+    }
+  }
   // componentDidUpdate(prevProps, prevState) {
   //   // if (this.state.ended && this.state.ended !== prevState.ended) {
   //   //   setTimeout(() => {
@@ -44,6 +51,7 @@ export default class VideoPlayer extends React.PureComponent {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
+    Orientation.lockToPortrait();
   }
 
   togglePlay = () => {

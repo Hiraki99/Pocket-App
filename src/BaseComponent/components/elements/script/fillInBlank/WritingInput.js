@@ -129,7 +129,7 @@ const styles = {
   input: {
     backgroundColor: colors.mainBgColor,
     borderRadius: 20,
-    paddingVertical: 10,
+    paddingVertical: OS.IsAndroid ? 16 : 10,
     paddingHorizontal: 20,
     fontSize: 17,
     fontFamily: 'CircularStd-Book',

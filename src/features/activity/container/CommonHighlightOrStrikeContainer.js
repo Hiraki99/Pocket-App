@@ -47,7 +47,7 @@ const CommonHighlightOrStrikeContainer = (props) => {
     });
   }, []);
 
-  const noAttachment = !attachment || attachment.type === 'none';
+  const noAttachment = !attachment || attachment?.type === 'none';
 
   const renderItem = useCallback(
     ({item, index}) => {
@@ -80,8 +80,8 @@ const CommonHighlightOrStrikeContainer = (props) => {
     return (
       <NoFlexContainer
         backgroundColor={colors.mainBgColor}
-        paddingHorizontal={!attachment ? 0 : 24}
-        paddingBottom={!attachment ? 16 : 0}>
+        paddingHorizontal={noAttachment ? 0 : 24}
+        paddingBottom={noAttachment ? 16 : 0}>
         {!noAttachment && (
           <NoFlexContainer>
             <CommonAttachment attachment={attachment} showText={false} />
@@ -144,7 +144,7 @@ const CommonHighlightOrStrikeContainer = (props) => {
           primary
           rounded
           large
-          marginBottom={24}
+          // marginBottom={24}
           shadow
           icon
           uppercase
@@ -177,11 +177,12 @@ const CommonHighlightOrStrikeContainer = (props) => {
               props.increaseScore(
                 countAnswerSuccess,
                 countAnswerSuccess,
-                countAnswer - countAnswerSuccess > 0
-                  ? countAnswer - countAnswerSuccess
-                  : 0,
+                props.items.length - countAnswerSuccess,
               );
-              if (countAnswerSuccess / countAnswer >= 0.6) {
+              if (
+                countAnswerSuccess / ((props.items || []).length || 1) >=
+                0.6
+              ) {
                 playAudioAnswer(true);
                 setShowAnswerAward(true);
                 setTimeout(() => {

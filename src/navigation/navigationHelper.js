@@ -1,4 +1,5 @@
 import {StyleSheet, StatusBar} from 'react-native';
+
 import {colors} from '~/themes';
 import {OS} from '~/constants/os';
 
@@ -9,24 +10,16 @@ export const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0,
     width: OS.WIDTH,
-    borderTopWidth: 0,
-    paddingTop: 0,
+    borderTopWidth: 0.01,
     backgroundColor: colors.white,
     height: OS.hasNotch ? 100 : 70,
-    shadowColor: 'rgb(230, 235, 243)',
-    shadowOffset: {
-      width: 0,
-      height: -6,
-    },
-    marginLeft: 0,
-    shadowOpacity: 0.45,
     borderTopRightRadius: 16,
     borderTopLeftRadius: 16,
     borderBottomLeftRadius: 0,
     borderBottomRightRadius: 0,
     overflow: 'hidden',
     elevation: 10,
-    zIndex: 10,
+    zIndex: 100,
   },
   bottomBarContainerIOS: {
     flexDirection: 'row',

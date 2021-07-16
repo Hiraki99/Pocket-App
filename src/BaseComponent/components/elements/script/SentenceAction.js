@@ -15,6 +15,7 @@ class SentenceAction extends React.Component {
     this.state = {
       show: false,
       endAnimation: false,
+      clicked: false,
     };
 
     this.nextAction = this.nextAction.bind(this);
@@ -41,11 +42,15 @@ class SentenceAction extends React.Component {
     if (this.timeout) {
       clearTimeout(this.timeout);
     }
+    this.setState({clicked: false});
   }
 
-  nextAction() {
-    generateNextActivity(...Array(2), false);
-  }
+  nextAction = async () => {
+    if (!this.state.clicked) {
+      generateNextActivity(...Array(2), false);
+      await this.setState({clicked: true});
+    }
+  };
 
   renderButton = () => {
     const {action, disabled} = this.props;

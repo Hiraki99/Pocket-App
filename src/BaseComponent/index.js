@@ -50,6 +50,8 @@ import TranslateText from './components/elements/TranslateText';
 import DateRangePicker from './components/elements/DateRangePicker';
 import ThumbnailImage from './components/base/ThumnailImage';
 import AudioPlayer from './components/base/AudioPlayer';
+
+import TouchableOpacityPreventDoubleClick from '~/BaseComponent/components/base/TouchableOpacityPreventDoubleClick';
 const AnimatableButton = createAnimatableComponent(Button);
 const AnimatableCard = createAnimatableComponent(Card, {
   transition: 'transition',
@@ -115,4 +117,5 @@ export {
   TranscriptModalRef,
   Input,
   TextBase,
+  TouchableOpacityPreventDoubleClick,
 };

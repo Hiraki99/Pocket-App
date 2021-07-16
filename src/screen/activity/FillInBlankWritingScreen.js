@@ -229,7 +229,7 @@ class FillInBlankWritingScreen extends React.PureComponent {
           keyExtractor={(item) => item._id}
           showsVerticalScrollIndicator={false}
           extraData={this.props}
-          style={{paddingHorizontal: 26}}
+          contentContainerStyle={{paddingHorizontal: 24}}
         />
 
         {this.renderFooterFlatList()}

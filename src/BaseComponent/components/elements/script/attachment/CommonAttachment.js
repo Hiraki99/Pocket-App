@@ -26,7 +26,7 @@ const CommonAttachment = (props) => {
   }, [isFocused]);
   const changeText = React.useCallback(() => {
     setLang((old) => {
-      return old.lang === LANGUAGE.VI ? LANGUAGE.EN : LANGUAGE.VI;
+      return old === LANGUAGE.VI ? LANGUAGE.EN : LANGUAGE.VI;
     });
   }, []);
 

@@ -1,53 +1,51 @@
 import React, {useEffect, useState} from 'react';
 import styled from 'styled-components';
-import {TouchableOpacity, StyleSheet} from 'react-native';
+import {TouchableOpacity, StyleSheet, Text as NativeText} from 'react-native';
 import PropTypes from 'prop-types';
 
-import {RowContainer, Text} from '~/BaseComponent';
+import {
+  RowContainer,
+  Text,
+  TouchableOpacityPreventDoubleClick,
+} from '~/BaseComponent';
+import {TextBaseStyle} from '~/BaseComponent/components/base/text-base/TextBase';
 import {HighLightText} from '~/BaseComponent/components/elements/script/HighLightText';
-import {ARRAY_DISABLE_CLICK_CHARACTER} from '~/constants/threshold';
 import {colors} from '~/themes';
 import {playAudio} from '~/utils/utils';
 
 const CommonHighlightOrStrikeItem = (props) => {
-  const [itemChoose, setItemChoose] = useState({});
+  const [itemChoose, setItemChoose] = useState(new Map());
 
   useEffect(() => {
-    setItemChoose({});
+    setItemChoose(new Map());
   }, [props.id]);
 
   const checker = (o) => {
     let answerAgg = true;
     let newItemChoose;
-    if (itemChoose[o.id]) {
-      delete itemChoose[o.id];
-      setItemChoose({...itemChoose});
-      if (
-        Object.keys(itemChoose).length === 0 &&
-        itemChoose.constructor === Object
-      ) {
+    if (itemChoose.has(o.id)) {
+      if (itemChoose.size === 0) {
         props.decreaseCountAnswer();
       }
+      itemChoose.delete(o.id);
+      setItemChoose(itemChoose);
       newItemChoose = itemChoose;
     } else {
-      newItemChoose = {...itemChoose, [o.id]: o};
-      setItemChoose(newItemChoose);
-      if (
-        Object.keys(itemChoose).length === 0 &&
-        itemChoose.constructor === Object
-      ) {
+      if (itemChoose.size === 0) {
         props.increaseCountAnswer();
       }
+      itemChoose.set(o.id, o);
+      newItemChoose = itemChoose;
+      setItemChoose(newItemChoose);
     }
-    if (Object.keys(newItemChoose).length === 0) {
+    if (newItemChoose.size === 0) {
       answerAgg = false;
     } else {
       for (let key in newItemChoose) {
-        answerAgg = newItemChoose[key].isAnswer && answerAgg;
+        answerAgg = (newItemChoose.get(key) || {}).isAnswer && answerAgg;
       }
       answerAgg =
-        Object.keys(newItemChoose).length === props.content.numWordSuccess &&
-        answerAgg;
+        newItemChoose.size === props.content.numWordSuccess && answerAgg;
     }
     playAudio('selected');
     props.updateArrAnswer({[props.content.key]: answerAgg});
@@ -64,8 +62,8 @@ const CommonHighlightOrStrikeItem = (props) => {
 
       <RowContainer style={styles.container}>
         {(props.content ? props.content.questions || [] : []).map((o) => {
-          const selected = itemChoose[o.id]
-            ? itemChoose[o.id].id === o.id
+          const selected = itemChoose.has(o.id)
+            ? (itemChoose.get(o.id) || {}).id === o.id
             : false;
           const strikethroughtStyle = props.question_type === 'strikethrought';
 
@@ -73,11 +71,7 @@ const CommonHighlightOrStrikeItem = (props) => {
             return (
               <TouchableOpacity
                 activeOpacity={0.8}
-                disable={
-                  o.isExample ||
-                  props.showAnswer ||
-                  ARRAY_DISABLE_CLICK_CHARACTER.includes(o.word)
-                }
+                disable={o.isExample || props.showAnswer}
                 key={`${props.id}_${o.id}_${o.isAnswer}_${props.showAnswer}`}
                 onPress={() => {
                   checker(o);
@@ -99,11 +93,7 @@ const CommonHighlightOrStrikeItem = (props) => {
             return (
               <TouchableOpacity
                 activeOpacity={0.8}
-                disabled={
-                  o.isExample ||
-                  props.showAnswer ||
-                  ARRAY_DISABLE_CLICK_CHARACTER.includes(o.word)
-                }
+                disabled={o.isExample || props.showAnswer}
                 key={`${props.id}_${o.id}_${o.isAnswer}_${props.showAnswer}`}
                 onPress={() => {
                   checker(o);
@@ -135,34 +125,31 @@ const CommonHighlightOrStrikeItem = (props) => {
           }
 
           return (
-            <TouchableOpacity
-              activeOpacity={0.8}
-              disabled={
-                o.isExample ||
-                props.showAnswer ||
-                ARRAY_DISABLE_CLICK_CHARACTER.includes(o.word)
-              }
+            <TouchableOpacityPreventDoubleClick
+              disabled={o.isExample || props.showAnswer}
               key={`${props.id}_${o.id}_${o.isAnswer}_${props.showAnswer}`}
               onPress={() => {
                 checker(o);
               }}>
               <HighLightText>{o.word}</HighLightText>
-              <Text
-                style={
+              <NativeText
+                style={[
                   selected
                     ? strikethroughtStyle
                       ? styles.dotHorizontal
                       : {}
-                    : {}
-                }
-                h5
-                bold={selected}
-                color={selected ? colors.primary : colors.helpText}
-                paddingHorizontal={2}>
+                    : {},
+                  TextBaseStyle.h5,
+                  TextBaseStyle.normal,
+                  selected
+                    ? [TextBaseStyle.bold, {color: colors.primary}]
+                    : {color: colors.helpText},
+                  {paddingHorizontal: 2},
+                ]}>
                 {o.word}
-              </Text>
+              </NativeText>
               <BottomView selected={selected} />
-            </TouchableOpacity>
+            </TouchableOpacityPreventDoubleClick>
           );
         })}
       </RowContainer>
@@ -191,26 +178,26 @@ CommonHighlightOrStrikeItem.propTypes = {
 };
 
 const BottomView = styled.View`
-    borderBottomWidth: ${(props) => {
-      if (props.showAnswer || props.selected || props.isExample) {
-        return 2;
-      }
-      return 0;
-    }}
-    paddingBottom: ${(props) => {
-      if (props.showAnswer || props.selected || props.isExample) {
-        return 2;
-      }
-      return 4;
-    }}
-    borderBottomColor: ${(props) => {
-      if (props.showAnswer || props.isExample) {
-        return colors.success;
-      }
-      if (props.selected) {
-        return colors.primary;
-      }
-      return 0;
-    }}
+  borderBottomWidth: ${(props) => {
+    if (props.showAnswer || props.selected || props.isExample) {
+      return 2;
+    }
+    return 0;
+  }}
+  paddingBottom: ${(props) => {
+    if (props.showAnswer || props.selected || props.isExample) {
+      return 2;
+    }
+    return 4;
+  }}
+  borderBottomColor: ${(props) => {
+    if (props.showAnswer || props.isExample) {
+      return colors.success;
+    }
+    if (props.selected) {
+      return colors.primary;
+    }
+    return 0;
+  }}
 `;
 export default CommonHighlightOrStrikeItem;

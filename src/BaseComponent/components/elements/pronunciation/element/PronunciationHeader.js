@@ -45,7 +45,7 @@ class PronunciationHeader extends React.PureComponent {
           <FastImage source={images.teacher} style={styles.avatar} />
           <View style={styles.mainInfo}>
             <Text color={colors.primary} uppercase bold>
-              `${translate('Mike')}`
+              {`${translate('Mike')}`}
             </Text>
             <Text h5 color={colors.helpText}>
               {translate(

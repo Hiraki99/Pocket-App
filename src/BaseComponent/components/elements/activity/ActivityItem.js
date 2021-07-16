@@ -1,5 +1,5 @@
 import React from 'react';
-import {TouchableOpacity, View} from 'react-native';
+import {View} from 'react-native';
 import {connect} from 'react-redux';
 import FastImage from 'react-native-fast-image';
 import FontAwesome5 from 'react-native-vector-icons/Ionicons';
@@ -9,7 +9,7 @@ import PropTypes from 'prop-types';
 import {resetActivityDone} from '~/features/activity/ActivityAction';
 import {NoFlexContainer} from '~/BaseComponent/components/base/CommonContainer';
 import Text from '~/BaseComponent/components/base/Text';
-import {Card} from '~/BaseComponent';
+import {Card, TouchableOpacityPreventDoubleClick} from '~/BaseComponent';
 import {colors} from '~/themes';
 import {OS} from '~/constants/os';
 
@@ -37,8 +37,7 @@ class ActivityItem extends React.PureComponent {
     return (
       // <View style={[item.enabled ? styles.enable : styles.enable]}>
       <View style={styles.enable}>
-        <TouchableOpacity
-          activeOpacity={0.7}
+        <TouchableOpacityPreventDoubleClick
           style={styles.courseItem}
           onPress={() => onSelected(item, item.enabled)}>
           <View style={styles.courseInfoWrap}>
@@ -99,7 +98,7 @@ class ActivityItem extends React.PureComponent {
               )}
             </>
           )}
-        </TouchableOpacity>
+        </TouchableOpacityPreventDoubleClick>
       </View>
     );
   }

@@ -81,7 +81,10 @@ export default class MultiChoiceQuestion extends React.Component {
         <ScrollView
           style={{marginBottom: 24, paddingHorizontal: 24, paddingTop: 24}}>
           <Text bold h5>
-            {translate('Câu %s %s', {s1: `${index + 1}`, s2: `${length}`})}
+            {translate('Câu %s %s_reading', {
+              s1: `${index + 1}`,
+              s2: `${length}`,
+            })}
           </Text>
           <Text h5 style={{marginBottom: 10}}>
             {item.question}

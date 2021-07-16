@@ -13,21 +13,36 @@ import styled from 'styled-components';
 import {colors} from '~/themes';
 
 export default class Button extends React.PureComponent {
+  constructor(props) {
+    super(props);
+    this.state = {clicked: false};
+  }
+
+  componentWillUnmount() {
+    if (this.timeout) {
+      clearTimeout(this.timeout);
+    }
+    this.setState({clicked: false});
+  }
+
+  press = () => {
+    if (!this.state.clicked) {
+      this.props.onPress && this.props.onPress();
+      this.setState({clicked: true});
+      this.timeout = setTimeout(() => {
+        this.setState({clicked: false});
+      }, 600);
+    }
+  };
+
   render() {
-    const {
-      onPress,
-      shadow,
-      shadowColor,
-      marginTop,
-      marginBottom,
-      ...props
-    } = this.props;
+    const {shadow, shadowColor, marginTop, marginBottom, ...props} = this.props;
 
     return (
       <ButtonContainer
         activeOpacity={0.8}
         {...props}
-        onPress={onPress}
+        onPress={this.press}
         style={[
           shadow ? styles.shadow : null,
           shadowColor ? {shadowColor: shadowColor} : null,
