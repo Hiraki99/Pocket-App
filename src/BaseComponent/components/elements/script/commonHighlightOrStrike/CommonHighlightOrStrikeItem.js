@@ -21,6 +21,9 @@ const CommonHighlightOrStrikeItem = (props) => {
   }, [props.id]);
 
   const checker = (o) => {
+    if (o.word === '/') {
+      return;
+    }
     let answerAgg = true;
     let newItemChoose;
     if (itemChoose.has(o.id)) {

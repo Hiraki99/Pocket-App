@@ -114,7 +114,12 @@ class FillInBlankWithGivenWordsScreen extends React.PureComponent {
         )}
 
         {attachment && attachment.type === 'audio_background' && (
-          <View style={{marginHorizontal: -24, width: OS.WIDTH, marginTop: -8}}>
+          <View
+            style={{
+              marginHorizontal: -24,
+              width: OS.WIDTH,
+              marginTop: OS.IsAndroid ? -8 : 0,
+            }}>
             <EmbedAudio
               ref={(ref) => (this.audioRef = ref)}
               isUser={true}

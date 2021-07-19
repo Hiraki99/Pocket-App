@@ -76,7 +76,7 @@ class ListenAndSpeakActivity extends React.PureComponent {
       audio: filePath,
     });
     let commonComment;
-    const scoreGetComment = score * 100;
+    const scoreGetComment = score;
     if (scoreGetComment >= 70) {
       commonComment = this.props.commonCommentSpeak.good;
     }
@@ -95,7 +95,7 @@ class ListenAndSpeakActivity extends React.PureComponent {
         ];
       action2 = makeAction(actionTypes.INLINE_SENTENCE, {
         content: textComment.text,
-        score: score || 0,
+        score: score / 100.0 || 0,
         scoreBonus: activity.data.score,
       });
       let count = 0;

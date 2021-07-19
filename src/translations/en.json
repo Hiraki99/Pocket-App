@@ -484,7 +484,7 @@
     "Nghe và nhắc lại": "Listen and repeat",
     "Nói lại âm /%s/": "Speak syllable /{{s1}}/",
     "Bài đọc": "Reading",
-    "Câu %s/%s": "Question {{s1}}/{{s2}}",
+    "Câu %s %s": "Question {{s1}}/{{s2}}",
     "Đáp án đúng là": "The correct answer:",
     "Đáp án là": "The correct answer:",
     "Điền từ thích hợp": "Fill the correct answer",
