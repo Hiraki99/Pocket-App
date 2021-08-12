@@ -7,6 +7,7 @@ import styles from '~/BaseComponent/components/elements/script/flashcardStyles';
 import {Text} from '~/BaseComponent';
 import {colors, images} from '~/themes';
 import {translate} from '~/utils/multilanguage';
+import {HighLightText} from '~/BaseComponent/components/elements/script/HighLightText';
 
 export default class BottomResult extends React.PureComponent {
   render() {
@@ -47,7 +48,21 @@ export default class BottomResult extends React.PureComponent {
                   fontSize={19}
                   bold
                   style={{paddingHorizontal: 24}}>
-                  {translate('Đáp án là:')} {correctAnswer}
+                  {translate('Đáp án là:')}{' '}
+                  <Text
+                    center
+                    style={{
+                      lineHeight: 26,
+                    }}>
+                    <HighLightText
+                      content={correctAnswer}
+                      fontSize={19}
+                      bold
+                      center
+                      colorHighLight={'rgb(248, 147, 31)'}
+                      color={colors.white}
+                    />
+                  </Text>
                 </Text>
               )}
 
@@ -57,11 +72,20 @@ export default class BottomResult extends React.PureComponent {
                     {translate('Đáp án là:')}
                   </Text>
                   <Text
-                    color={colors.white}
-                    h5
                     center
-                    style={{paddingHorizontal: 24, marginTop: 10}}>
-                    {correctAnswer}
+                    style={{
+                      lineHeight: 24,
+                      marginTop: 10,
+                      paddingHorizontal: 24,
+                    }}>
+                    <HighLightText
+                      content={correctAnswer}
+                      fontSize={17}
+                      bold
+                      center
+                      colorHighLight={'rgb(248, 147, 31)'}
+                      color={colors.white}
+                    />
                   </Text>
                 </>
               )}

@@ -381,7 +381,7 @@ class VideoSpeakingAnswerContainer extends React.Component {
                 </>
               </TouchableOpacity>
             ) : (
-              <FlexContainer justifyContent={'flex-end'} paddingVertical={24}>
+              <View paddingVertical={24}>
                 <Button
                   primary
                   transparent
@@ -412,7 +412,7 @@ class VideoSpeakingAnswerContainer extends React.Component {
                   }}>
                   {translate('Tiếp tục')}
                 </Button>
-              </FlexContainer>
+              </View>
             )}
           </FlexContainer>
         </FlexContainer>

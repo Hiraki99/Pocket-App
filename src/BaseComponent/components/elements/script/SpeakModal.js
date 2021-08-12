@@ -18,6 +18,7 @@ import navigator from '~/navigation/customNavigator';
 import SpeakApi from '~/features/speak/SpeakApi';
 import {colors} from '~/themes';
 import {translate} from '~/utils/multilanguage';
+import {HighLightText} from '~/BaseComponent/components/elements/script/HighLightText';
 
 export default class SpeakModal extends React.Component {
   constructor(props) {
@@ -259,10 +260,21 @@ export default class SpeakModal extends React.Component {
             <Text h2 bold primary center>
               {word}
             </Text>
-            <Text h4 bold primary center paddingHorizontal={24}>
-              {sentence}
+            <Text
+              center
+              style={{
+                lineHeight: 28,
+                paddingHorizontal: 24,
+              }}>
+              <HighLightText
+                content={sentence}
+                fontSize={24}
+                bold
+                primary
+                center
+                colorHighLight={'rgb(248, 147, 31)'}
+              />
             </Text>
-
             <Text h5 center color={colors.helpText2} style={{marginBottom: 20}}>
               {pronunciation}
             </Text>

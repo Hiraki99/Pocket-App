@@ -21,6 +21,7 @@ import {MAPPING_IPA} from '~/constants/ipa';
 import {OS} from '~/constants/os';
 import {playAudioAnswer} from '~/utils/utils';
 import {translate} from '~/utils/multilanguage';
+import {HighLightText} from '~/BaseComponent/components/elements/script/HighLightText';
 
 class ListeningSingleChoiceScreen extends React.PureComponent {
   constructor(props) {
@@ -115,7 +116,21 @@ class ListeningSingleChoiceScreen extends React.PureComponent {
               bold
               style={{paddingVertical: 3.15}}
               onPress={() => this.checkAnswer(o)}>
-              {o.text}
+              <Text
+                center
+                style={{
+                  lineHeight: 28,
+                  paddingHorizontal: 24,
+                }}>
+                <HighLightText
+                  content={o.text}
+                  fontSize={24}
+                  bold
+                  primary
+                  center
+                  colorHighLight={'rgb(248, 147, 31)'}
+                />
+              </Text>
             </Button>
           )}
         </View>

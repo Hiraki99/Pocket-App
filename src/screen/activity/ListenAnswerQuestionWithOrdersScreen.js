@@ -65,58 +65,62 @@ class ListenAnswerQuestionWithOrdersScreen extends React.PureComponent {
 
     return (
       <ScriptWrapper>
-        <View style={{paddingHorizontal: 24}}>
-          {currentScriptItem.audio && !currentScriptItem.attachment && (
-            <CommonAttachment
-              attachment={{type: 'audio', path: currentScriptItem.audio}}
-              key={currentScriptItem.key}
-              text={translate('Câu hỏi %s/%s', {
-                s1: currentIndex + 1,
-                s2: currentScriptItem.items.length,
-              })}
-            />
-          )}
+        <ScrollView style={{flex: 1}}>
+          <View style={{paddingHorizontal: 24}}>
+            {currentScriptItem.audio && !currentScriptItem.attachment && (
+              <CommonAttachment
+                attachment={{type: 'audio', path: currentScriptItem.audio}}
+                key={currentScriptItem.key}
+                text={translate('Câu hỏi %s/%s', {
+                  s1: currentIndex + 1,
+                  s2: currentScriptItem.items.length,
+                })}
+              />
+            )}
 
-          {currentScriptItem.attachment && (
-            <CommonAttachment
-              attachment={currentScriptItem.attachment}
-              key={currentScriptItem.key}
-              text={translate('Câu hỏi %s/%s', {
-                s1: currentIndex + 1,
-                s2: currentScriptItem.items.length,
-              })}
-            />
-          )}
-          {!currentScriptItem.attachment && (
-            <Text h5 bold style={{marginTop: 32, marginBottom: 18}}>
-              {translate('Câu hỏi %s/%s', {
-                s1: currentIndex + 1,
-                s2: currentScriptItem.items.length,
-              })}
+            {currentScriptItem.attachment && (
+              <CommonAttachment
+                attachment={currentScriptItem.attachment}
+                key={currentScriptItem.key}
+                text={translate('Câu hỏi %s/%s', {
+                  s1: currentIndex + 1,
+                  s2: currentScriptItem.items.length,
+                })}
+              />
+            )}
+            {!currentScriptItem.attachment && (
+              <Text h5 bold style={{marginTop: 32, marginBottom: 18}}>
+                {translate('Câu hỏi %s/%s', {
+                  s1: currentIndex + 1,
+                  s2: currentScriptItem.items.length,
+                })}
+              </Text>
+            )}
+            <Text
+              h5
+              style={{marginTop: !currentScriptItem.attachment ? 0 : -15}}>
+              {currentScriptItem.items[currentIndex].question}
             </Text>
-          )}
-          <Text h5 style={{marginTop: !currentScriptItem.attachment ? 0 : -15}}>
-            {currentScriptItem.items[currentIndex].question}
-          </Text>
-          <TouchableOpacity
-            activeOpacity={0.65}
-            style={[
-              activityStyles.embedButton,
-              activityStyles.embedButtonRound,
-            ]}
-            onPress={this.showModal}>
-            <Text h5>{translate('Sắp xếp từ/cụm từ để trả lời')}</Text>
-          </TouchableOpacity>
-        </View>
+            <TouchableOpacity
+              activeOpacity={0.65}
+              style={[
+                activityStyles.embedButton,
+                activityStyles.embedButtonRound,
+              ]}
+              onPress={this.showModal}>
+              <Text h5>{translate('Sắp xếp từ/cụm từ để trả lời')}</Text>
+            </TouchableOpacity>
+          </View>
 
-        <GivenWordModal
-          ref={(ref) => (this.modalRef = ref)}
-          key={currentScriptItem.items[currentIndex].key}
-          options={currentScriptItem.items[currentIndex].answers}
-          score={currentScriptItem.items[currentIndex].score}
-          inInlineMode={false}
-          onDone={this.onDone}
-        />
+          <GivenWordModal
+            ref={(ref) => (this.modalRef = ref)}
+            key={currentScriptItem.items[currentIndex].key}
+            options={currentScriptItem.items[currentIndex].answers}
+            score={currentScriptItem.items[currentIndex].score}
+            inInlineMode={false}
+            onDone={this.onDone}
+          />
+        </ScrollView>
       </ScriptWrapper>
     );
   }
