@@ -1,5 +1,10 @@
 import React from 'react';
-import {View, TouchableNativeFeedback, StyleSheet} from 'react-native';
+import {
+  View,
+  TouchableNativeFeedback,
+  StyleSheet,
+  TouchableWithoutFeedback,
+} from 'react-native';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
@@ -11,6 +16,7 @@ import {OS} from '~/constants/os';
 import TextBase, {
   TextBaseStyle,
 } from '~/BaseComponent/components/base/text-base/TextBase';
+
 export default class LessonSliderItem extends React.PureComponent {
   static propTypes = {
     data: PropTypes.object.isRequired,
@@ -33,15 +39,15 @@ export default class LessonSliderItem extends React.PureComponent {
 
   render() {
     const {
-      data: {name, display_name, status},
+      data: {display_name, status, order},
       onChange,
     } = this.props;
     return (
-      <TouchableNativeFeedback activeOpacity={1} onPress={onChange}>
+      <TouchableWithoutFeedback onPress={onChange}>
         <View style={styles.slideInnerContainer}>
           <RowContainer paddingHorizontal={14} justifyContent={'space-between'}>
             <TextBase style={[TextBaseStyle.primary, TextBaseStyle.bold]}>
-              {name.replace('Bài', 'unit').toUpperCase()}
+              {`Unit ${order + 1}`.toUpperCase()}
             </TextBase>
             <View style={styles.processContainer}>
               <AnimatedCircularProgress
@@ -73,7 +79,7 @@ export default class LessonSliderItem extends React.PureComponent {
             </TextBase>
           </View>
         </View>
-      </TouchableNativeFeedback>
+      </TouchableWithoutFeedback>
     );
   }
 }
@@ -95,6 +101,7 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     backgroundColor: colors.white,
     minHeight: 232,
+    overflow: 'hidden',
   },
   image: {width: 140, height: 100, marginTop: 8, marginBottom: 16},
   textContainer: {

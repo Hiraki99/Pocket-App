@@ -50,7 +50,7 @@ const LessonPrimaryContainer = (props) => {
     dispatch(
       fetchLesson({
         start: 0,
-        length: -1,
+        // length: -1,
         course_id: courseId,
         isExam: props.isExam,
       }),

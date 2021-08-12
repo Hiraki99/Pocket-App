@@ -22,7 +22,7 @@ class InfoAccountScreen extends React.PureComponent {
     const {user} = this.props;
     return (
       <FlexContainer backgroundColor={colors.backgroundActivity}>
-        <BlankHeader />
+        <BlankHeader color={colors.backgroundActivity} dark />
         <RowContainer style={{width: '100%'}}>
           <TouchableNativeFeedback
             onPress={() => {

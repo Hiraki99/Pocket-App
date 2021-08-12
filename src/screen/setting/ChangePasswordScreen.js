@@ -31,7 +31,7 @@ class ChangePasswordScreen extends React.Component {
   changePassword = () => {
     const {old_password, new_password} = this.state;
     if (old_password.length < 6 && new_password.length < 6) {
-      Alert.alert(translate('Mật khẩu không hợp lệ'), [
+      Alert.alert(translate('Thông báo'), translate('Mật khẩu không hợp lệ'), [
         {
           text: translate('Đồng ý'),
         },

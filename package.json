@@ -13,12 +13,12 @@
     "dev": "yarn start --reset-cache",
     "initTheme": "cp -r src/themes BaseComponent/themes",
     "android-fix": "npx jetify",
-    "build-android": "yarn android-fix && cd android && ./gradlew clean && cd .. && yarn android",
+    "build-android": "cd android && ./gradlew clean && cd .. && yarn android",
     "build-release-test": "yarn android-fix && cd android && ./gradlew clean && cd .. && npx react-native run-android --variant=release",
     "release:android:apk": "yarn android-fix && cd android && ./gradlew clean && ./gradlew assembleRelease && cd .. && open .",
     "build-android-store": "yarn android-fix && cd android && ./gradlew clean && ./gradlew bundleRelease && cd ..",
     "set-icon-ios": "react-native set-icon --platform ios --path src/assets/images/logo1024_pocket.png",
-    "set-icon-android": "react-native set-icon --platform android --path src/assets/images/logo1024_pocket.png"
+    "set-icon-android": "react-native set-icon --platform android --path src/assets/images/logoAndroidPocket.png"
   },
   "dependencies": {
     "@gorhom/bottom-sheet": "^2",
@@ -31,6 +31,7 @@
     "@react-native-community/picker": "^1.6.6",
     "@react-native-community/slider": "^3.0.3",
     "@react-native-community/toolbar-android": "^0.1.0-rc.2",
+    "@react-native-community/viewpager": "^5.0.11",
     "@react-native-firebase/analytics": "^7.1.7",
     "@react-native-firebase/app": "^8.0.0",
     "@react-native-firebase/messaging": "^7.4.2",

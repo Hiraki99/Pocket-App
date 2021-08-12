@@ -1,5 +1,12 @@
 import React from 'react';
-import {Image, TouchableOpacity, View, StyleSheet} from 'react-native';
+import {
+  Image,
+  TouchableOpacity,
+  View,
+  StyleSheet,
+  Alert,
+  Linking,
+} from 'react-native';
 import {PERMISSIONS} from 'react-native-permissions';
 import {Icon} from 'native-base';
 import LottieView from 'lottie-react-native';
@@ -98,7 +105,24 @@ export default class EmbedAudioRecorder extends React.Component {
     if (data.accept) {
       const init = requestInit();
       AudioRecord.init(init);
+      return;
     }
+    Alert.alert(
+      `${translate('Thông báo')}`,
+      translate(
+        'Tính năng thu âm chưa được cấp quyền, Mời bạn vào cài đặt để bật tính năng !',
+      ),
+      [
+        {
+          text: `${translate('OK')}`,
+          onPress: () => Linking.openURL('app-settings:'),
+        },
+        {
+          text: `${translate('Hủy')}`,
+          onPress: () => {},
+        },
+      ],
+    );
   };
 
   playAudio = () => {
@@ -123,6 +147,22 @@ export default class EmbedAudioRecorder extends React.Component {
 
         if (!this.state.hasPermission) {
           console.warn("Can't record, no permission granted!");
+          Alert.alert(
+            `${translate('Thông báo')}`,
+            translate(
+              'Tính năng thu âm chưa được cấp quyền, Mời bạn vào cài đặt để bật tính năng !',
+            ),
+            [
+              {
+                text: `${translate('OK')}`,
+                onPress: () => Linking.openURL('app-settings:'),
+              },
+              {
+                text: `${translate('Hủy')}`,
+                onPress: () => {},
+              },
+            ],
+          );
           return;
         }
         AudioRecord.start();

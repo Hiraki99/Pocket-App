@@ -20,6 +20,7 @@ export default class SingleChoiceQuestion extends React.Component {
       selected: -1,
       isDone: false,
       showAward: false,
+      resultAnswer: true,
     };
   }
 
@@ -54,6 +55,7 @@ export default class SingleChoiceQuestion extends React.Component {
         onDone(item.answers[selected].isAnswer);
       }
       playAudioAnswer(item.answers[selected].isAnswer);
+      this.setState({resultAnswer: item.answers[selected].isAnswer});
     }
   };
 
@@ -189,7 +191,7 @@ export default class SingleChoiceQuestion extends React.Component {
             </BottomWrapper>
           )}
 
-          {!needCheckAll && isDone && (
+          {!needCheckAll && isDone && !this.state.resultAnswer && (
             <BottomWrapper
               paddingHorizontal={24}
               style={[buttonContainerStyle]}>

@@ -85,6 +85,8 @@ project.ext.react = [
 ]
 
 project.ext.envConfigFiles = [
+				debug: ".env",
+        release: ".env",
         debugClient: ".env",
         releaseClient: ".env",
         anothercustombuild: ".env",
@@ -140,18 +142,12 @@ android {
     }
 
     defaultConfig {
-        // appstore
         applicationId "com.dolphin.pocket"
-        // private
-//         applicationId "com.aic.group.englishforschool"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         multiDexEnabled true
-        versionCode 13
-        // private
-        versionName "1.7.4"
-        // appstore
-//         versionName "1.0.3"
+        versionCode 1
+        versionName "1.0.0"
     }
 
     splits {
@@ -224,17 +220,12 @@ android {
         pickFirst 'lib/**/libjsc.so'
     }
 
-    productFlavors {
-        client {
-            resValue "string", "build_config_package", "com.dolphin.pocket"
-            resValue "string", "app_name", "English4Schools"
-        }
-        video {
-            applicationIdSuffix ".video"
-            resValue "string", "build_config_package", "com.dolphin.pocket"
-            resValue "string", "app_name", "English4SchoolsVideo"
-        }
-    }
+//     productFlavors {
+//         client {
+//             resValue "string", "build_config_package", "com.dolphin.pocket"
+//             resValue "string", "app_name", "PocketApp"
+//         }
+//     }
 }
 
 dependencies {

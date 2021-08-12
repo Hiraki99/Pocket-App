@@ -23,7 +23,7 @@ export default function* courseSagas() {
 const getCurrentCourse = (state) => state.course.currentCourse;
 
 function* fetchCourse({payload: {form}}) {
-  const response = yield call(courseApi.fetchCourse, form);
+  const response = yield call(courseApi.fetchCourse);
   if (response.ok && response.data) {
     const currentCourse = yield select(getCurrentCourse);
     yield put(fetchCourseSuccess(response.data));

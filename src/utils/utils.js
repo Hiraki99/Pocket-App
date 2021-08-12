@@ -224,6 +224,7 @@ export const addQuestionInHighlightOrStrike = (nextScriptItem) => {
     const corrects = matchAllRegex(answerRegex, item.question);
     let question = item.question;
     let analysis = [];
+    let numWordSuccess = 0;
     if (corrects && corrects.length > 0) {
       (corrects || []).forEach((it, index) => {
         const itemLength = it[0].length;
@@ -242,6 +243,7 @@ export const addQuestionInHighlightOrStrike = (nextScriptItem) => {
           .trim()
           .split(' ');
         // const answersCorrect = primaryText.split(' ');
+        numWordSuccess = answersCorrect.length;
         answersCorrect.forEach((i) => {
           analysis.push({
             id: makeid(8),
@@ -292,7 +294,7 @@ export const addQuestionInHighlightOrStrike = (nextScriptItem) => {
     return {
       ...item,
       questions: analysis.filter((analysisItem) => analysisItem.word),
-      numWordSuccess: corrects.length || 0,
+      numWordSuccess,
     };
   });
   return {

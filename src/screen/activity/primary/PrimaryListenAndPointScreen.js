@@ -9,10 +9,10 @@ import {
 import {useSelector, useDispatch} from 'react-redux';
 import {useIsFocused} from '@react-navigation/native';
 
-import ScriptWrapper from '~/BaseComponent/components/elements/script/ScriptWrapper';
-import ListenAndPoint from '~/BaseComponent/components/elements/listen/ListenAndPoint';
-import {Button, Card, SeparatorVertical, Text} from '~/BaseComponent/index';
-import EmbedMultiAudioAnimate from '~/BaseComponent/components/elements/result/EmbedMultiAudioAnimate';
+import ScriptWrapper from 'BaseComponent/components/elements/script/ScriptWrapper';
+import ListenAndPoint from 'BaseComponent/components/elements/listen/ListenAndPoint';
+import {Button, Card, SeparatorVertical, Text} from 'BaseComponent/index';
+import EmbedMultiAudioAnimate from 'BaseComponent/components/elements/result/EmbedMultiAudioAnimate';
 import {capitalizeFirstLetter} from '~/utils/utils';
 import {OS, STATE_AUDIO} from '~/constants/os';
 import {currentScriptObjectSelector} from '~/selector/activity';
@@ -37,7 +37,6 @@ const PrimaryListenAndPointScreen = () => {
   const audioRef = useRef(null);
   const timeout = useRef();
   const question = useSelector(currentScriptObjectSelector);
-  console.log('question ', question);
   const conversations = question?.object?.conversations || [];
   const dispatch = useDispatch();
   const [selectedItem, setSelectedItem] = React.useState(null);
@@ -46,6 +45,7 @@ const PrimaryListenAndPointScreen = () => {
   const [actions, setListActions] = React.useState(conversations);
   const [autoPlay, setAutoPlay] = React.useState(true);
   const [loadingDone, setLoadingDone] = React.useState(false);
+  const [playDone, setPlayDone] = React.useState(false);
 
   const actionSelected = useCallback((item, index) => {
     if (
@@ -146,11 +146,6 @@ const PrimaryListenAndPointScreen = () => {
       const actionsUpdate = conversations.slice(actions[0].index + 1);
       setListActions(() => actionsUpdate);
       actionSelected(actions[0], actions[0].index);
-      console.log('actions[0]', actions[0]);
-      console.log(
-        'actions[0] duration ',
-        (((actions[0].end - actions[0].start) * 2) / 3) * 1000,
-      );
       timeout.current = setTimeout(() => {
         if (
           animationsRef &&
@@ -246,6 +241,7 @@ const PrimaryListenAndPointScreen = () => {
         setAutoPlay={setAutoPlay}
         loadingDone={loadingDone}
         isUser
+        setPlayDone={() => setPlayDone(true)}
       />
       <ImageBackground
         source={{uri: question.backgroundUrl}}
@@ -289,6 +285,7 @@ const PrimaryListenAndPointScreen = () => {
           uppercase
           bold
           icon
+          disabled={!playDone}
           onPress={() => {
             generateNextActivity();
           }}>

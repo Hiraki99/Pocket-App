@@ -14,7 +14,7 @@ const EmbedMultiAudioAnimateRef = (props, ref) => {
   const isFocused = useIsFocused();
   const [playState, setPlayState] = React.useState(STATE_AUDIO.PAUSE);
   const [durationSound, setDurationSound] = React.useState(0);
-  const {isUser, loadingDone, data} = props;
+  const {isUser, loadingDone, data, setPlayDone} = props;
 
   useImperativeHandle(ref, () => ({
     play: () => {
@@ -36,7 +36,8 @@ const EmbedMultiAudioAnimateRef = (props, ref) => {
 
   const playSuccess = React.useCallback(() => {
     setPlayState(STATE_AUDIO.STOP);
-  }, []);
+    setPlayDone();
+  }, [setPlayDone]);
 
   React.useEffect(() => {
     if (!isFocused && sound && sound.current) {
@@ -247,6 +248,7 @@ EmbedMultiAudioAnimate.propTypes = {
   navigateOutScreen: PropTypes.bool,
   setAutoPlay: PropTypes.func,
   hideItemSelected: PropTypes.func,
+  setPlayDone: PropTypes.func,
 };
 
 EmbedMultiAudioAnimate.defaultProps = {
@@ -258,6 +260,7 @@ EmbedMultiAudioAnimate.defaultProps = {
   navigateOutScreen: false,
   setAutoPlay: () => {},
   hideItemSelected: () => {},
+  setPlayDone: () => {},
 };
 
 export default EmbedMultiAudioAnimate;

@@ -49,7 +49,7 @@ const Input = (props) => {
         allowFontScaling={false}
         onBlur={() => setOnBlur(true)}
         secureTextEntry={showPassword}
-        style={[styles.input, props.inputStyle || {}]}
+        style={[styles.input, props.inputStyle]}
       />
       {!!props.value && !blur && !props.secureTextEntry && props.enableEdit && (
         <TouchableWithoutFeedback onPress={() => props.onChangeText('')}>
@@ -108,7 +108,6 @@ Input.defaultProps = {
     shadowOffset: {width: 0, height: 8},
     shadowOpacity: 0.05,
     shadowRadius: 3,
-    elevation: 2,
     borderWidth: 0,
     width: 'auto',
   },

@@ -16,7 +16,6 @@ import configureStore from './store';
 import Bootstrap from './Bootstrap';
 import Routes from './navigation/Routes';
 
-import {OS} from '~/constants/os';
 import theme from '~/themes/theme';
 import {setStoreApiSaure} from '~/utils/apisaure';
 import {setStoreScript} from '~/utils/script';
@@ -29,10 +28,6 @@ const {store, persistor} = configureStore();
 class Entry extends React.PureComponent {
   constructor(props) {
     super(props);
-  }
-
-  componentDidUpdate() {
-    Orientation.lockToPortrait();
   }
 
   componentDidMount = async () => {

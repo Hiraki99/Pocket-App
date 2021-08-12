@@ -18,6 +18,7 @@ import {
 import VocabularyWordSummary from '~/BaseComponent/components/elements/vocabulary/VocabularyWordSummary';
 import {
   changeCurrentScriptItem,
+  increaseScore,
   resetAction,
 } from '~/features/script/ScriptAction';
 import {forceBackActivity} from '~/utils/utils';
@@ -131,7 +132,10 @@ const SummaryVocabularyScreen = () => {
               block
               uppercase
               bold
-              onPress={() => generateNextActivity()}>
+              onPress={() => {
+                dispatch(increaseScore(1, 2, 1));
+                generateNextActivity();
+              }}>
               {`${translate('Hoàn thành')}`}
             </Button>
           </>
@@ -139,7 +143,7 @@ const SummaryVocabularyScreen = () => {
         <SeparatorVertical slg={OS.hasNotch} lg={!OS.hasNotch} />
       </>
     );
-  }, [data]);
+  }, [data, dispatch]);
 
   return (
     <FlexContainer>

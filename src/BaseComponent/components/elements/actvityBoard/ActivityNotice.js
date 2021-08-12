@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 import sortBy from 'lodash/sortBy';
 import PropTypes from 'prop-types';
 
-import {Text} from '~/BaseComponent';
+import {Text} from 'BaseComponent';
 import {colors, images} from '~/themes';
 import {resetAction} from '~/features/script/ScriptAction';
 import {doneActivity} from '~/features/activity/ActivityAction';
@@ -82,7 +82,7 @@ class ActivityNotice extends React.Component {
       currentScoreLevel,
     } = this.state;
 
-    const {totalCorrect, totalWrong} = this.props;
+    const {totalCorrect, totalWrong, currentScript} = this.props;
     const totalQuestion = totalCorrect + totalWrong;
     let str = translate('Tệ nhỉ, cố lên bạn!');
 
@@ -95,6 +95,12 @@ class ActivityNotice extends React.Component {
         str = translate('Cũng khá đấy chứ!');
       } else {
         str = translate('Quá đỉnh cao!');
+      }
+      if (
+        currentScript?.type === 'summary_review' ||
+        currentScript?.type === 'summary_vocabulary'
+      ) {
+        str = translate('Rất tốt');
       }
     }
 
@@ -154,6 +160,7 @@ const mapStateToProps = (state) => {
     maxCorrect: state.script.maxCorrect,
     totalWrong: state.script.totalWrong,
     totalCorrect: state.script.totalCorrect,
+    currentScript: state.script.currentScriptItem,
     totalScore: state.auth.user ? state.auth.user.score : 0,
     levels: state.auth.levels,
   };

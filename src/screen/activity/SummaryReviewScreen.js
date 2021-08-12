@@ -14,6 +14,7 @@ import {
 } from '~/BaseComponent/index';
 import {
   changeCurrentScriptItem,
+  increaseScore,
   resetAction,
 } from '~/features/script/ScriptAction';
 import {colors} from '~/themes';
@@ -162,7 +163,10 @@ const SummaryReviewScreen = () => {
             block
             uppercase
             bold
-            onPress={() => generateNextActivity()}>
+            onPress={() => {
+              dispatch(increaseScore(1, 2, 1));
+              generateNextActivity();
+            }}>
             Hoàn thành
           </Button>
           <SeparatorVertical slg={OS.hasNotch} lg={!OS.hasNotch} />

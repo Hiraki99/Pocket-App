@@ -107,7 +107,6 @@ function* loginAppleSaga({payload: {data}}) {
     api.setHeader('Authorization', `Bearer ${response.data.token}`);
     AsyncStorage.setItem('access_token', response.data.token);
     yield put(fetchMe());
-    console.log('fcmToken ', fcmToken);
     yield put(updateFcmToken({newToken: fcmToken}));
   } else {
     yield put(loginFail('Thông tin đăng nhập không đúng!'));
@@ -204,6 +203,7 @@ function* updateProfile({payload: {body}}) {
     Alert.alert('Thông báo', 'Cập nhập thông tin thành công!', [
       {text: 'Đồng ý'},
     ]);
+    navigator.back();
   } else {
     Alert.alert(
       'Thông báo',

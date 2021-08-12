@@ -21,7 +21,10 @@ const CommonHighlightOrStrikeItem = (props) => {
   }, [props.id]);
 
   const checker = (o) => {
-    let answerAgg = true;
+    if (o.word === '/') {
+      return;
+    }
+    let answerAgg = false;
     let newItemChoose;
     if (itemChoose.has(o.id)) {
       if (itemChoose.size === 0) {
@@ -41,6 +44,7 @@ const CommonHighlightOrStrikeItem = (props) => {
     if (newItemChoose.size === 0) {
       answerAgg = false;
     } else {
+      answerAgg = true;
       for (let key in newItemChoose) {
         answerAgg = (newItemChoose.get(key) || {}).isAnswer && answerAgg;
       }
@@ -48,7 +52,12 @@ const CommonHighlightOrStrikeItem = (props) => {
         newItemChoose.size === props.content.numWordSuccess && answerAgg;
     }
     playAudio('selected');
-    props.updateArrAnswer({[props.content.key]: answerAgg});
+    props.updateArrAnswer({
+      [props.content.key]: {
+        answer: answerAgg,
+        numWordSuccess: props.content.numWordSuccess,
+      },
+    });
   };
 
   return (

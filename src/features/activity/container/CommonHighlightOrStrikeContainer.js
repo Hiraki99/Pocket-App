@@ -168,21 +168,26 @@ const CommonHighlightOrStrikeContainer = (props) => {
                 answerLasted = false;
               } else {
                 for (let key in arrayAnswer) {
-                  if (arrayAnswer[key]) {
+                  if (
+                    arrayAnswer[key]?.answer &&
+                    arrayAnswer[key]?.numWordSuccess
+                  ) {
                     countAnswerSuccess += 1;
                   }
                   answerLasted = arrayAnswer[key] && answerLasted;
                 }
               }
+              const numQuestion = props.items.filter(
+                (item) => item.numWordSuccess,
+              ).length;
               props.increaseScore(
                 countAnswerSuccess,
                 countAnswerSuccess,
-                props.items.length - countAnswerSuccess,
+                numQuestion - countAnswerSuccess > 0
+                  ? numQuestion - countAnswerSuccess
+                  : 0,
               );
-              if (
-                countAnswerSuccess / ((props.items || []).length || 1) >=
-                0.6
-              ) {
+              if (countAnswerSuccess / (numQuestion || 1) >= 0.8) {
                 playAudioAnswer(true);
                 setShowAnswerAward(true);
                 setTimeout(() => {

@@ -1,5 +1,4 @@
-import {channel} from 'redux-saga';
-import {all, fork, call} from 'redux-saga/effects';
+import {all, fork} from 'redux-saga/effects';
 
 import authSagas from './features/authentication/AuthenSaga';
 import courseSagas from './features/course/CourseSaga';

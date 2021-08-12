@@ -30,14 +30,17 @@ const CommonHeader = (props) => {
         backgroundColor={androidStatusBarColor}
         barStyle={themeWhite ? 'dark-content' : 'light-content'}
       />
-      <SView
-        style={{
-          height: OS.statusBarHeight,
-          width: OS.WIDTH,
-          zIndex: 1000001,
-        }}
-        {...updateProps}
-      />
+      {!OS.IsAndroid && (
+        <SView
+          style={{
+            height: OS.statusBarHeight,
+            width: OS.WIDTH,
+            zIndex: 1000001,
+          }}
+          {...updateProps}
+        />
+      )}
+
       <RowContainer
         style={[styles.header, props.border ? styles.border : null]}>
         <Left>

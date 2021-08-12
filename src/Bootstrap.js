@@ -278,4 +278,4 @@ const Bootstrap = (props) => {
   return <Root>{props.children}</Root>;
 };
 
-export default Bootstrap;
+export default React.memo(Bootstrap);

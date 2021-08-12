@@ -46,7 +46,7 @@ class AccountScreen extends React.PureComponent {
     const {user} = this.props;
     return (
       <FlexContainer backgroundColor={colors.white}>
-        <BlankHeader />
+        <BlankHeader color={colors.white} dark />
         <RowContainer style={{width: '100%'}}>
           <TouchableNativeFeedback
             onPress={() => {

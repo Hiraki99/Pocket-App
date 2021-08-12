@@ -514,5 +514,6 @@
     "Lớp %s": "Grade {{s1}}",
     "Học tiếng anh qua bài hát": "Learning English with songs",
     "Chào buổi sáng": "Good morning",
-    "Câu %s %s_reading": "Question {{s1}}/{{s2}}"
+    "Câu %s %s_reading": "Question {{s1}}/{{s2}}",
+    "Rất tốt": "Good job"
 }

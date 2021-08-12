@@ -9,6 +9,7 @@ import {
   Platform,
   Alert,
   TouchableNativeFeedback,
+  Linking,
 } from 'react-native';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
@@ -51,7 +52,7 @@ class ProfileInfoScreen extends React.Component {
   }
 
   chooseImage = async () => {
-    let checkPermission;
+    let checkPermission = true;
     if (isAndroid) {
       const permissions = await check(PERMISSIONS.ANDROID.CAMERA);
       if (permissions !== RESULTS.GRANTED) {
@@ -99,6 +100,7 @@ class ProfileInfoScreen extends React.Component {
       [
         {
           text: translate('Đồng ý'),
+          onPress: () => Linking.openURL('app-settings:'),
         },
       ],
     );
@@ -126,7 +128,7 @@ class ProfileInfoScreen extends React.Component {
 
     return (
       <FlexContainer backgroundColor={colors.white}>
-        <BlankHeader />
+        <BlankHeader color={colors.white} dark />
         <RowContainer style={{width: '100%'}}>
           <TouchableNativeFeedback
             onPress={() => {
