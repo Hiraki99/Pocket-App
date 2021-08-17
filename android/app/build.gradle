@@ -93,6 +93,7 @@ project.ext.envConfigFiles = [
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
+apply from: "../../node_modules/react-native-code-push/android/codepush.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -268,3 +269,4 @@ apply from: file("../../node_modules/@react-native-community/cli-platform-androi
 apply plugin: 'com.google.gms.google-services'
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
+com.google.gms.googleservices.GoogleServicesPlugin.config.disableVersionCheck = true

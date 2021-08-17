@@ -116,7 +116,7 @@ class LoginMethodScreen extends React.PureComponent {
                   resizeMode="contain"
                 />
                 <Text h4 bold center color={'#1F2631'}>
-                  {translate('Tiếng anh bỏ túi cho tất cả mọi người')}
+                  {translate('Tiếng anh bỏ túi cho tất cả mọi người phan 2')}
                 </Text>
               </NoFlexContainer>
 

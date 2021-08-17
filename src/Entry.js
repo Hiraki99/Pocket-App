@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import 'react-native-gesture-handler';
+import {ActivityIndicator} from 'react-native';
 import TrackPlayer from 'react-native-track-player';
-import Config from 'react-native-config';
+import codePush from 'react-native-code-push';
 import Orientation from 'react-native-orientation';
 import {Container, StyleProvider} from 'native-base';
 import {Provider} from 'react-redux';
@@ -14,7 +15,7 @@ import platform from '../native-base-theme/variables/platform';
 
 import configureStore from './store';
 import Bootstrap from './Bootstrap';
-import Routes from './navigation/Routes';
+// import Routes from './navigation/Routes';
 
 import theme from '~/themes/theme';
 import {setStoreApiSaure} from '~/utils/apisaure';
@@ -22,7 +23,7 @@ import {setStoreScript} from '~/utils/script';
 import ReviewContext from '~/ReviewContext';
 
 const {store, persistor} = configureStore();
-
+const Routes = React.lazy(() => import('./navigation/Routes'));
 // console.log('Bundle Info: ', investigate());
 
 class Entry extends React.PureComponent {
@@ -46,7 +47,9 @@ class Entry extends React.PureComponent {
               <StyleProvider style={getTheme(platform)}>
                 <Bootstrap>
                   <ReviewContext>
-                    <Routes />
+                    <Suspense fallback={<ActivityIndicator />}>
+                      <Routes />
+                    </Suspense>
                   </ReviewContext>
                 </Bootstrap>
               </StyleProvider>
@@ -57,5 +60,15 @@ class Entry extends React.PureComponent {
     );
   }
 }
+let codePushOptions = {
+  updateDialog: {
+    optionalInstallButtonLabel: 'Cài đặt',
+    optionalIgnoreButtonLabel: 'Bỏ qua',
+    title: 'Cập nhật có sẵn',
+    optionalUpdateMessage: 'Đã có bản cập nhật, bạn có muốn cài đặt nó?',
+  },
+  installMode: codePush.InstallMode.IMMEDIATE,
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+};
 
-export default Entry;
+export default codePush(codePushOptions)(Entry);

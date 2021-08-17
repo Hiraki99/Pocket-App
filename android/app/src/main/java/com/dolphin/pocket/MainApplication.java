@@ -7,6 +7,7 @@ import com.facebook.react.ReactApplication;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.soloader.SoLoader;
+import com.microsoft.codepush.react.CodePush;
 
 import java.util.List;
 
@@ -29,7 +30,12 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
 
             @Override
             protected String getJSMainModuleName() {
-              return "index";
+               return "index";
+            }
+
+            @Override
+            protected String getJSBundleFile() {
+              return CodePush.getJSBundleFile();
             }
           };
 

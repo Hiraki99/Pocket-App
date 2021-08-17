@@ -14,6 +14,7 @@
 		13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		151E866AFBDB4A0796E8DD95 /* CircularStd-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A217850B3E8140649EBB2757 /* CircularStd-BookItalic.otf */; };
+		250B537E26C65F9300003434 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 250B537D26C65F9300003434 /* AppCenter-Config.plist */; };
 		254CE0F72685BD6B00DF5FC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 254CE0F62685BD6B00DF5FC5 /* GoogleService-Info.plist */; };
 		257FF91524B72531009D7B1B /* bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257FF91424B72531009D7B1B /* bridge.swift */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -67,6 +68,7 @@
 		13B07FB71A68108700A75B9A /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = PocketApp/main.m; sourceTree = "<group>"; };
 		234F0B5CA0DB41BE85687566 /* rubicon-icon-font.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "rubicon-icon-font.ttf"; path = "../node_modules/native-base/Fonts/rubicon-icon-font.ttf"; sourceTree = "<group>"; };
 		240CA49856A44771BD5340FB /* FontAwesome5_Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Regular.ttf; path = "../node_modules/native-base/Fonts/FontAwesome5_Regular.ttf"; sourceTree = "<group>"; };
+		250B537D26C65F9300003434 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		2510FE152693FE6400315355 /* PocketAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PocketAppRelease.entitlements; path = PocketApp/PocketAppRelease.entitlements; sourceTree = "<group>"; };
 		253C7193257E34BD0091BEC9 /* PocketApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PocketApp.entitlements; path = PocketApp/PocketApp.entitlements; sourceTree = "<group>"; };
 		254CE0F62685BD6B00DF5FC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "PocketApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -181,6 +183,7 @@
 				13B07FB71A68108700A75B9A /* main.m */,
 				257FF91424B72531009D7B1B /* bridge.swift */,
 				257FF91324B72531009D7B1B /* PocketApp-Bridging-Header.h */,
+				250B537D26C65F9300003434 /* AppCenter-Config.plist */,
 			);
 			name = PocketApp;
 			sourceTree = "<group>";
@@ -435,6 +438,7 @@
 				006D938027E848709011D8BC /* CircularStd-Black.otf in Resources */,
 				D4784015F5C84D4B88AB0C65 /* CircularStd-BlackItalic.otf in Resources */,
 				9382F663418D471FBDF0FCA5 /* CircularStd-Bold.otf in Resources */,
+				250B537E26C65F9300003434 /* AppCenter-Config.plist in Resources */,
 				02324002BCCF418F8C5B9400 /* CircularStd-BoldItalic.otf in Resources */,
 				4EAFB90E6011462493AD69E2 /* CircularStd-Book.otf in Resources */,
 				151E866AFBDB4A0796E8DD95 /* CircularStd-BookItalic.otf in Resources */,
