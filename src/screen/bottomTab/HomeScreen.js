@@ -1,11 +1,12 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import ScrollableTabView from 'react-native-scrollable-tab-view';
 
 import {BlankHeader, FlexContainer} from '~/BaseComponent';
 import HomeTabBar from '~/BaseComponent/components/elements/tabbar/HomeTabBar';
 import TopUserHeader from '~/BaseComponent/components/layouts/header/TopUserHeader';
+import {changeCurrentCourse} from '~/features/course/CourseAction';
 import LessonContainer from '~/features/lessons/container/LessonContainer';
 import navigator from '~/navigation/customNavigator';
 import {listCourseSelector} from '~/selector/lesson';
@@ -13,6 +14,7 @@ import {colors} from '~/themes';
 import {translate} from '~/utils/multilanguage';
 
 const HomeScreen = () => {
+  const dispatch = useDispatch();
   const courses = useSelector(listCourseSelector);
   const renderHomeTab = React.useCallback(() => {
     return (
@@ -21,6 +23,7 @@ const HomeScreen = () => {
       />
     );
   }, [courses]);
+
   return (
     <FlexContainer backgroundColor={colors.white}>
       <BlankHeader color={colors.white} dark />
@@ -33,6 +36,9 @@ const HomeScreen = () => {
       </View>
       <ScrollableTabView
         renderTabBar={renderHomeTab}
+        onChangeTab={(i) => {
+          dispatch(changeCurrentCourse(courses[i] || []));
+        }}
         tabBarBackgroundColor={colors.white}
         tabBarActiveTextColor={colors.primary}
         tabBarInactiveTextColor={colors.helpText}

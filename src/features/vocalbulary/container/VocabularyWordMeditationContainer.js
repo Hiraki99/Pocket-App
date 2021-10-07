@@ -195,6 +195,8 @@ class VocabularyWordMeditationContainer extends React.PureComponent {
     );
   };
 
+  onSnapToItem = (index) => this.setState({activeSlide: index});
+
   renderQuestionText = () => {
     const {data} = this.state;
     if (data.length === 0) {
@@ -205,7 +207,7 @@ class VocabularyWordMeditationContainer extends React.PureComponent {
         ref={(c) => {
           this.carouselQuestion = c;
         }}
-        onSnapToItem={(index) => this.setState({activeSlide: index})}
+        onSnapToItem={this.onSnapToItem}
         data={data}
         renderItem={this.renderQuestionTextItem}
         sliderWidth={OS.WIDTH}
@@ -218,6 +220,15 @@ class VocabularyWordMeditationContainer extends React.PureComponent {
         containerCustomStyle={{zIndex: 4}}
         loop={false}
       />
+    );
+  };
+
+  onCloseHeader = () => {
+    forceBackActivity(
+      false,
+      () => {},
+      this.props.isActivityVip,
+      this.props.fromWordGroup,
     );
   };
 
@@ -236,14 +247,7 @@ class VocabularyWordMeditationContainer extends React.PureComponent {
           themeWhite
           title={!showList ? 'word meditation' : 'thiền từ'}
           close
-          onClose={() =>
-            forceBackActivity(
-              false,
-              () => {},
-              this.props.isActivityVip,
-              this.props.fromWordGroup,
-            )
-          }
+          onClose={this.onCloseHeader}
         />
         <FlexContainer
           style={styles.container}

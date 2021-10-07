@@ -78,6 +78,8 @@ const HomeworkContainer = () => {
     [dispatch],
   );
 
+  const keyExtractor = useCallback((item) => item._id, []);
+
   const renderItem = useCallback(
     ({item}) => {
       return (
@@ -92,6 +94,16 @@ const HomeworkContainer = () => {
     [navigateToDetail],
   );
 
+  const renderItemSeparatorComponent = useCallback(
+    () => <SeparatorVertical md />,
+    [],
+  );
+
+  const renderListFooterComponent = useCallback(
+    () => <SeparatorVertical md />,
+    [],
+  );
+
   return (
     <FlexContainer backgroundColor={colors.mainBgColor} marginTop={4}>
       <FlatList
@@ -99,10 +111,10 @@ const HomeworkContainer = () => {
         ListHeaderComponent={renderHeader}
         onRefresh={onRefresh}
         data={data}
-        keyExtractor={(item) => item._id}
+        keyExtractor={keyExtractor}
         renderItem={renderItem}
-        ItemSeparatorComponent={() => <SeparatorVertical md />}
-        ListFooterComponent={() => <SeparatorVertical slg />}
+        ItemSeparatorComponent={renderItemSeparatorComponent}
+        ListFooterComponent={renderListFooterComponent}
         onEndReachedThreshold={0.1}
         onEndReached={loadMore}
         showsVerticalScrollIndicator={false}

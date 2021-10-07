@@ -56,8 +56,12 @@ const ListDocsHelpfulScreen = () => {
   }, [canLoadMore, refreshing]);
 
   const viewDetailTopic = useCallback((item) => {
-    Linking.openURL(item.link);
+    return () => {
+      Linking.openURL(item.link);
+    };
   }, []);
+
+  const keyExtractor = useCallback((item, index) => `${item._id}_${index}`, []);
 
   const renderHeader = useCallback(() => {
     return (
@@ -95,11 +99,21 @@ const ListDocsHelpfulScreen = () => {
             ...item,
             name: item.name.toLowerCase(),
           }}
-          action={() => viewDetailTopic(item)}
+          action={viewDetailTopic(item)}
         />
       );
     },
     [viewDetailTopic],
+  );
+
+  const renderItemSeparatorComponent = useCallback(
+    () => <SeparatorVertical lg />,
+    [],
+  );
+
+  const renderListFooterComponent = useCallback(
+    () => <SeparatorVertical slg />,
+    [],
   );
 
   return (
@@ -110,12 +124,12 @@ const ListDocsHelpfulScreen = () => {
         onRefresh={onRefresh}
         data={listenData}
         ListHeaderComponent={renderHeader}
-        keyExtractor={(item, index) => `${item._id}_${index}`}
+        keyExtractor={keyExtractor}
         renderItem={renderItem}
         numColumns={2}
         columnWrapperStyle={{paddingHorizontal: 24}}
-        ItemSeparatorComponent={() => <SeparatorVertical lg />}
-        ListFooterComponent={() => <SeparatorVertical slg />}
+        ItemSeparatorComponent={renderItemSeparatorComponent}
+        ListFooterComponent={renderListFooterComponent}
         onEndReachedThreshold={0.1}
         onEndReached={loadMore}
         showsVerticalScrollIndicator={false}
@@ -124,4 +138,4 @@ const ListDocsHelpfulScreen = () => {
   );
 };
 
-export default ListDocsHelpfulScreen;
+export default React.memo(ListDocsHelpfulScreen);

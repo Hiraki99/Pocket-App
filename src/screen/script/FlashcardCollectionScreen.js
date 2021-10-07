@@ -37,8 +37,6 @@ class FlashcardCollectionScreen extends React.Component {
       cards: [],
       activeSlide: 0,
     };
-
-    this.renderItem = this.renderItem.bind(this);
   }
 
   shouldComponentUpdate(nextProps) {
@@ -260,6 +258,10 @@ class FlashcardCollectionScreen extends React.Component {
     }
   };
 
+  onSnapToItem = (index) => {
+    this.setState({activeSlide: index});
+  };
+
   render() {
     const {cards} = this.state;
 
@@ -271,9 +273,7 @@ class FlashcardCollectionScreen extends React.Component {
               ref={(c) => {
                 this._carousel = c;
               }}
-              onSnapToItem={(index) => {
-                this.setState({activeSlide: index});
-              }}
+              onSnapToItem={this.onSnapToItem}
               useScrollView={true}
               data={cards}
               renderItem={this.renderItem}

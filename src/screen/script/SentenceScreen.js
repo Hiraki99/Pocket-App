@@ -94,6 +94,8 @@ class SentenceScreen extends React.PureComponent {
     }
   }
 
+  keyExtractor = (item) => item.key;
+
   render() {
     const {listActions} = this.state;
 
@@ -105,7 +107,7 @@ class SentenceScreen extends React.PureComponent {
         <FlatList
           data={listActions}
           renderItem={this.renderItem}
-          keyExtractor={(item) => item.key}
+          keyExtractor={this.keyExtractor}
           showsVerticalScrollIndicator={false}
           style={styles.activityList}
         />

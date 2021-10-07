@@ -5,7 +5,7 @@ import {Text} from '~/BaseComponent';
 import {colors} from '~/themes';
 import {translate} from '~/utils/multilanguage';
 
-export default class HomeTabBar extends React.Component {
+export default class HomeTabBar extends React.PureComponent {
   render() {
     return (
       <View style={[styles.tabs, this.props.style]}>
@@ -13,7 +13,10 @@ export default class HomeTabBar extends React.Component {
           return (
             <TouchableOpacity
               key={tab}
-              onPress={() => this.props.goToPage(i)}
+              onPress={() => {
+                console.log('TouchableOpacity');
+                this.props.goToPage(i);
+              }}
               style={[
                 styles.tab,
                 this.props.activeTab === i

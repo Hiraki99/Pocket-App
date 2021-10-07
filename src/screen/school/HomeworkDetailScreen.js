@@ -8,9 +8,11 @@ import {translate} from '~/utils/multilanguage';
 
 const HomeworkDetailScreen = () => {
   const dispatch = useDispatch();
+
   React.useEffect(() => {
     dispatch(setScreenActivity('HomeworkDetail'));
   }, [dispatch]);
+
   return (
     <FlexContainer>
       <CommonHeader title={`${translate('Bài tập về nhà')}`} back themeWhite />

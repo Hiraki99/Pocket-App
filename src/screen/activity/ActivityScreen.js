@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, FlatList} from 'react-native';
+import {View, FlatList, StyleSheet} from 'react-native';
 import {connect} from 'react-redux';
 import Icon from 'react-native-vector-icons/Foundation';
 import Sound from 'react-native-sound';
@@ -140,7 +140,6 @@ class ActivityScreen extends React.PureComponent {
         title={translate('Ôi không!')}
         subtitle={this.state.message}
         headerIconComponent={<Icon name="alert" color="#fff" size={30} />}
-        onRequestClose={() => {}}
         cancellable={false}>
         <Button
           rounded
@@ -209,7 +208,7 @@ class ActivityScreen extends React.PureComponent {
   }
 }
 
-const styles = {
+const styles = StyleSheet.create({
   partInfo: {
     justifyContent: 'center',
     alignItems: 'center',
@@ -233,7 +232,7 @@ const styles = {
     borderRadius: 15,
     marginBottom: 24,
   },
-};
+});
 
 const mapStateToProps = (state) => {
   return {

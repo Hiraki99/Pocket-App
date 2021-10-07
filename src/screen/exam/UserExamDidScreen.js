@@ -56,8 +56,6 @@ const UserExamDidScreen = () => {
     getExamed();
   }, [query]);
 
-  console.log('exam daa ', selectedItem);
-  console.log('exam daa 2 ', selectedItem?.results);
   const onRefresh = useCallback(() => {
     setExamData([]);
     setQuery((oldQuery) => {

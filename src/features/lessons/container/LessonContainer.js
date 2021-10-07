@@ -6,6 +6,7 @@ import PropTypes from 'prop-types';
 
 import {FlexContainer, Loading, SeparatorVertical, Text} from '~/BaseComponent';
 import LessonSliderItem from '~/BaseComponent/components/elements/lesson/LessonSliderItem';
+import {changeCurrentCourse} from '~/features/course/CourseAction';
 import lessonApi from '~/features/lessons/LessonApi';
 import {translate} from '~/utils/multilanguage';
 import {
@@ -43,9 +44,10 @@ const LessonContainer = (props) => {
   const changeLesson = useCallback(
     (lesson) => {
       dispatch(changeCurrentLesson(lesson));
+      dispatch(changeCurrentCourse({...data, lesson: lessons}));
       navigator.navigate('LessonDetail');
     },
-    [dispatch],
+    [dispatch, lessons, data],
   );
 
   const renderEmptyComponent = useCallback(() => {

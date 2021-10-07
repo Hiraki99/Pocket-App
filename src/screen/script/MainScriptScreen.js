@@ -1,30 +1,87 @@
-import React from 'react';
+import React, {Suspense} from 'react';
 import {connect} from 'react-redux';
-import {FlatList, View} from 'react-native';
+import {FlatList, View, ActivityIndicator} from 'react-native';
 
 import {HighLightText} from '~/BaseComponent/components/elements/script/HighLightText';
-import InlineSentenceActivity from '~/BaseComponent/components/elements/script/InlineSentenceActivity';
-import InlineAction from '~/BaseComponent/components/elements/script/InlineAction';
-import InlineAudioActivity from '~/BaseComponent/components/elements/script/InlineAudioActivity';
-import SingleChoiceInline from '~/BaseComponent/components/elements/script/SingleChoiceInline';
-import InlineEmotion from '~/BaseComponent/components/elements/script/InlineEmotion';
-import MultiChoiceInline from '~/BaseComponent/components/elements/script/MultiChoiceInline';
-import ListenAndSpeakActivity from '~/BaseComponent/components/elements/script/ListenAndRepeatActivity';
-import InlineUserAudioActivity from '~/BaseComponent/components/elements/script/InlineUserAudioActivity';
-import InlineAnswerQuestionGivenWords from '~/BaseComponent/components/elements/script/InlineAnswerQuestionGivenWordsActivity';
-import InlineAnswerQuestionGivenImages from '~/BaseComponent/components/elements/script/InlineAnswerQuestionGivenImagesActivity';
-import InlineImageActivity from '~/BaseComponent/components/elements/script/InlineImageActivity';
-import ScriptWrapper from '~/BaseComponent/components/elements/script/ScriptWrapper';
-import AnswerQuestionWritingActivity from '~/BaseComponent/components/elements/script/answerQuestionWriting/AnswerQuestionWritingActivity';
-import SpeakResult from '~/BaseComponent/components/elements/script/SpeakResult';
-import SpeakCoachPractice from '~/BaseComponent/components/elements/script/speak/SpeakCoachPractice';
-import SpeakCoachResult from '~/BaseComponent/components/elements/script/speak/SpeakCoachResult';
-import SpeakCoachIntroduction from '~/BaseComponent/components/elements/script/speak/SpeakCoachIntroduction';
-import WritingInputExam from '~/BaseComponent/components/elements/exam/modal/WritingInputExam';
+// eslint-disable-next-line import/order
 import {Text} from '~/BaseComponent/index';
-import SpeakStressPractice from '~/BaseComponent/components/elements/script/speak/SpeakStressPractice';
-import SpeakStressResult from '~/BaseComponent/components/elements/script/speak/SpeakStressResult';
-import SpeakStressResultNonAI from '~/BaseComponent/components/elements/script/speak/SpeakStressResultNonAI';
+
+const InlineSentenceActivity = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/InlineSentenceActivity'),
+);
+const InlineAction = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/InlineAction'),
+);
+const InlineAudioActivity = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/InlineAudioActivity'),
+);
+const SingleChoiceInline = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/SingleChoiceInline'),
+);
+const InlineEmotion = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/InlineEmotion'),
+);
+const MultiChoiceInline = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/MultiChoiceInline'),
+);
+const ListenAndSpeakActivity = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/ListenAndRepeatActivity'),
+);
+const InlineUserAudioActivity = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/InlineUserAudioActivity'),
+);
+const InlineAnswerQuestionGivenWords = React.lazy(() =>
+  import(
+    '~/BaseComponent/components/elements/script/InlineAnswerQuestionGivenWordsActivity'
+  ),
+);
+const InlineAnswerQuestionGivenImages = React.lazy(() =>
+  import(
+    '~/BaseComponent/components/elements/script/InlineAnswerQuestionGivenImagesActivity'
+  ),
+);
+const InlineImageActivity = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/InlineImageActivity'),
+);
+const ScriptWrapper = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/ScriptWrapper'),
+);
+const AnswerQuestionWritingActivity = React.lazy(() =>
+  import(
+    '~/BaseComponent/components/elements/script/answerQuestionWriting/AnswerQuestionWritingActivity'
+  ),
+);
+const SpeakResult = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/SpeakResult'),
+);
+const SpeakCoachPractice = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/speak/SpeakCoachPractice'),
+);
+const SpeakCoachResult = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/speak/SpeakCoachResult'),
+);
+const SpeakCoachIntroduction = React.lazy(() =>
+  import(
+    '~/BaseComponent/components/elements/script/speak/SpeakCoachIntroduction'
+  ),
+);
+const WritingInputExam = React.lazy(() =>
+  import('~/BaseComponent/components/elements/exam/modal/WritingInputExam'),
+);
+const SpeakStressPractice = React.lazy(() =>
+  import(
+    '~/BaseComponent/components/elements/script/speak/SpeakStressPractice'
+  ),
+);
+const SpeakStressResult = React.lazy(() =>
+  import('~/BaseComponent/components/elements/script/speak/SpeakStressResult'),
+);
+const SpeakStressResultNonAI = React.lazy(() =>
+  import(
+    '~/BaseComponent/components/elements/script/speak/SpeakStressResultNonAI'
+  ),
+);
+
 import * as actionTypes from '~/constants/actionTypes';
 import {generateNextActivity} from '~/utils/script';
 import navigator from '~/navigation/customNavigator';
@@ -38,7 +95,6 @@ class MainScriptScreen extends React.Component {
       itemWritingSelected: null,
       scrollToIndex,
     };
-    this.listLoaded = new Map();
   }
 
   componentDidMount() {
@@ -235,6 +291,8 @@ class MainScriptScreen extends React.Component {
     );
   };
 
+  keyExtractor = (item) => item.key;
+
   renderFooter = () => {
     return <View style={styles.footer} />;
   };
@@ -243,30 +301,34 @@ class MainScriptScreen extends React.Component {
     const {actions} = this.props;
 
     return (
-      <ScriptWrapper>
-        <FlatList
-          data={actions}
-          renderItem={this.renderItem}
-          keyExtractor={(item) => item.key}
-          showsVerticalScrollIndicator={false}
-          style={styles.activityList}
-          ref={(ref) => {
-            this.flatListRef = ref;
-          }}
-          onContentSizeChange={this.scrollToEnd}
-          ListFooterComponent={this.renderFooter}
-          onScrollToIndexFailed={() => {}}
-        />
-        {this.state.itemWritingSelected && (
-          <WritingInputExam
-            ref={(ref) => (this.writingRef = ref)}
-            questionComp={() =>
-              this.renderQuestion(this.state.itemWritingSelected)
-            }
-            onSubmit={this.onWritingDone}
+      <Suspense
+        fallback={
+          <ActivityIndicator size={'large'} color={'transparent'} center />
+        }>
+        <ScriptWrapper>
+          <FlatList
+            data={actions}
+            renderItem={this.renderItem}
+            keyExtractor={this.keyExtractor}
+            showsVerticalScrollIndicator={false}
+            style={styles.activityList}
+            ref={(ref) => {
+              this.flatListRef = ref;
+            }}
+            onContentSizeChange={this.scrollToEnd}
+            ListFooterComponent={this.renderFooter}
           />
-        )}
-      </ScriptWrapper>
+          {this.state.itemWritingSelected && (
+            <WritingInputExam
+              ref={(ref) => (this.writingRef = ref)}
+              questionComp={() =>
+                this.renderQuestion(this.state.itemWritingSelected)
+              }
+              onSubmit={this.onWritingDone}
+            />
+          )}
+        </ScriptWrapper>
+      </Suspense>
     );
   }
 }

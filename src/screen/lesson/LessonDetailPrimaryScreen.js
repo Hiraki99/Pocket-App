@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useCallback} from 'react';
 import {connect, useDispatch, useSelector} from 'react-redux';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import {
@@ -119,6 +119,48 @@ const LessonDetailPrimaryScreen = () => {
     return <FastImage source={imageFooter} style={styles.footerImage} />;
   }, [imageFooter]);
 
+  const renderItemSeparatorComponent = useCallback(
+    () => <SeparatorVertical lg />,
+    [],
+  );
+
+  const renderStickyHeader = useCallback(() => {
+    return <CommonHeader themeWhite title={currentLesson.name} />;
+  }, [currentLesson]);
+
+  const renderBackground = useCallback(
+    () => (
+      <View
+        style={{
+          overflow: 'hidden',
+          backgroundColor: colors.white,
+        }}>
+        <Image
+          source={{uri: currentLesson?.banner_image}}
+          style={styles.imageHeader}
+        />
+        <View style={styles.oval} />
+      </View>
+    ),
+    [currentLesson],
+  );
+
+  const renderFixedHeader = useCallback(
+    () => (
+      <TouchableWithoutFeedback
+        onPress={() => {
+          navigator.goBack();
+        }}>
+        <RowContainer
+          justifyContent={'center'}
+          style={[{zIndex: 10}, styles.back]}>
+          <Ionicons name={'md-arrow-back'} color={colors.white} size={22} />
+        </RowContainer>
+      </TouchableWithoutFeedback>
+    ),
+    [],
+  );
+
   return (
     <BottomTabContainer backgroundColor={colors.white}>
       <StatusBar
@@ -129,56 +171,24 @@ const LessonDetailPrimaryScreen = () => {
         <ParallaxScrollView
           backgroundColor={colors.white}
           style={{backgroundColor: colors.white}}
-          renderFixedHeader={() => (
-            <TouchableWithoutFeedback
-              onPress={() => {
-                navigator.goBack();
-              }}>
-              <RowContainer
-                justifyContent={'center'}
-                style={[{zIndex: 10}, styles.back]}>
-                <Ionicons
-                  name={'md-arrow-back'}
-                  color={colors.white}
-                  size={22}
-                />
-              </RowContainer>
-            </TouchableWithoutFeedback>
-          )}
-          renderBackground={() => (
-            <View
-              style={{
-                overflow: 'hidden',
-                backgroundColor: colors.white,
-              }}>
-              <Image
-                source={{uri: currentLesson?.banner_image}}
-                style={styles.imageHeader}
-              />
-              <View style={styles.oval} />
-            </View>
-          )}
+          renderFixedHeader={renderFixedHeader}
+          renderBackground={renderBackground}
           parallaxHeaderHeight={250}
           stickyHeaderHeight={86}
           bounces={false}
           showsVerticalScrollIndicator={false}
-          renderStickyHeader={() => {
-            return <CommonHeader themeWhite title={currentLesson.name} />;
-          }}
+          renderStickyHeader={renderStickyHeader}
           contentContainerStyle={{flex: 1}}>
           <FlatList
             data={parts}
             keyExtractor={(item) => item._id}
             renderItem={renderItemLesson}
-            ItemSeparatorComponent={() => <SeparatorVertical lg />}
+            ItemSeparatorComponent={renderItemSeparatorComponent}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={renderHeader}
             ListFooterComponent={renderFooter}
-            contentContainerStyle={{
-              flexGrow: 1,
-              minHeight: OS.HEIGHT - 250 - (OS.hasNotch ? 104 : 70),
-            }}
-            ListFooterComponentStyle={{flex: 1, justifyContent: 'flex-end'}}
+            contentContainerStyle={styles.contentContainerStyle}
+            ListFooterComponentStyle={styles.listFooterComponentStyle}
             bounces={false}
           />
         </ParallaxScrollView>
@@ -197,6 +207,14 @@ const mapStateToProps = (state) => {
 };
 
 const styles = StyleSheet.create({
+  listFooterComponentStyle: {
+    flex: 1,
+    justifyContent: 'flex-end',
+  },
+  contentContainerStyle: {
+    flexGrow: 1,
+    minHeight: OS.HEIGHT - 250 - (OS.hasNotch ? 104 : 70),
+  },
   footerImage: {
     width: OS.WIDTH,
     height: 260,

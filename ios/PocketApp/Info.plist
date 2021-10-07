@@ -53,19 +53,19 @@
 		</dict>
 	</dict>
 	<key>NSAppleMusicUsageDescription</key>
-	<string>Ứng dụng English4Schools Need to play audios</string>
+	<string>Ứng dụng Pocket Need to play audios</string>
 	<key>NSBluetoothAlwaysUsageDescription</key>
-	<string>Ứng dụng English4Schools sử dụng bluetooth để trao đổi dữ liệu trong app</string>
+	<string>Ứng dụng Pocket sử dụng bluetooth để trao đổi dữ liệu trong app</string>
 	<key>NSBluetoothPeripheralUsageDescription</key>
-	<string>Ứng dụng English4Schools sử dụng bluetooth để trao đổi dữ liệu trong app</string>
+	<string>Ứng dụng Pocket sử dụng bluetooth để trao đổi dữ liệu trong app</string>
 	<key>NSCameraUsageDescription</key>
-	<string>Ứng dụng English4Schools Chụp ảnh avatar</string>
+	<string>Ứng dụng Pocket Chụp ảnh avatar</string>
 	<key>NSMicrophoneUsageDescription</key>
-	<string>Ứng dụng English4Schools Ghi âm lại để kiểm tra trình độ phát âm</string>
+	<string>Ứng dụng Pocket Ghi âm lại để kiểm tra trình độ phát âm</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Cho phép English4School truy cập vào thư mục ảnh của bạn để có thể cập nhật avatar của bạn</string>
+	<string>Cho phép Pocket truy cập vào thư mục ảnh của bạn để có thể cập nhật avatar của bạn</string>
 	<key>NSUserTrackingUsageDescription</key>
-	<string>Ứng dụng English4Schools thu thập thông tin để cải tiến chất lượng ứng dụng</string>
+	<string>Ứng dụng Pocket thu thập thông tin để cải tiến chất lượng ứng dụng</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>CircularStd-Black.otf</string>

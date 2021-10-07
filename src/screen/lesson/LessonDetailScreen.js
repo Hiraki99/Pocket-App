@@ -32,9 +32,6 @@ class LessonDetailScreen extends React.PureComponent {
     this.state = {
       activeIndex: 0,
     };
-  }
-
-  componentDidMount() {
     this.loadParts();
   }
 
@@ -96,6 +93,14 @@ class LessonDetailScreen extends React.PureComponent {
     );
   };
 
+  renderItemSeparatorComponent = () => {
+    return <SeparatorVertical lg />;
+  };
+
+  renderListFooterComponent = () => {
+    return <SeparatorVertical lg />;
+  };
+
   render() {
     const {parts, currentLesson} = this.props;
 
@@ -106,11 +111,11 @@ class LessonDetailScreen extends React.PureComponent {
           data={parts}
           keyExtractor={(item) => item._id}
           renderItem={this.renderItemLesson}
-          ItemSeparatorComponent={() => <SeparatorVertical lg />}
+          ItemSeparatorComponent={this.renderItemSeparatorComponent}
           showsVerticalScrollIndicator={false}
           ListHeaderComponent={this.renderHeader}
-          ListFooterComponent={() => <SeparatorVertical lg />}
-          ListFooterComponentStyle={{height: 50, justifyContent: 'flex-end'}}
+          ListFooterComponent={this.renderListFooterComponent}
+          ListFooterComponentStyle={styles.listFooterComponentStyle}
           bounces={false}
         />
       </FlexContainer>
@@ -128,6 +133,10 @@ const mapStateToProps = (state) => {
 };
 
 const styles = StyleSheet.create({
+  listFooterComponentStyle: {
+    height: 50,
+    justifyContent: 'flex-end',
+  },
   footerImage: {
     width: OS.WIDTH,
     height: 260,

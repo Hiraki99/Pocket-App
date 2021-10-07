@@ -6,6 +6,7 @@ import {
   View,
   ScrollView,
   ActivityIndicator,
+  StyleSheet,
 } from 'react-native';
 
 import ScriptWrapper from '~/BaseComponent/components/elements/script/ScriptWrapper';
@@ -208,14 +209,9 @@ class FillInBlankParagraphChooseCorrectWordsScreen extends React.PureComponent {
     const splitRegex = /\[.*?\]\{\d\}/;
 
     const parts = split(question, splitRegex);
-
     return (
-      <View style={{flexDirection: 'row', marginBottom: 22}}>
-        <View
-          style={{
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-          }}>
+      <View style={styles.renderFillInBlankContainer}>
+        <View style={styles.rowWrap}>
           {parts.map((item, k) => {
             const correct = correctAnswers[k] ? correctAnswers[k].text : '';
 
@@ -252,13 +248,7 @@ class FillInBlankParagraphChooseCorrectWordsScreen extends React.PureComponent {
                       activeOpacity={0.75}
                       onPress={() => this.onSelected(k)}
                       key={`${answers[k]}_${k}_${k}`}
-                      style={{
-                        backgroundColor: 'rgba(89, 95, 255, 0.1)',
-                        borderBottomWidth: 1,
-                        borderBottomColor: colors.helpText,
-                        width: 80,
-                        height: 22,
-                      }}
+                      style={styles.blankStyle}
                     />
                   )}
 
@@ -297,11 +287,7 @@ class FillInBlankParagraphChooseCorrectWordsScreen extends React.PureComponent {
     }
 
     return (
-      <View
-        style={{
-          marginVertical: 20,
-          paddingHorizontal: 24,
-        }}>
+      <View style={styles.renderButtonContainer}>
         {!isDone && (
           <Button
             disabled={disabled}
@@ -387,6 +373,25 @@ const mapStateToProps = (state) => {
     currentScriptItem: state.script.currentScriptItem,
   };
 };
+
+const styles = StyleSheet.create({
+  rowWrap: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+  },
+  renderButtonContainer: {
+    marginVertical: 20,
+    paddingHorizontal: 24,
+  },
+  renderFillInBlankContainer: {flexDirection: 'row', marginBottom: 22},
+  blankStyle: {
+    backgroundColor: 'rgba(89, 95, 255, 0.1)',
+    borderBottomWidth: 1,
+    borderBottomColor: colors.helpText,
+    width: 80,
+    height: 22,
+  },
+});
 
 export default connect(mapStateToProps, {
   setMaxCorrect,

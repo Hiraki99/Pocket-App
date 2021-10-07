@@ -124,6 +124,10 @@ const DetailLectureListenScreen = () => {
     );
   }, []);
 
+  const renderListFooterComponent = useCallback(
+    () => <SeparatorVertical slg />,
+    [],
+  );
   return (
     <FlexContainer>
       <CommonHeader themeWhite title={params.name} />
@@ -136,7 +140,7 @@ const DetailLectureListenScreen = () => {
           ListHeaderComponent={renderHeader}
           keyExtractor={(item, index) => `${item._id}_${index}`}
           renderItem={renderItem}
-          ListFooterComponent={() => <SeparatorVertical slg />}
+          ListFooterComponent={renderListFooterComponent}
           showsVerticalScrollIndicator={false}
           onEndReachedThreshold={0.1}
           onEndReached={loadMore}

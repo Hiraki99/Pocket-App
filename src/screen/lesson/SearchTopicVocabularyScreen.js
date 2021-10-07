@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState, useCallback} from 'react';
-import {FlatList, TouchableOpacity} from 'react-native';
+import {FlatList, TouchableOpacity, StyleSheet} from 'react-native';
 import lodash from 'lodash';
 // import PropTypes from 'prop-types';
 import Ionicons from 'react-native-vector-icons/Ionicons';
@@ -90,6 +90,8 @@ const SearchTopicVocabularyScreen = () => {
     });
   }, []);
 
+  const keyExtractor = useCallback((item, index) => `${item._id}_${index}`, []);
+
   const renderItem = useCallback(
     ({item}) => {
       return (
@@ -103,6 +105,17 @@ const SearchTopicVocabularyScreen = () => {
     [viewLessonDetailVoByTopic],
   );
 
+  const onChangeValue = useCallback((text) => setValue(text), []);
+
+  const renderItemSeparatorComponent = useCallback(
+    () => <SeparatorVertical md />,
+    [],
+  );
+
+  const renderListFooterComponent = useCallback(
+    () => <SeparatorVertical slg />,
+    [],
+  );
   return (
     <FlexContainer backgroundColor={colors.white}>
       <BlankHeader />
@@ -113,7 +126,7 @@ const SearchTopicVocabularyScreen = () => {
         <InputVocabulary
           ref={inputVocabulary}
           value={value}
-          onChangeValue={(text) => setValue(text)}
+          onChangeValue={onChangeValue}
           placeHolderText={`${translate('Tìm kiếm bộ từ...')}`}
         />
       </RowContainer>
@@ -130,18 +143,22 @@ const SearchTopicVocabularyScreen = () => {
         refreshing={refreshing}
         onRefresh={onRefresh}
         data={searchResult}
-        keyExtractor={(item, index) => `${item._id}_${index}`}
+        keyExtractor={keyExtractor}
         renderItem={renderItem}
         onEndReachedThreshold={0.1}
         onEndReached={loadMore}
-        ItemSeparatorComponent={() => <SeparatorVertical md />}
-        ListFooterComponent={() => <SeparatorVertical slg />}
+        ItemSeparatorComponent={renderItemSeparatorComponent}
+        ListFooterComponent={renderListFooterComponent}
         showsVerticalScrollIndicator={false}
-        style={{flex: 1, paddingHorizontal: 24}}
+        style={styles.flatlistContainer}
       />
     </FlexContainer>
   );
 };
+
+const styles = StyleSheet.create({
+  flatlistContainer: {flex: 1, paddingHorizontal: 24},
+});
 SearchTopicVocabularyScreen.propTypes = {};
 SearchTopicVocabularyScreen.defaultProps = {};
 

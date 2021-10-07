@@ -145,6 +145,9 @@ class LessonPracticeSpeakDetailScreen extends React.PureComponent {
     );
   };
 
+  renderListFooterComponent = () => {
+    return <View style={{height: 48}} />;
+  };
   render() {
     const {activities, lessonIndex} = this.props;
     let displayIndex =
@@ -157,7 +160,7 @@ class LessonPracticeSpeakDetailScreen extends React.PureComponent {
           {this.renderAlert()}
           <FlatList
             ListHeaderComponent={this.renderHeaderFlatList}
-            ListFooterComponent={() => <View style={{height: 48}} />}
+            ListFooterComponent={this.renderListFooterComponent}
             data={activities}
             renderItem={this.renderItem}
             keyExtractor={(item) => item._id}

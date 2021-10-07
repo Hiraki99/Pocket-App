@@ -1,10 +1,10 @@
-import React, {useEffect} from 'react';
+import React, {useCallback, useEffect} from 'react';
 import {StyleSheet, Alert} from 'react-native';
 import {useIsFocused} from '@react-navigation/native';
 import {TabBar, TabView} from 'react-native-tab-view';
 import {useSelector} from 'react-redux';
 
-import {CommonHeader, Text} from '~/BaseComponent/index';
+import {CommonHeader, FlexContainer, Text} from '~/BaseComponent/index';
 import {translate} from '~/utils/multilanguage';
 import {colors} from '~/themes';
 import ListUserInClassContainer from '~/features/class/container/ListUserInClassContainer';
@@ -79,20 +79,23 @@ const AccessClassScreen = () => {
     }
   }, [isFocus]);
 
-  const renderTabBar = (props) => (
-    <TabBar
-      {...props}
-      indicatorStyle={styles.indicator}
-      style={styles.tabBarStyle}
-      renderLabel={({route, focused}) => (
-        <Text fontSize={14} bold uppercase primary={focused}>
-          {translate(route.title)}
-        </Text>
-      )}
-    />
+  const renderTabBar = useCallback(
+    (props) => (
+      <TabBar
+        {...props}
+        indicatorStyle={styles.indicator}
+        style={styles.tabBarStyle}
+        renderLabel={({route, focused}) => (
+          <Text fontSize={14} bold uppercase primary={focused}>
+            {translate(route.title)}
+          </Text>
+        )}
+      />
+    ),
+    [],
   );
 
-  const renderScene = ({route}) => {
+  const renderScene = useCallback(({route}) => {
     switch (route.key) {
       case 'list':
         return <ListUserInClassContainer focus={route.key === 'list'} />;
@@ -101,9 +104,10 @@ const AccessClassScreen = () => {
       default:
         return <ListUserScoreContainer focus={route.key === 'study'} />;
     }
-  };
+  }, []);
+
   return (
-    <>
+    <FlexContainer>
       <CommonHeader title={classInfo.name} back themeWhite />
       <TabView
         navigationState={{index, routes}}
@@ -111,7 +115,7 @@ const AccessClassScreen = () => {
         renderScene={renderScene}
         renderTabBar={renderTabBar}
       />
-    </>
+    </FlexContainer>
   );
 };
 AccessClassScreen.propTypes = {};
@@ -131,4 +135,4 @@ const styles = StyleSheet.create({
     borderBottomWidth: 0,
   },
 });
-export default AccessClassScreen;
+export default React.memo(AccessClassScreen);

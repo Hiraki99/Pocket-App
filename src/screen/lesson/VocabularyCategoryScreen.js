@@ -137,24 +137,31 @@ const VocabularyCategoryScreen = () => {
     );
   }, [params.featured_image, params.name, query, onChangeText]);
 
+  const onActionVocabularyTopicItem = useCallback(
+    (item) => {
+      return () => {
+        dispatch(setTabActivity(TAB_ACTIVITY.wordGroup));
+        navigator.navigate('LibraryLessonDetail', {
+          params: {
+            ...item,
+            vocabulary: true,
+          },
+        });
+      };
+    },
+    [dispatch],
+  );
+
   const renderItem = React.useCallback(
     ({item}) => {
       return (
         <VocabularyTopicItem
           item={item}
-          action={() => {
-            dispatch(setTabActivity(TAB_ACTIVITY.wordGroup));
-            navigator.navigate('LibraryLessonDetail', {
-              params: {
-                ...item,
-                vocabulary: true,
-              },
-            });
-          }}
+          action={onActionVocabularyTopicItem(item)}
         />
       );
     },
-    [dispatch],
+    [onActionVocabularyTopicItem],
   );
 
   return (

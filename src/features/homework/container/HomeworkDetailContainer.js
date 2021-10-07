@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
 });
-export default HomeworkDetailContainer;
+export default React.memo(HomeworkDetailContainer);

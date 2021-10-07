@@ -28,7 +28,7 @@ const TeachingSectionDetailScreen = () => {
   const [detailData, setDetailData] = useState([]);
   // eslint-disable-next-line no-unused-vars
   const [pendingProcess, setPendingProcess] = useState(false);
-  let onEndReachedCalledDuringMomentum = false;
+  let onEndReachedCalledDuringMomentum = React.useRef(false);
 
   const params = navigator.getParam('params', {});
 
@@ -60,11 +60,11 @@ const TeachingSectionDetailScreen = () => {
     }
   }, [page, refreshing, params]);
 
-  const onRefresh = () => {
+  const onRefresh = useCallback(() => {
     setDetailData([]);
     setPage(0);
     setRefreshing(true);
-  };
+  }, []);
 
   const loadMore = useCallback(() => {
     if (
@@ -93,7 +93,7 @@ const TeachingSectionDetailScreen = () => {
         </NoFlexContainer>
       </>
     );
-  }, []);
+  }, [params]);
 
   const renderItem = useCallback(({item, index}) => {
     return <VideoListItem index={index} item={item} />;
@@ -113,6 +113,12 @@ const TeachingSectionDetailScreen = () => {
       </View>
     );
   }, []);
+
+  const renderListFooterComponent = useCallback(
+    () => <SeparatorVertical slg />,
+    [],
+  );
+
   return (
     <>
       <CommonHeader themeWhite title={params.name} />
@@ -125,7 +131,7 @@ const TeachingSectionDetailScreen = () => {
           ListEmptyComponent={renderEmpty}
           keyExtractor={(item) => item.key}
           renderItem={renderItem}
-          ListFooterComponent={() => <SeparatorVertical slg />}
+          ListFooterComponent={renderListFooterComponent}
           onEndReachedThreshold={0.1}
           onEndReached={loadMore}
           onMomentumScrollBegin={() => {

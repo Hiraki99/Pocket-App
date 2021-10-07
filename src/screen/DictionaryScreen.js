@@ -85,22 +85,25 @@ const DictionaryScreen = () => {
     );
   }, []);
 
-  const renderIdioms = useCallback((idioms) => {
-    return (
-      <View key={makeid(32)} paddingTop={8}>
-        {idioms.map((item) => {
-          return (
-            <View key={makeid(32)} paddingHorizontal={16}>
-              <Text fontSize={18} medium>
-                {item.eng}
-              </Text>
-              {renderMeaningWord(item.meanings)}
-            </View>
-          );
-        })}
-      </View>
-    );
-  }, []);
+  const renderIdioms = useCallback(
+    (idioms) => {
+      return (
+        <View key={makeid(32)} paddingTop={8}>
+          {idioms.map((item) => {
+            return (
+              <View key={makeid(32)} paddingHorizontal={16}>
+                <Text fontSize={18} medium>
+                  {item.eng}
+                </Text>
+                {renderMeaningWord(item.meanings)}
+              </View>
+            );
+          })}
+        </View>
+      );
+    },
+    [renderMeaningWord],
+  );
 
   // const renderMeaningIdioms = (item) => {};
 

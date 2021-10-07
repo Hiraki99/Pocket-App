@@ -1,5 +1,5 @@
 import React from 'react';
-import {Image, TouchableOpacity} from 'react-native';
+import {Image, TouchableOpacity, StyleSheet} from 'react-native';
 import PropTypes from 'prop-types';
 import {View} from 'react-native-animatable';
 import LottieView from 'lottie-react-native';
@@ -163,20 +163,14 @@ export default class RoundAudioPlayer extends React.PureComponent {
               style={styles.controlWrap}
               onPress={this.toggle}
               activeOpacity={0.65}>
-              <View
-                style={{
-                  opacity: 1,
-                  position: 'absolute',
-                  top: 0,
-                  right: 0,
-                  left: 0,
-                  bottom: 0,
-                }}>
+              <View style={styles.container}>
                 <ProgressCircle
                   percent={processWidth}
                   radius={50}
                   borderWidth={8}
-                  color={themeMode === 'card' ? colors.white : '#7479F3'}
+                  color={
+                    themeMode === 'card' ? colors.white : colors.successChoice
+                  }
                   shadowColor={
                     themeMode === 'card' ? '#ffb300' : colors.primary
                   }
@@ -223,7 +217,7 @@ RoundAudioPlayer.defaultProps = {
   themeMode: 'card',
 };
 
-const styles = {
+const styles = StyleSheet.create({
   controlWrap: {
     width: 100,
     height: 100,
@@ -247,4 +241,12 @@ const styles = {
     paddingVertical: 12,
     paddingHorizontal: 8,
   },
-};
+  container: {
+    opacity: 1,
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    left: 0,
+    bottom: 0,
+  },
+});

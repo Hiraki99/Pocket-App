@@ -122,6 +122,8 @@ class LibraryLessonDetailScreen extends React.PureComponent {
     }
   };
 
+  keyExtractor = (item) => item._id;
+
   renderHeader = () => {
     const params = navigator.getParam('params', {});
     return (
@@ -174,6 +176,10 @@ class LibraryLessonDetailScreen extends React.PureComponent {
     );
   };
 
+  renderListFooterComponent = () => {
+    return <SeparatorVertical slg />;
+  };
+
   render() {
     const params = navigator.getParam('params', {});
 
@@ -184,9 +190,9 @@ class LibraryLessonDetailScreen extends React.PureComponent {
           <FlatList
             data={this.props.activities}
             ListHeaderComponent={this.renderHeader}
-            keyExtractor={(item) => item._id}
+            keyExtractor={this.keyExtractor}
             renderItem={this.renderItem}
-            ListFooterComponent={() => <SeparatorVertical slg />}
+            ListFooterComponent={this.renderListFooterComponent}
             showsVerticalScrollIndicator={false}
           />
         </FlexContainer>
