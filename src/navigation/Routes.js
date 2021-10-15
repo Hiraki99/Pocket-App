@@ -124,6 +124,7 @@ import PrimaryPointAndSayBubbleScreen from '~/screen/activity/primary/PrimaryPoi
 import ChangeLanguageScreen from '~/screen/ChangeLanguageScreen';
 import HomeScreen from '~/screen/bottomTab/HomeScreen';
 import InfoAccountScreen from '~/screen/InfoAccountScreen';
+import PaymentAccountScreen from '~/screen/PaymentAccountScreen';
 
 let Stack;
 if (!OS.IsAndroid) {
@@ -214,6 +215,7 @@ const AppStack = () => {
       <Stack.Screen name="ActivityBoard" component={ActivityBoardScreen} />
       <Stack.Screen name="Account" component={AccountScreen} />
       <Stack.Screen name="InfoAccount" component={InfoAccountScreen} />
+      <Stack.Screen name="PaymentAccount" component={PaymentAccountScreen} />
       <Stack.Screen
         name="TeachingSectionDetail"
         component={TeachingSectionDetailScreen}

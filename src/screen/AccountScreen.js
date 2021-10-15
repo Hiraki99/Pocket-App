@@ -101,7 +101,10 @@ class AccountScreen extends React.PureComponent {
               <Text h5>{translate('Bài học')}</Text>
             </RowContainer>
           </TouchableNativeFeedback>
-          <TouchableNativeFeedback>
+          <TouchableNativeFeedback
+            onPress={() => {
+              navigator.navigate('PaymentAccount');
+            }}>
             <RowContainer style={styles.itemSetting}>
               <Image
                 resizeMode={'contain'}

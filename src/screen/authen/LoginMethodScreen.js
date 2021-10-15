@@ -158,20 +158,20 @@ class LoginMethodScreen extends React.PureComponent {
                   {translate('Đăng nhập với email')}
                 </Button>
                 <SeparatorVertical md />
-                <TouchableOpacity
-                  style={[styles.containerLoginButton, styles.borderFacebook]}>
-                  <RowContainer justifyContent={'center'} alignItems={'center'}>
-                    <Image
-                      resizeMode={'contain'}
-                      source={images.social.facebook}
-                      style={{width: 24, height: 24, marginRight: 12}}
-                    />
-                    <Text h5 color={colors.facebook}>
-                      {translate('Đăng nhập với facebook')}
-                    </Text>
-                  </RowContainer>
-                </TouchableOpacity>
-                <SeparatorVertical md />
+                {/*<TouchableOpacity*/}
+                {/*  style={[styles.containerLoginButton, styles.borderFacebook]}>*/}
+                {/*  <RowContainer justifyContent={'center'} alignItems={'center'}>*/}
+                {/*    <Image*/}
+                {/*      resizeMode={'contain'}*/}
+                {/*      source={images.social.facebook}*/}
+                {/*      style={{width: 24, height: 24, marginRight: 12}}*/}
+                {/*    />*/}
+                {/*    <Text h5 color={colors.facebook}>*/}
+                {/*      {translate('Đăng nhập với facebook')}*/}
+                {/*    </Text>*/}
+                {/*  </RowContainer>*/}
+                {/*</TouchableOpacity>*/}
+                {/*<SeparatorVertical md />*/}
                 <TouchableOpacity
                   onPress={this.signInGG}
                   style={[styles.containerLoginButton, styles.borderGoogle]}>
@@ -187,21 +187,26 @@ class LoginMethodScreen extends React.PureComponent {
                   </RowContainer>
                 </TouchableOpacity>
                 <SeparatorVertical md />
-                <TouchableOpacity
-                  onPress={this.signInApple}
-                  style={[styles.containerLoginButton, styles.borderApple]}>
-                  <RowContainer justifyContent={'center'} alignItems={'center'}>
-                    <AntDesign
-                      color={colors.black}
-                      name={'apple1'}
-                      size={24}
-                      style={{marginRight: 12}}
-                    />
-                    <Text h5 color={colors.black}>
-                      {translate('Đăng nhập với apple')}
-                    </Text>
-                  </RowContainer>
-                </TouchableOpacity>
+                {!OS.IsAndroid && (
+                  <TouchableOpacity
+                    onPress={this.signInApple}
+                    style={[styles.containerLoginButton, styles.borderApple]}>
+                    <RowContainer
+                      justifyContent={'center'}
+                      alignItems={'center'}>
+                      <AntDesign
+                        color={colors.black}
+                        name={'apple1'}
+                        size={24}
+                        style={{marginRight: 12}}
+                      />
+                      <Text h5 color={colors.black}>
+                        {translate('Đăng nhập với apple')}
+                      </Text>
+                    </RowContainer>
+                  </TouchableOpacity>
+                )}
+
                 <SeparatorVertical md />
               </NoFlexContainer>
               <TouchableOpacity

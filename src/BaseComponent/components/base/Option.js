@@ -15,17 +15,26 @@ export default class Option extends React.Component {
 Option.propTypes = {
   selected: PropTypes.bool,
   colorOption: PropTypes.string,
+  size: PropTypes.number,
 };
 
 Option.defaultProps = {
   selected: false,
   colorOption: null,
+  size: 20,
 };
 
 const OptionContainer = styled.View`
-  width: 20
-  height: 20
-  border-radius: 10
+  width: ${(props) => {
+    console.log(props.size);
+    return props.size;
+  }};
+  height: ${(props) => {
+    return props.size;
+  }};
+  borderRadius: ${(props) => {
+    return props.size / 2;
+  }}
   border-width: 2
   opacity: ${(props) => {
     if (props.selected) {
@@ -42,13 +51,15 @@ const OptionContainer = styled.View`
     }
     return props.theme.colors.helpText;
   }}
-  justifyContent: center
-  alignItems: center
+  justifyContent: center;
+  alignItems: center;
 `;
 const OptionValue = styled.View`
-  width: ${(props) => (props.selected ? 10 : 0)}
-  height: ${(props) => (props.selected ? 10 : 0)}
-  border-radius: 5
+  width: ${(props) => (props.selected ? props.size / 2 : 0)}
+  height: ${(props) => (props.selected ? props.size / 2 : 0)}
+  border-radius: ${(props) => {
+    return props.size / 4;
+  }};
   backgroundColor: ${(props) => {
     if (props.selected) {
       if (props.colorOption) {

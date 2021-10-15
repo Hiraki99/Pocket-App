@@ -42,6 +42,7 @@ export const setStoreApiSaure = (initStore) => {
 };
 
 export async function configApi(token = null, url = Config.API_URL) {
+  console.log('url ', url);
   api.setBaseURL(url);
   api.setHeader('Accept', 'application/json');
   api.setHeader('appVersion', DeviceInfo.getVersion());

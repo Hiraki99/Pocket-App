@@ -15,6 +15,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		151E866AFBDB4A0796E8DD95 /* CircularStd-BookItalic.otf in Resources */ = {isa = PBXBuildFile; fileRef = A217850B3E8140649EBB2757 /* CircularStd-BookItalic.otf */; };
 		250B537E26C65F9300003434 /* AppCenter-Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 250B537D26C65F9300003434 /* AppCenter-Config.plist */; };
+		25431BF9270EDE470064C242 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 25431BF8270EDE470064C242 /* StoreKit.framework */; };
 		254CE0F72685BD6B00DF5FC5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 254CE0F62685BD6B00DF5FC5 /* GoogleService-Info.plist */; };
 		257FF91524B72531009D7B1B /* bridge.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257FF91424B72531009D7B1B /* bridge.swift */; };
 		2D02E4BC1E0B4A80006451C7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB01A68108700A75B9A /* AppDelegate.m */; };
@@ -71,6 +72,7 @@
 		250B537D26C65F9300003434 /* AppCenter-Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "AppCenter-Config.plist"; sourceTree = "<group>"; };
 		2510FE152693FE6400315355 /* PocketAppRelease.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PocketAppRelease.entitlements; path = PocketApp/PocketAppRelease.entitlements; sourceTree = "<group>"; };
 		253C7193257E34BD0091BEC9 /* PocketApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = PocketApp.entitlements; path = PocketApp/PocketApp.entitlements; sourceTree = "<group>"; };
+		25431BF8270EDE470064C242 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		254CE0F62685BD6B00DF5FC5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "PocketApp/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		257FF91324B72531009D7B1B /* PocketApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "PocketApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		257FF91424B72531009D7B1B /* bridge.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = bridge.swift; sourceTree = "<group>"; };
@@ -128,6 +130,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				52D263EA47D95ACD555ECC64 /* libPods-PocketApp.a in Frameworks */,
+				25431BF9270EDE470064C242 /* StoreKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -191,6 +194,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				25431BF8270EDE470064C242 /* StoreKit.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				3D4368C5CA896053A74EBE36 /* libPods-PocketApp.a */,
@@ -385,7 +389,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 8CYW96YL22;
+						DevelopmentTeam = APB4CPB955;
 						LastSwiftMigration = 1150;
 						ProvisioningStyle = Automatic;
 					};
@@ -895,7 +899,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8CYW96YL22;
+				DEVELOPMENT_TEAM = APB4CPB955;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PocketApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -905,7 +909,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dolphin.pocket;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dolphin.pocketapp;
 				PRODUCT_NAME = PocketApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PocketApp-Bridging-Header.h";
@@ -925,7 +929,7 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 8CYW96YL22;
+				DEVELOPMENT_TEAM = APB4CPB955;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = PocketApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -935,7 +939,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.dolphin.pocket;
+				PRODUCT_BUNDLE_IDENTIFIER = com.dolphin.pocketapp;
 				PRODUCT_NAME = PocketApp;
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "PocketApp-Bridging-Header.h";

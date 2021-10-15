@@ -40,6 +40,42 @@
           ]
         }
       }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:589397194208:android:f67167b6575c923a69e785",
+        "android_client_info": {
+          "package_name": "com.dolphin.pocketapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "589397194208-9epel862sfulphngiqici8l8a4p9qgu4.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA0G8I4vRHQOyT4QdmsDOspCBIDwc9dFTw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "589397194208-9epel862sfulphngiqici8l8a4p9qgu4.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "589397194208-r934tgfv19qhge8ha5d61s54nnhird3b.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.dolphin.pocket"
+              }
+            }
+          ]
+        }
+      }
     }
   ],
   "configuration_version": "1"

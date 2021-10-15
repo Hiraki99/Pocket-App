@@ -1,10 +1,5 @@
 import React from 'react';
-import {
-  View,
-  TouchableNativeFeedback,
-  StyleSheet,
-  TouchableWithoutFeedback,
-} from 'react-native';
+import {View, StyleSheet, TouchableWithoutFeedback} from 'react-native';
 import PropTypes from 'prop-types';
 import FastImage from 'react-native-fast-image';
 import {AnimatedCircularProgress} from 'react-native-circular-progress';
@@ -96,8 +91,9 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.09,
     shadowRadius: 10,
     elevation: 2,
-    borderWidth: 0.1,
+    borderWidth: OS.IsAndroid ? 0 : 0.1,
     borderRadius: 16,
+    marginTop: OS.IsAndroid ? 2 : 0,
     paddingVertical: 12,
     backgroundColor: colors.white,
     minHeight: 232,
